@@ -1,10 +1,10 @@
 within ThermoCycle.Components.HeatFlow.Walls;
 model ThermalResistanceL
   //parameter Integer N(min=1)=2 "Number of nodes";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer U
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer U
     "Heat transfer coefficient";
-  parameter Modelica.SIunits.Area A "Heat exchange area";
-  Modelica.SIunits.Power Qdot;
+  parameter Modelica.Units.SI.Area A "Heat exchange area";
+  Modelica.Units.SI.Power Qdot;
 
   ThermoCycle.Interfaces.HeatTransfer.ThermalPortL port1
     annotation (Placement(transformation(extent={{-40,20},{40,40}})));

@@ -8,41 +8,53 @@ model HX_twophase_pT
 
   /******************************* PARAMETERS *****************************/
   /*Metal Wall*/
-  parameter Modelica.SIunits.Mass M_wall= 69 "Mass of the Wall";
-  parameter Modelica.SIunits.SpecificHeatCapacity c_wall= 500
+  parameter Modelica.Units.SI.Mass M_wall=69 "Mass of the Wall";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_wall=500
     "Specific heat capacity of the metal";
 
   /******************HEAT TRANSFER******************/
-  parameter Modelica.SIunits.Area A_iso=0.03 annotation (Dialog(group="Heat transfer", tab="General", enable=(not Use_AU)));
-  parameter Modelica.SIunits.Area A_sf=0.03 annotation (Dialog(group="Heat transfer", tab="General", enable=(not Use_AU)));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer U_iso
-    "Constant heat transfer coefficient, isothermal fluid Side" annotation (Dialog(group="Heat transfer", tab="General"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer U_sf
-    "Constant heat transfer coefficient, secondary fluid Side" annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.Area A_iso=0.03 annotation (Dialog(
+      group="Heat transfer",
+      tab="General",
+      enable=(not Use_AU)));
+  parameter Modelica.Units.SI.Area A_sf=0.03 annotation (Dialog(
+      group="Heat transfer",
+      tab="General",
+      enable=(not Use_AU)));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_iso
+    "Constant heat transfer coefficient, isothermal fluid Side"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_sf
+    "Constant heat transfer coefficient, secondary fluid Side"
+    annotation (Dialog(group="Heat transfer", tab="General"));
 
   /******************    Initialization parameters    ******************/
-  parameter Modelica.SIunits.Temperature T_sf_su_start=273.15+200
-    "Start value for secondary fluid the inlet temperature" annotation(Dialog(tab = "Initialization"));
-  parameter Modelica.SIunits.Temperature T_sf_ex_start=273.15+100
-    "Start value for the secondary fluid outlet temperature" annotation(Dialog(tab = "Initialization"));
-  parameter Modelica.SIunits.Temperature T_iso_start=273.15 + 50
-    "Start value for the isothermal fluid temperature" annotation(Dialog(tab= "Initialization"));
-  parameter Modelica.SIunits.Temperature T_w_start=273.15+60
-    "Initial value of wall temperature"                                                  annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_sf_su_start=273.15 + 200
+    "Start value for secondary fluid the inlet temperature"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_sf_ex_start=273.15 + 100
+    "Start value for the secondary fluid outlet temperature"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_iso_start=273.15 + 50
+    "Start value for the isothermal fluid temperature"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_w_start=273.15 + 60
+    "Initial value of wall temperature"
+    annotation (Dialog(tab="Initialization"));
   parameter Boolean steadystate_T_wall=false
     "if true, sets the derivative of T_wall to zero during Initialization"    annotation (Dialog(group="Initialization options", tab="Initialization"));
   parameter Boolean T_wall_fixed=false
     "if true, imposes the initial wall temperature"                               annotation (Dialog(group="Initialization options", tab="Initialization"));
 
   /******************************* VARIABLES *****************************/
-  Modelica.SIunits.ThermodynamicTemperature pinch_sf(displayUnit="K",min=1);
-  Modelica.SIunits.ThermodynamicTemperature pinch_iso(displayUnit="K",min=1);
+  Modelica.Units.SI.ThermodynamicTemperature pinch_sf(displayUnit="K", min=1);
+  Modelica.Units.SI.ThermodynamicTemperature pinch_iso(displayUnit="K", min=1);
 
-  Modelica.SIunits.Power Q_dot_iso;
-  Modelica.SIunits.Power Q_dot_sf;
+  Modelica.Units.SI.Power Q_dot_iso;
+  Modelica.Units.SI.Power Q_dot_sf;
 
-  Modelica.SIunits.ThermalConductance AU_iso;
-  Modelica.SIunits.ThermalConductance AU_sf;
+  Modelica.Units.SI.ThermalConductance AU_iso;
+  Modelica.Units.SI.ThermalConductance AU_sf;
 
   Medium_iso.ThermodynamicState stateIn_iso;
   Medium_iso.ThermodynamicState stateOut_iso;

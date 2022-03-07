@@ -6,85 +6,85 @@ model Hx_130627
     Modelica.Media.Interfaces.PartialMedium "Medium model";
   // Heat exchanger geometric characteristics:
   parameter Integer N(min=1) = 5 "Number of cells";
-  parameter Modelica.SIunits.Area A=16.18 "Heat exchange area";
-  parameter Modelica.SIunits.Volume V=0.03781
+  parameter Modelica.Units.SI.Area A=16.18 "Heat exchange area";
+  parameter Modelica.Units.SI.Volume V=0.03781
     "Heat exchanger internal volume, working fluid side";
-  parameter Modelica.SIunits.Volume V_sf=0.03781
+  parameter Modelica.Units.SI.Volume V_sf=0.03781
     "Total Internal volume, hot side [m3]";
-  final parameter Modelica.SIunits.Volume Vi=V/N
+  final parameter Modelica.Units.SI.Volume Vi=V/N
     "Internal volume for each cell, cold side [m3]";
-  final parameter Modelica.SIunits.Area Ai=A/N;
-  final parameter Modelica.SIunits.Volume Vi_sf= V_sf/N;
+  final parameter Modelica.Units.SI.Area Ai=A/N;
+  final parameter Modelica.Units.SI.Volume Vi_sf=V_sf/N;
   /* Select type of heat transfer*/
   import ThermoCycle.Functions.Enumerations.HTtypes;
   parameter HTtypes HTtype=HTtypes.LiqVap
     "Select type of heat transfer coefficient";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_l=300
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_l=300
     "Constant heat transfer coefficient, liquid zone";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_tp=700
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_tp=700
     "Constant heat transfer coefficient, two-phase zone";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_v=400
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_v=400
     "Constant heat transfer coefficient, vapor zone";
   import ThermoCycle.Functions.Enumerations.HT_sf;
 parameter HT_sf HTtype_sf=HT_sf.Const
     "Select type of heat transfer coefficient";
- parameter Modelica.SIunits.CoefficientOfHeatTransfer  Unom_sf=369
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_sf=369
     "Nominal heat transfer coefficient,secondary fluid";
     // Secondary fluid initial values:
-  parameter Modelica.SIunits.MassFlowRate Mdotnom_sf = 3
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom_sf=3
     "Norminal secondary fluid flow rate";
-  parameter Modelica.SIunits.Temperature Tstart_sf_left=408.45
+  parameter Modelica.Units.SI.Temperature Tstart_sf_left=408.45
     "Secondary fluid temperature start value - first node"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature Tstart_sf_right=418.15
+  parameter Modelica.Units.SI.Temperature Tstart_sf_right=418.15
     "Secondary fluid temperature start value - last node"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature Tstart_sf[N]=linspace(
-        Tstart_sf_left,
-        Tstart_sf_right,
-        N) "Start value of temperature vector (initialized by default)"
+  parameter Modelica.Units.SI.Temperature Tstart_sf[N]=linspace(
+      Tstart_sf_left,
+      Tstart_sf_right,
+      N) "Start value of temperature vector (initialized by default)"
     annotation (Dialog(tab="Initialization"));
   // Wall Temperatures initial values:
-  parameter Modelica.SIunits.Mass M_wall=69 "Wall mass";
-  parameter Modelica.SIunits.SpecificHeatCapacity c_wall=500
+  parameter Modelica.Units.SI.Mass M_wall=69 "Wall mass";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_wall=500
     "Specific heat capacity of the metal";
-  parameter Modelica.SIunits.Temperature Tstart_wall_left=( Tstart_wf_left+Tstart_sf_right)/2
-    "Wall temperature start value - first node"
+  parameter Modelica.Units.SI.Temperature Tstart_wall_left=(Tstart_wf_left +
+      Tstart_sf_right)/2 "Wall temperature start value - first node"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature Tstart_wall_right=( Tstart_wf_right+Tstart_sf_left)/2
-    "Wall temperature start value - last node"
+  parameter Modelica.Units.SI.Temperature Tstart_wall_right=(Tstart_wf_right +
+      Tstart_sf_left)/2 "Wall temperature start value - last node"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature Tstart_wall[N]=linspace(
-        Tstart_wall_left,
-        Tstart_wall_right,
-        N) "Start value of temperature vector (initialized by default)"
+  parameter Modelica.Units.SI.Temperature Tstart_wall[N]=linspace(
+      Tstart_wall_left,
+      Tstart_wall_right,
+      N) "Start value of temperature vector (initialized by default)"
     annotation (Dialog(tab="Initialization"));
   // Working fluid initial values:
-  parameter Modelica.SIunits.MassFlowRate Mdotnom=0.2588
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom=0.2588
     "Nominal working fluid flow rate";
-  parameter Modelica.SIunits.Pressure pstart=23.57e5
+  parameter Modelica.Units.SI.Pressure pstart=23.57e5
     "Working fluid pressure start value"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.SpecificEnthalpy hstart_left=283000
+  parameter Modelica.Units.SI.SpecificEnthalpy hstart_left=283000
     "Inlet working fluid enthalpy start value"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.SpecificEnthalpy hstart_right=505000
+  parameter Modelica.Units.SI.SpecificEnthalpy hstart_right=505000
     "Outlet enthalpy start value" annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature Tstart_wf_left=334.9
+  parameter Modelica.Units.SI.Temperature Tstart_wf_left=334.9
     "Working fluid temperature start value - first node"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature Tstart_wf_right=413.15
+  parameter Modelica.Units.SI.Temperature Tstart_wf_right=413.15
     "Working fluid temperature start value - last node"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature Tstart_wf[N]=linspace(
-        Tstart_wf_left,
-        Tstart_wf_right,
-        N) "Start value of temperature vector (initialized by default)"
+  parameter Modelica.Units.SI.Temperature Tstart_wf[N]=linspace(
+      Tstart_wf_left,
+      Tstart_wf_right,
+      N) "Start value of temperature vector (initialized by default)"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.SpecificEnthalpy hstart[N]=linspace(
-        hstart_left,
-        hstart_right,
-        N) "Start value of enthalpy vector (initialized by default)"
+  parameter Modelica.Units.SI.SpecificEnthalpy hstart[N]=linspace(
+      hstart_left,
+      hstart_right,
+      N) "Start value of enthalpy vector (initialized by default)"
     annotation (Dialog(tab="Initialization"));
 /* Parameters for Numerical Options */
   parameter Boolean Mdotconst=false
@@ -102,9 +102,9 @@ parameter HT_sf HTtype_sf=HT_sf.Const
 //
    parameter Real max_drhodt=100 "Maximum value for the density derivative"
      annotation (Dialog(enable=max_der, group="Numerical options"));
-   parameter Modelica.SIunits.Time TT=1
+  parameter Modelica.Units.SI.Time TT=1
     "Integration time of the first-order filter"
-     annotation (Dialog(enable=filter_dMdt, group="Numerical options"));
+    annotation (Dialog(enable=filter_dMdt, group="Numerical options"));
   parameter Boolean steadystate_T_sf=true
     "if true, sets the derivative of T_sf to zero during Initialization"
     annotation (Dialog(group="Initialization options", tab="Initialization"));
@@ -116,20 +116,20 @@ parameter HT_sf HTtype_sf=HT_sf.Const
     annotation (Dialog(group="Initialization options", tab="Initialization"));
   /* VARIABLES */
   /* SECONDARY FLUID */
-  Modelica.SIunits.MassFlowRate M_dot_sf;
-  Modelica.SIunits.SpecificHeatCapacity cp_sf;
-  Modelica.SIunits.Temperature T_sf_su;
-  Modelica.SIunits.Density rho_sf_su;
-  Modelica.SIunits.Temperature T_sf[N](start=Tstart_sf) "Node temperatures";
-  Modelica.SIunits.HeatFlux qdot_sf[N] "Average heat flux";
-  Modelica.SIunits.Temperature Tnode_sf[N + 1];
+  Modelica.Units.SI.MassFlowRate M_dot_sf;
+  Modelica.Units.SI.SpecificHeatCapacity cp_sf;
+  Modelica.Units.SI.Temperature T_sf_su;
+  Modelica.Units.SI.Density rho_sf_su;
+  Modelica.Units.SI.Temperature T_sf[N](start=Tstart_sf) "Node temperatures";
+  Modelica.Units.SI.HeatFlux qdot_sf[N] "Average heat flux";
+  Modelica.Units.SI.Temperature Tnode_sf[N + 1];
   /*METAL WALL */
-  Modelica.SIunits.Temperature T_wall[N](start=linspace(
-          Tstart_wall_left,
-          Tstart_wall_right,
-          N)) "Cell temperatures";
+  Modelica.Units.SI.Temperature T_wall[N](start=linspace(
+        Tstart_wall_left,
+        Tstart_wall_right,
+        N)) "Cell temperatures";
     /* WORKING FLUID */
-  Modelica.SIunits.MassFlowRate M_dot_su;
+  Modelica.Units.SI.MassFlowRate M_dot_su;
   /* Medium variables */
   Medium.ThermodynamicState fluidState[N];
   Medium.SaturationProperties sat;
@@ -137,27 +137,27 @@ parameter HT_sf HTtype_sf=HT_sf.Const
           hstart_left,
           hstart_right,
           N)) "Fluid specific enthalpy at the nodes";
-  Modelica.SIunits.Pressure p(start=pstart);
+  Modelica.Units.SI.Pressure p(start=pstart);
   Medium.Temperature T[N](start=Tstart_wf) "Fluid temperature";
   Medium.Density rho[N] "Fluid cell density";
-  Modelica.SIunits.DerDensityByEnthalpy drdh[N]
+  Modelica.Units.SI.DerDensityByEnthalpy drdh[N]
     "Derivative of density by enthalpy";
-  Modelica.SIunits.DerDensityByPressure drdp[N]
+  Modelica.Units.SI.DerDensityByPressure drdp[N]
     "Derivative of density by pressure";
-  Modelica.SIunits.SpecificEnthalpy hnode[N + 1] "Enthalpy state variables";
+  Modelica.Units.SI.SpecificEnthalpy hnode[N + 1] "Enthalpy state variables";
   Real dMdt[N] "Time derivative of mass in each cell between two nodes";
-  Modelica.SIunits.HeatFlux qdot_wf[N] "Average heat flux";
-  Modelica.SIunits.MassFlowRate Mdot[N + 1](each start=Mdotnom, each min=0);
+  Modelica.Units.SI.HeatFlux qdot_wf[N] "Average heat flux";
+  Modelica.Units.SI.MassFlowRate Mdot[N + 1](each start=Mdotnom, each min=0);
   //HEAT TRANSFER
   // Heat transfer variables:
-  Modelica.SIunits.CoefficientOfHeatTransfer U_wf[N]
+  Modelica.Units.SI.CoefficientOfHeatTransfer U_wf[N]
     "Heat transfer coefficient between wall and working fluid";
-   Modelica.SIunits.CoefficientOfHeatTransfer U_sf
+  Modelica.Units.SI.CoefficientOfHeatTransfer U_sf
     "Heat transfer coefficient,secondary fluid";
     //
   Real x[N] "Vapor quality";
-  Modelica.SIunits.SpecificEnthalpy h_l;
-  Modelica.SIunits.SpecificEnthalpy h_v;
+  Modelica.Units.SI.SpecificEnthalpy h_l;
+  Modelica.Units.SI.SpecificEnthalpy h_v;
 equation
   Tnode_sf[N + 1] = T_sf_su;
   //Cold fluid properties

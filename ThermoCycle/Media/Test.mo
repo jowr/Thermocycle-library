@@ -72,18 +72,18 @@ package Test "Test medium models"
     model TestBasePropertiesDynamic
       "Test case using TestMedium and dynamic equations"
       replaceable package Medium = ExternalMedia.Media.TestMedium;
-      parameter Modelica.SIunits.Volume V=1 "Storage Volume";
+      parameter Modelica.Units.SI.Volume V=1 "Storage Volume";
       parameter Real p_atm = 101325 "Atmospheric pressure";
-      parameter Modelica.SIunits.Temperature Tstart=300;
+      parameter Modelica.Units.SI.Temperature Tstart=300;
       parameter Real Kv0 = 1.00801e-2 "Valve flow coefficient";
       Medium.BaseProperties medium(preferredMediumStates = true);
-      Modelica.SIunits.Mass M;
-      Modelica.SIunits.Energy U;
-      Modelica.SIunits.MassFlowRate win(start=100);
-      Modelica.SIunits.MassFlowRate wout;
-      Modelica.SIunits.SpecificEnthalpy hin;
-      Modelica.SIunits.SpecificEnthalpy hout;
-      Modelica.SIunits.Power Q;
+      Modelica.Units.SI.Mass M;
+      Modelica.Units.SI.Energy U;
+      Modelica.Units.SI.MassFlowRate win(start=100);
+      Modelica.Units.SI.MassFlowRate wout;
+      Modelica.Units.SI.SpecificEnthalpy hin;
+      Modelica.Units.SI.SpecificEnthalpy hout;
+      Modelica.Units.SI.Power Q;
       Real Kv;
     equation
       // Mass & energy balance equation
@@ -140,7 +140,7 @@ package Test "Test medium models"
         Medium.SpecificHeatCapacity cp =           Medium.specificHeatCapacityCp(state);
         Medium.SpecificHeatCapacity cv =           Medium.specificHeatCapacityCv(state);
         Medium.IsobaricExpansionCoefficient beta = Medium.isobaricExpansionCoefficient(state);
-        Modelica.SIunits.IsothermalCompressibility kappa=
+        Modelica.Units.SI.IsothermalCompressibility kappa=
             Medium.isothermalCompressibility(state);
         Medium.DerDensityByPressure d_d_dp_h =     Medium.density_derp_h(state);
         Medium.DerDensityByEnthalpy d_d_dh_p =     Medium.density_derh_p(state);
@@ -231,7 +231,7 @@ package Test "Test medium models"
         Medium.SpecificHeatCapacity cv =           Medium.specificHeatCapacityCv(state);
       // Not yet implemented in FluidProp
         Medium.IsobaricExpansionCoefficient beta = Medium.isobaricExpansionCoefficient(state);
-        Modelica.SIunits.IsothermalCompressibility kappa=
+        Modelica.Units.SI.IsothermalCompressibility kappa=
             Medium.isothermalCompressibility(state);
         Medium.DerDensityByPressure d_d_dp_h =     Medium.density_derp_h(state);
         Medium.DerDensityByEnthalpy d_d_dh_p =     Medium.density_derh_p(state);
@@ -378,20 +378,20 @@ package Test "Test medium models"
         "Test case using BaseProperties and dynamic equations"
       replaceable package Medium =
             Modelica.Media.Interfaces.PartialTwoPhaseMedium;
-      parameter Modelica.SIunits.Volume V=1 "Storage Volume";
+        parameter Modelica.Units.SI.Volume V=1 "Storage Volume";
       parameter Real p_atm = 101325 "Atmospheric pressure";
-      parameter Modelica.SIunits.Temperature Tstart=300;
-      parameter Modelica.SIunits.SpecificEnthalpy hstart;
+        parameter Modelica.Units.SI.Temperature Tstart=300;
+        parameter Modelica.Units.SI.SpecificEnthalpy hstart;
       parameter Real Kv0 "Valve flow coefficient";
       Medium.BaseProperties medium(preferredMediumStates = true,
                                    h(start=1e5));
-      Modelica.SIunits.Mass M;
-      Modelica.SIunits.Energy U;
-      Modelica.SIunits.MassFlowRate win(start=100);
-      Modelica.SIunits.MassFlowRate wout;
-      Modelica.SIunits.SpecificEnthalpy hin;
-      Modelica.SIunits.SpecificEnthalpy hout;
-      Modelica.SIunits.Power Q;
+        Modelica.Units.SI.Mass M;
+        Modelica.Units.SI.Energy U;
+        Modelica.Units.SI.MassFlowRate win(start=100);
+        Modelica.Units.SI.MassFlowRate wout;
+        Modelica.Units.SI.SpecificEnthalpy hin;
+        Modelica.Units.SI.SpecificEnthalpy hout;
+        Modelica.Units.SI.Power Q;
       Real Kv;
     equation
       // Mass & energy balance equation
@@ -420,10 +420,10 @@ package Test "Test medium models"
           redeclare package Medium = ModelicaMedium) "Modelica medium model";
         CompleteBaseProperties fluidPropMedium(
           redeclare package Medium = FluidPropMedium) "FluidProp medium model";
-        parameter Modelica.SIunits.Pressure pmin;
-        parameter Modelica.SIunits.Pressure pmax;
-        parameter Modelica.SIunits.SpecificEnthalpy hmin;
-        parameter Modelica.SIunits.SpecificEnthalpy hmax;
+        parameter Modelica.Units.SI.Pressure pmin;
+        parameter Modelica.Units.SI.Pressure pmax;
+        parameter Modelica.Units.SI.SpecificEnthalpy hmin;
+        parameter Modelica.Units.SI.SpecificEnthalpy hmax;
       equation
         modelicaMedium.baseProperties.p = pmin + (pmax-pmin)*time;
         modelicaMedium.baseProperties.h = hmin + (hmax-hmin)*time;
@@ -548,50 +548,50 @@ package Test "Test medium models"
       package propane_CP
         "R290, computation of Propane Properties using CoolProp"
         extends ExternalMedia.Media.BaseClasses.ExternalTwoPhaseMedium(
-        mediumName="TestMedium",
-        libraryName="CoolProp",
-        substanceName="propane",
-        ThermoStates=Modelica.Media.Interfaces.PartialMedium.Choices.IndependentVariables.ph);
+          mediumName="TestMedium",
+          libraryName="CoolProp",
+          substanceName="propane",
+          ThermoStates=Modelica.Media.Interfaces.Choices.IndependentVariables.ph);
         annotation ();
       end propane_CP;
 
       package propane_FPST
         "Propane properties using the StanMix library of FluidProp"
         extends ExternalMedia.Media.BaseClasses.ExternalTwoPhaseMedium(
-        mediumName="TestMedium",
-        libraryName="FluidProp.StanMix",
-        substanceName="propane",
-        ThermoStates=Modelica.Media.Interfaces.PartialMedium.Choices.IndependentVariables.ph);
+          mediumName="TestMedium",
+          libraryName="FluidProp.StanMix",
+          substanceName="propane",
+          ThermoStates=Modelica.Media.Interfaces.Choices.IndependentVariables.ph);
         annotation ();
       end propane_FPST;
 
       package propane_FPRP
         "Propane properties using Refprop through FluidProp (requires the full version of FluidProp)"
         extends ExternalMedia.Media.BaseClasses.ExternalTwoPhaseMedium(
-        mediumName="TestMedium",
-        libraryName="FluidProp.RefProp",
-        substanceName="propane",
-        ThermoStates=Modelica.Media.Interfaces.PartialMedium.Choices.IndependentVariables.ph);
+          mediumName="TestMedium",
+          libraryName="FluidProp.RefProp",
+          substanceName="propane",
+          ThermoStates=Modelica.Media.Interfaces.Choices.IndependentVariables.ph);
         annotation ();
       end propane_FPRP;
 
       package propane_CP_TTSE
         "R290, computation of Propane Properties using CoolProp"
         extends ExternalMedia.Media.BaseClasses.ExternalTwoPhaseMedium(
-        mediumName="TestMedium",
-        libraryName="CoolProp",
-        substanceName="propane|enable_TTSE=1",
-        ThermoStates=Modelica.Media.Interfaces.PartialMedium.Choices.IndependentVariables.ph);
+          mediumName="TestMedium",
+          libraryName="CoolProp",
+          substanceName="propane|enable_TTSE=1",
+          ThermoStates=Modelica.Media.Interfaces.Choices.IndependentVariables.ph);
         annotation ();
       end propane_CP_TTSE;
 
       package propane_CP_transport
         "R290, computation of Propane Properties using CoolProp"
         extends ExternalMedia.Media.BaseClasses.ExternalTwoPhaseMedium(
-        mediumName="TestMedium",
-        libraryName="CoolProp",
-        substanceName="propane|calc_transport=0",
-        ThermoStates=Modelica.Media.Interfaces.PartialMedium.Choices.IndependentVariables.ph);
+          mediumName="TestMedium",
+          libraryName="CoolProp",
+          substanceName="propane|calc_transport=0",
+          ThermoStates=Modelica.Media.Interfaces.Choices.IndependentVariables.ph);
         annotation ();
       end propane_CP_transport;
     end fluids;
@@ -601,8 +601,8 @@ package Test "Test medium models"
         replaceable package wf = benchmark.fluids.propane_CP constrainedby
           Modelica.Media.Interfaces.PartialMedium "Medium model";
         wf.BaseProperties fluid "Properties of the two-phase fluid";
-        Modelica.SIunits.SpecificEnthalpy h;
-        Modelica.SIunits.Pressure p;
+        Modelica.Units.SI.SpecificEnthalpy h;
+        Modelica.Units.SI.Pressure p;
 
       equation
         p = 1E5;
@@ -622,8 +622,8 @@ package Test "Test medium models"
         replaceable package wf = benchmark.fluids.propane_CP constrainedby
           Modelica.Media.Interfaces.PartialMedium "Medium model";
         wf.ThermodynamicState fluid "Properties of the two-phase fluid";
-        Modelica.SIunits.SpecificEnthalpy h;
-        Modelica.SIunits.Pressure p;
+        Modelica.Units.SI.SpecificEnthalpy h;
+        Modelica.Units.SI.Pressure p;
       equation
         p = 1E5;
         h = -1E5 + time*1E5;
@@ -638,8 +638,8 @@ package Test "Test medium models"
         replaceable package wf =  benchmark.fluids.propane_FPST
           constrainedby Modelica.Media.Interfaces.PartialMedium "Medium model";
         wf.BaseProperties fluid "Properties of the two-phase fluid";
-        Modelica.SIunits.SpecificEnthalpy h;
-        Modelica.SIunits.Pressure p;
+        Modelica.Units.SI.SpecificEnthalpy h;
+        Modelica.Units.SI.Pressure p;
 
       equation
         p = 1E5;
@@ -659,8 +659,8 @@ package Test "Test medium models"
         replaceable package wf = benchmark.fluids.propane_FPST constrainedby
           Modelica.Media.Interfaces.PartialMedium "Medium model";
         wf.ThermodynamicState fluid "Properties of the two-phase fluid";
-        Modelica.SIunits.SpecificEnthalpy h;
-        Modelica.SIunits.Pressure p;
+        Modelica.Units.SI.SpecificEnthalpy h;
+        Modelica.Units.SI.Pressure p;
       equation
         p = 1E5;
         h = -7E5 + time*1E5;
@@ -676,8 +676,8 @@ package Test "Test medium models"
         replaceable package wf = benchmark.fluids.propane_FPRP constrainedby
           Modelica.Media.Interfaces.PartialMedium "Medium model";
         wf.ThermodynamicState fluid "Properties of the two-phase fluid";
-        Modelica.SIunits.SpecificEnthalpy h;
-        Modelica.SIunits.Pressure p;
+        Modelica.Units.SI.SpecificEnthalpy h;
+        Modelica.Units.SI.Pressure p;
       equation
         p = 1E5;
         h = 1E5 + time*1E5;
@@ -692,8 +692,8 @@ package Test "Test medium models"
         replaceable package wf =  benchmark.fluids.propane_FPRP
           constrainedby Modelica.Media.Interfaces.PartialMedium "Medium model";
         wf.BaseProperties fluid "Properties of the two-phase fluid";
-        Modelica.SIunits.SpecificEnthalpy h;
-        Modelica.SIunits.Pressure p;
+        Modelica.Units.SI.SpecificEnthalpy h;
+        Modelica.Units.SI.Pressure p;
 
       equation
         p = 1E5;
@@ -713,8 +713,8 @@ package Test "Test medium models"
         replaceable package wf = benchmark.fluids.propane_CP_TTSE
           constrainedby Modelica.Media.Interfaces.PartialMedium "Medium model";
         wf.ThermodynamicState fluid "Properties of the two-phase fluid";
-        Modelica.SIunits.SpecificEnthalpy h;
-        Modelica.SIunits.Pressure p;
+        Modelica.Units.SI.SpecificEnthalpy h;
+        Modelica.Units.SI.Pressure p;
       equation
         p = 1E5;
         h = -1E5 + time*1E5;
@@ -730,8 +730,8 @@ package Test "Test medium models"
         replaceable package wf = benchmark.fluids.propane_CP_transport
           constrainedby Modelica.Media.Interfaces.PartialMedium "Medium model";
         wf.ThermodynamicState fluid "Properties of the two-phase fluid";
-        Modelica.SIunits.SpecificEnthalpy h;
-        Modelica.SIunits.Pressure p;
+        Modelica.Units.SI.SpecificEnthalpy h;
+        Modelica.Units.SI.Pressure p;
       equation
         p = 1E5;
         h = -1E5 + time*1E5;
@@ -886,11 +886,11 @@ package Test "Test medium models"
       Medium.SpecificEntropy sA(start=s);
       Medium.SpecificEntropy sB(start=s);
 
-      Modelica.SIunits.SpecificVolume v;
-      Modelica.SIunits.SpecificVolume vA;
-      Modelica.SIunits.SpecificVolume vB;
+      Modelica.Units.SI.SpecificVolume v;
+      Modelica.Units.SI.SpecificVolume vA;
+      Modelica.Units.SI.SpecificVolume vB;
 
-      Modelica.SIunits.SpecificVolume dv=0.0001;
+      Modelica.Units.SI.SpecificVolume dv=0.0001;
 
       Medium.Density rho;
       Real dpdv_s,dpdd_s,test1,test2;
@@ -1002,11 +1002,11 @@ package Test "Test medium models"
     replaceable package wf = CoolProp2Modelica.Media.R290_CP constrainedby
       Modelica.Media.Interfaces.PartialMedium "Medium model";
     wf.BaseProperties fluid "Properties of the two-phase fluid";
-    Modelica.SIunits.SpecificEnthalpy h;
-    Modelica.SIunits.Pressure p;
-    Modelica.SIunits.DerDensityByEnthalpy drdh
+    Modelica.Units.SI.SpecificEnthalpy h;
+    Modelica.Units.SI.Pressure p;
+    Modelica.Units.SI.DerDensityByEnthalpy drdh
       "Derivative of average density by enthalpy";
-    Modelica.SIunits.DerDensityByPressure drdp
+    Modelica.Units.SI.DerDensityByPressure drdp
       "Derivative of average density by pressure";
   equation
     p = 1E5;
@@ -1021,11 +1021,11 @@ package Test "Test medium models"
     replaceable package wf = CoolProp2Modelica.Media.R290_FPST constrainedby
       Modelica.Media.Interfaces.PartialMedium "Medium model";
     wf.BaseProperties fluid "Properties of the two-phase fluid";
-    Modelica.SIunits.SpecificEnthalpy h;
-    Modelica.SIunits.Pressure p;
-    Modelica.SIunits.DerDensityByEnthalpy drdh
+    Modelica.Units.SI.SpecificEnthalpy h;
+    Modelica.Units.SI.Pressure p;
+    Modelica.Units.SI.DerDensityByEnthalpy drdh
       "Derivative of average density by enthalpy";
-    Modelica.SIunits.DerDensityByPressure drdp
+    Modelica.Units.SI.DerDensityByPressure drdp
       "Derivative of average density by pressure";
   equation
     p = 1E5;
@@ -1040,11 +1040,11 @@ package Test "Test medium models"
     replaceable package wf = CoolProp2Modelica.Media.R290_FPRP constrainedby
       Modelica.Media.Interfaces.PartialMedium "Medium model";
     wf.BaseProperties fluid "Properties of the two-phase fluid";
-    Modelica.SIunits.SpecificEnthalpy h;
-    Modelica.SIunits.Pressure p;
-    Modelica.SIunits.DerDensityByEnthalpy drdh
+    Modelica.Units.SI.SpecificEnthalpy h;
+    Modelica.Units.SI.Pressure p;
+    Modelica.Units.SI.DerDensityByEnthalpy drdh
       "Derivative of average density by enthalpy";
-    Modelica.SIunits.DerDensityByPressure drdp
+    Modelica.Units.SI.DerDensityByPressure drdp
       "Derivative of average density by pressure";
   equation
     p = 1E5;
@@ -1060,11 +1060,11 @@ package Test "Test medium models"
                                                            constrainedby
       Modelica.Media.Interfaces.PartialMedium "Medium model";
     wf.BaseProperties fluid "Properties of the two-phase fluid";
-    Modelica.SIunits.SpecificEnthalpy h;
-    Modelica.SIunits.Pressure p;
-    Modelica.SIunits.DerDensityByEnthalpy drdh
+    Modelica.Units.SI.SpecificEnthalpy h;
+    Modelica.Units.SI.Pressure p;
+    Modelica.Units.SI.DerDensityByEnthalpy drdh
       "Derivative of average density by enthalpy";
-    Modelica.SIunits.DerDensityByPressure drdp
+    Modelica.Units.SI.DerDensityByPressure drdp
       "Derivative of average density by pressure";
   equation
     p = 1E5;
@@ -1082,11 +1082,11 @@ package Test "Test medium models"
     replaceable package wf = CoolProp2Modelica.Media.Solkatherm_debug
     constrainedby Modelica.Media.Interfaces.PartialMedium "Medium model";
     wf.BaseProperties fluid "Properties of the two-phase fluid";
-    Modelica.SIunits.SpecificEnthalpy h;
-    Modelica.SIunits.Pressure p;
-    Modelica.SIunits.DerDensityByEnthalpy drdh
+    Modelica.Units.SI.SpecificEnthalpy h;
+    Modelica.Units.SI.Pressure p;
+    Modelica.Units.SI.DerDensityByEnthalpy drdh
       "Derivative of average density by enthalpy";
-    Modelica.SIunits.DerDensityByPressure drdp
+    Modelica.Units.SI.DerDensityByPressure drdp
       "Derivative of average density by pressure";
   equation
     p = 1E5;
@@ -1102,11 +1102,11 @@ package Test "Test medium models"
     replaceable package wf = ThermoCycle_BDversion.Media.R601_CP
       constrainedby Modelica.Media.Interfaces.PartialMedium "Medium model";
     wf.BaseProperties fluid "Properties of the two-phase fluid";
-    Modelica.SIunits.SpecificEnthalpy h;
-    Modelica.SIunits.Pressure p;
-    Modelica.SIunits.DerDensityByEnthalpy drdh
+    Modelica.Units.SI.SpecificEnthalpy h;
+    Modelica.Units.SI.Pressure p;
+    Modelica.Units.SI.DerDensityByEnthalpy drdh
       "Derivative of average density by enthalpy";
-    Modelica.SIunits.DerDensityByPressure drdp
+    Modelica.Units.SI.DerDensityByPressure drdp
       "Derivative of average density by pressure";
   equation
     p = 1E5;
@@ -1121,11 +1121,11 @@ package Test "Test medium models"
     replaceable package wf = CoolProp2Modelica.Media.R245fa_CP constrainedby
       Modelica.Media.Interfaces.PartialMedium "Medium model";
     wf.BaseProperties fluid "Properties of the two-phase fluid";
-    Modelica.SIunits.SpecificEnthalpy h;
-    Modelica.SIunits.Pressure p;
-    Modelica.SIunits.DerDensityByEnthalpy drdh
+    Modelica.Units.SI.SpecificEnthalpy h;
+    Modelica.Units.SI.Pressure p;
+    Modelica.Units.SI.DerDensityByEnthalpy drdh
       "Derivative of average density by enthalpy";
-    Modelica.SIunits.DerDensityByPressure drdp
+    Modelica.Units.SI.DerDensityByPressure drdp
       "Derivative of average density by pressure";
   equation
     p = 1E5;
@@ -1141,11 +1141,11 @@ package Test "Test medium models"
     replaceable package wf = CoolProp2Modelica.Media.R245fa_CP constrainedby
       Modelica.Media.Interfaces.PartialMedium "Medium model";
     wf.ThermodynamicState fluid "Properties of the two-phase fluid";
-    Modelica.SIunits.SpecificEnthalpy h;
-    Modelica.SIunits.Pressure p;
-    Modelica.SIunits.DerDensityByEnthalpy drdh
+    Modelica.Units.SI.SpecificEnthalpy h;
+    Modelica.Units.SI.Pressure p;
+    Modelica.Units.SI.DerDensityByEnthalpy drdh
       "Derivative of average density by enthalpy";
-    Modelica.SIunits.DerDensityByPressure drdp
+    Modelica.Units.SI.DerDensityByPressure drdp
       "Derivative of average density by pressure";
   equation
     p = 1E5;
@@ -1161,35 +1161,38 @@ package Test "Test medium models"
     constant String fluidIdentifier = "n-Pentane";
 
     replaceable package ph = ExternalMedia.Media.CoolPropMedium (
-    mediumName=fluidIdentifier,
-    substanceNames={fluidIdentifier},
-    ThermoStates=Modelica.Media.Interfaces.PartialMedium.Choices.IndependentVariables.ph) constrainedby
+        mediumName=fluidIdentifier,
+        substanceNames={fluidIdentifier},
+        ThermoStates=Modelica.Media.Interfaces.Choices.IndependentVariables.ph)
+                                                                                          constrainedby
       Modelica.Media.Interfaces.PartialMedium "Medium model";
 
     replaceable package dT = ExternalMedia.Media.CoolPropMedium (
-    mediumName=fluidIdentifier,
-    substanceNames={fluidIdentifier},
-    ThermoStates=Modelica.Media.Interfaces.PartialMedium.Choices.IndependentVariables.dT) constrainedby
+        mediumName=fluidIdentifier,
+        substanceNames={fluidIdentifier},
+        ThermoStates=Modelica.Media.Interfaces.Choices.IndependentVariables.dT)
+                                                                                          constrainedby
       Modelica.Media.Interfaces.PartialMedium "Medium model";
 
     replaceable package ps = ExternalMedia.Media.CoolPropMedium (
-    mediumName=fluidIdentifier,
-    substanceNames={fluidIdentifier},
-    ThermoStates=Modelica.Media.Interfaces.PartialMedium.Choices.IndependentVariables.ps) constrainedby
+        mediumName=fluidIdentifier,
+        substanceNames={fluidIdentifier},
+        ThermoStates=Modelica.Media.Interfaces.Choices.IndependentVariables.ps)
+                                                                                          constrainedby
       Modelica.Media.Interfaces.PartialMedium "Medium model";
 
        replaceable package hs = ExternalMedia.Media.CoolPropMedium (
-         mediumName=fluidIdentifier,
-         substanceNames={fluidIdentifier},
-         ThermoStates=Modelica.Media.Interfaces.PartialMedium.Choices.IndependentVariables.hs)
+        mediumName=fluidIdentifier,
+        substanceNames={fluidIdentifier},
+        ThermoStates=Modelica.Media.Interfaces.Choices.IndependentVariables.hs)
        constrainedby Modelica.Media.Interfaces.PartialMedium "Medium model";
 
     ph.ThermodynamicState fluid "Properties of the two-phase fluid";
-    Modelica.SIunits.SpecificEnthalpy h;
-    Modelica.SIunits.Pressure p;
-    Modelica.SIunits.DerDensityByEnthalpy drdh
+    Modelica.Units.SI.SpecificEnthalpy h;
+    Modelica.Units.SI.Pressure p;
+    Modelica.Units.SI.DerDensityByEnthalpy drdh
       "Derivative of average density by enthalpy";
-    Modelica.SIunits.DerDensityByPressure drdp
+    Modelica.Units.SI.DerDensityByPressure drdp
       "Derivative of average density by pressure";
 
     dT.ThermodynamicState fluid_dT "Properties of the two-phase fluid";

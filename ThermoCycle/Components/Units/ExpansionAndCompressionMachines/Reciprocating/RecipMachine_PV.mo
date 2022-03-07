@@ -16,13 +16,14 @@ model RecipMachine_PV
         iconTransformation(extent={{-120,100},{-80,140}})));
   outer Modelica.Fluid.System system;
   parameter Boolean use_p_crank = false "Use non-ambient crankcase pressure?";
-  parameter Modelica.SIunits.AbsolutePressure p_crank(min=10,displayUnit="bar") = 101325
+  parameter Modelica.Units.SI.AbsolutePressure p_crank(
+    min=10,
+    displayUnit="bar") = 101325
     "Custom crankcase pressure, counteracts chamber pressure forces"
-  annotation (Evaluate = true,
-                Dialog(enable = use_p_crank));
+    annotation (Evaluate=true, Dialog(enable=use_p_crank));
 protected
-Modelica.SIunits.Volume tmp;
-Modelica.SIunits.AbsolutePressure p_crank_internal;
+  Modelica.Units.SI.Volume tmp;
+  Modelica.Units.SI.AbsolutePressure p_crank_internal;
 equation
   if use_p_crank then
     p_crank_internal = p_crank;

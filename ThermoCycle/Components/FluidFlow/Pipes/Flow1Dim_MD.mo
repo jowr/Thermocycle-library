@@ -17,25 +17,25 @@ annotation (choicesAllMatching = true);
     annotation (Placement(transformation(extent={{-28,40},{32,60}}),
         iconTransformation(extent={{-40,40},{40,60}})));
 // Geometric characteristics
-  constant Modelica.SIunits.SpecificEnthalpy hzero=1e-3
+  constant Modelica.Units.SI.SpecificEnthalpy hzero=1e-3
     "Small value for deltah";
   constant Real pi = Modelica.Constants.pi "pi-greco";
   parameter Integer N(min=1)=10 "Number of cells";
   parameter Integer Nt(min=1)=1 "Number of tubes in parallel";
-  parameter Modelica.SIunits.Area A = 16.18
+  parameter Modelica.Units.SI.Area A=16.18
     "Lateral surface of the tube: heat exchange area";
-  parameter Modelica.SIunits.Volume V = 0.03781 "Volume of the tube";
-  final parameter Modelica.SIunits.Volume Vi=V/N "Volume of a single cell";
-  final parameter Modelica.SIunits.Area Ai=A/N
+  parameter Modelica.Units.SI.Volume V=0.03781 "Volume of the tube";
+  final parameter Modelica.Units.SI.Volume Vi=V/N "Volume of a single cell";
+  final parameter Modelica.Units.SI.Area Ai=A/N
     "Lateral surface of a single cell";
-  parameter Modelica.SIunits.MassFlowRate Mdotnom = 0.2588
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom=0.2588
     "Nominal fluid flow rate";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer U_nom = 100
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_nom=100
     "if HTtype = LiqVap : Heat transfer coefficient, liquid zone ";
 
 /* FLUID INITIAL VALUES */
-parameter Modelica.SIunits.Pressure pstart "Fluid pressure start value"
-                                     annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure pstart "Fluid pressure start value"
+    annotation (Dialog(tab="Initialization"));
   parameter Medium.Temperature Tstart_inlet "Inlet temperature start value"
      annotation (Dialog(tab="Initialization"));
   parameter Medium.Temperature Tstart_outlet "Outlet temperature start value"
@@ -59,7 +59,7 @@ parameter Modelica.SIunits.Pressure pstart "Fluid pressure start value"
     annotation (Dialog(tab="Numerical options"));
   parameter Real max_drhodt=100 "Maximum value for the density derivative"
     annotation (Dialog(enable=filter_dMdt, tab="Numerical options"));
-  parameter Modelica.SIunits.Time TT=1
+  parameter Modelica.Units.SI.Time TT=1
     "Integration time of the first-order filter"
     annotation (Dialog(enable=max_der, tab="Numerical options"));
 //enable=filter_dMdt,enable=max_der,
@@ -69,57 +69,58 @@ parameter Modelica.SIunits.Pressure pstart "Fluid pressure start value"
 /* FLUID VARIABLES */
 /* Saturation variables */
   Medium.SaturationProperties sat;
-  Modelica.SIunits.SpecificEnthalpy h_l "saturated liquid enthalpy";
-  Modelica.SIunits.SpecificEnthalpy h_v "saturated vapor enthalpy";
+  Modelica.Units.SI.SpecificEnthalpy h_l "saturated liquid enthalpy";
+  Modelica.Units.SI.SpecificEnthalpy h_v "saturated vapor enthalpy";
   Medium.Density rho_l;
   Medium.Density rho_v;
-  Modelica.SIunits.DerDensityByPressure drldp
+  Modelica.Units.SI.DerDensityByPressure drldp
     "Bubble point density derivative with respect to pressure";
-  Modelica.SIunits.DerDensityByPressure drvdp
+  Modelica.Units.SI.DerDensityByPressure drvdp
     "Dew point density derivative with respect to pressure";
-  Modelica.SIunits.DerEnthalpyByPressure dhldp
+  Modelica.Units.SI.DerEnthalpyByPressure dhldp
     "Bubble point enthalpy derivative with respect to pressure";
-  Modelica.SIunits.DerEnthalpyByPressure dhvdp
+  Modelica.Units.SI.DerEnthalpyByPressure dhvdp
     "Dew point enthalpy derivative with respect to pressure";
 
 /* Fluid variables */
   Medium.ThermodynamicState  fluidState[N+1];
   //Medium.Temperature T_sat "Saturation temperature";
   Medium.AbsolutePressure p(start=pstart);
-  Modelica.SIunits.MassFlowRate M_dot_su;
+  Modelica.Units.SI.MassFlowRate M_dot_su;
   Medium.SpecificEnthalpy h[N] "Fluid specific enthalpy at the center cells";
-   Modelica.SIunits.SpecificEnthalpy h_node[N + 1](start=hstart)
+  Modelica.Units.SI.SpecificEnthalpy h_node[N + 1](start=hstart)
     "Enthalpy state variables at each node";
   Medium.Temperature T[N];//(start=Tstart) "Fluid temperatureat the center of the cell";
   Medium.Temperature T_node[N+1] "Fluid temperature at the nodes";
-  Modelica.SIunits.Temperature T_wall[N] "Internal wall temperature";
+  Modelica.Units.SI.Temperature T_wall[N] "Internal wall temperature";
   Medium.Density rho[N] "Fluid cell density at center cell";
   Medium.Density rho_node[N+1] "Fluid cell density at the nodes";
 
-  Modelica.SIunits.DerDensityByEnthalpy drdh_node[N+1]
+  Modelica.Units.SI.DerDensityByEnthalpy drdh_node[N + 1]
     "Derivative of density by enthalpy at each node";
-  Modelica.SIunits.DerDensityByEnthalpy drdh1[N]
+  Modelica.Units.SI.DerDensityByEnthalpy drdh1[N]
     "Derivative of average density by left enthalpy";
-  Modelica.SIunits.DerDensityByEnthalpy drdh2[N]
+  Modelica.Units.SI.DerDensityByEnthalpy drdh2[N]
     "Derivative of average density by right enthalpy";
   //Modelica.SIunits.DerDensityByEnthalpy drdh[N]
   //  "Derivative of density by enthalpy at center cell"; // It will be eliminated!!!!
 
-  Modelica.SIunits.DerDensityByPressure drdp_node[N+1]
+  Modelica.Units.SI.DerDensityByPressure drdp_node[N + 1]
     "Derivative of density by pressure at each node";
-  Modelica.SIunits.DerDensityByPressure drdp[N]
+  Modelica.Units.SI.DerDensityByPressure drdp[N]
     "Derivative of density by pressure at center cell";
 
   Real dMdt[N] "Time derivative of mass in each cell between two nodes";
-  Modelica.SIunits.HeatFlux qdot[N] "heat flux in each cell between two nodes";
-  Modelica.SIunits.MassFlowRate Mdot_node[N + 1](each start=Mdotnom/Nt, each min=0);
-  Modelica.SIunits.MassFlowRate Mdot[N](each start=Mdotnom/Nt, each min=0);
+  Modelica.Units.SI.HeatFlux qdot[N] "heat flux in each cell between two nodes";
+  Modelica.Units.SI.MassFlowRate Mdot_node[N + 1](each start=Mdotnom/Nt, each
+      min=0);
+  Modelica.Units.SI.MassFlowRate Mdot[N](each start=Mdotnom/Nt, each min=0);
   //Modelica.SIunits.CoefficientOfHeatTransfer U[N]
   //  "Heat transfer coefficient between wall and working fluid";
   Real x_node[N+1] "Vapor quality at each node";
 
-  Modelica.SIunits.Power Q_tot "Total heat flux exchanged by the thermal port";
-  Modelica.SIunits.Mass M_tot "Total mass of the fluid in the component";
+  Modelica.Units.SI.Power Q_tot "Total heat flux exchanged by the thermal port";
+  Modelica.Units.SI.Mass M_tot "Total mass of the fluid in the component";
 
  Real AA "Variable for the calculation of the mean density derivative";
  Real BB "Variable for the calculation of the mean density derivative";
@@ -309,16 +310,16 @@ public
    replaceable Arrays T_profile;
     record Arrays
     parameter Integer n;
-    Modelica.SIunits.Temperature[n] T_cell;
-    Modelica.SIunits.Temperature[n+1] T_node;
+      Modelica.Units.SI.Temperature[n] T_cell;
+      Modelica.Units.SI.Temperature[n + 1] T_node;
     end Arrays;
     parameter Integer n;
-    Modelica.SIunits.SpecificEnthalpy[n] h;
-    Modelica.SIunits.SpecificEnthalpy[n+1] hnode;
-    Modelica.SIunits.Density[n] rho;
-    Modelica.SIunits.MassFlowRate[n+1] Mdot;
+    Modelica.Units.SI.SpecificEnthalpy[n] h;
+    Modelica.Units.SI.SpecificEnthalpy[n + 1] hnode;
+    Modelica.Units.SI.Density[n] rho;
+    Modelica.Units.SI.MassFlowRate[n + 1] Mdot;
     Real[n+1] x;
-   Modelica.SIunits.Pressure p;
+    Modelica.Units.SI.Pressure p;
  end SummaryClass;
  SummaryClass Summary(  T_profile( n=N,T_cell = T, T_node = T_node), n=N, h = h, hnode = h_node, rho = rho, Mdot = Mdot_node, x = x_node, p = p);
 

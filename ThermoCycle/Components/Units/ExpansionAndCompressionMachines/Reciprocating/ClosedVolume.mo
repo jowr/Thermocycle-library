@@ -15,10 +15,10 @@ model ClosedVolume "Model of a confined volume without mass transfer"
   parameter Medium.Temperature T_start = 1500 "Initial temperature";
   parameter Medium.AbsolutePressure p_start = 40*system.p_ambient
     "Initial pressure";
-  parameter Modelica.SIunits.HeatFlowRate Q_dot = -10 "Constant heat flux";
-  Modelica.SIunits.Mass m;
-  Modelica.SIunits.InternalEnergy U;
-  Modelica.SIunits.Power W_dot;
+  parameter Modelica.Units.SI.HeatFlowRate Q_dot=-10 "Constant heat flux";
+  Modelica.Units.SI.Mass m;
+  Modelica.Units.SI.InternalEnergy U;
+  Modelica.Units.SI.Power W_dot;
 // initial algorithm
 //    Medium.setState_pTX(p_start,T_start,{1});
 initial algorithm

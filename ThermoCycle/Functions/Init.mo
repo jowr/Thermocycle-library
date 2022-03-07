@@ -1,7 +1,7 @@
 within ThermoCycle.Functions;
 model Init "Smooth transition between two values"
-  parameter Modelica.SIunits.Time t_init=10 "Starting time of the transition";
-  parameter Modelica.SIunits.Time length=3 "Duration of the transition";
+  parameter Modelica.Units.SI.Time t_init=10 "Starting time of the transition";
+  parameter Modelica.Units.SI.Time length=3 "Duration of the transition";
   parameter Boolean noevent=false
     "Avoids the generation of events during the transition";
   Modelica.Blocks.Interfaces.RealInput u1 "Connector of Real input signal"

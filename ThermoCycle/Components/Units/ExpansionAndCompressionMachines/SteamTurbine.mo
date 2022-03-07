@@ -24,15 +24,12 @@ model SteamTurbine "Steam turbine"
             68},{78,88}})));
 
 /************************* INITIALIZATION ****************************/
-  parameter Modelica.SIunits.Pressure p_su_start=p_su_nom
-    "Inlet pressure start value"
-    annotation(Dialog(tab = "Initialization"));
-  parameter Modelica.SIunits.Pressure p_ex_start=p_ex_nom
-    "Outlet pressure start value"
-    annotation(Dialog(tab = "Initialization"));
-  parameter Modelica.SIunits.MassFlowRate M_dot_start=M_dot_nom
-    "Mass flow rate start value"
-    annotation(Dialog(tab = "Initialization"));
+  parameter Modelica.Units.SI.Pressure p_su_start=p_su_nom
+    "Inlet pressure start value" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure p_ex_start=p_ex_nom
+    "Outlet pressure start value" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.MassFlowRate M_dot_start=M_dot_nom
+    "Mass flow rate start value" annotation (Dialog(tab="Initialization"));
   parameter Medium.SpecificEnthalpy h_su_start=Medium.specificEnthalpy_pT(p_su_nom,T_nom)
     "Inlet enthalpy start value"
     annotation(Dialog(tab = "Initialization"));
@@ -45,39 +42,39 @@ model SteamTurbine "Steam turbine"
   parameter Real eta_s_nom=0.92 "Nominal isentropic efficiency";
   parameter Boolean UseNom=false
     "if true, uses Nominal Conditions to compute Kt";
-  parameter Modelica.SIunits.Area Kt=1e-4 "Coefficient of Stodola's law"  annotation (Dialog(enable=(not UseNom)));
+  parameter Modelica.Units.SI.Area Kt=1e-4 "Coefficient of Stodola's law"
+    annotation (Dialog(enable=(not UseNom)));
 
 /************************* NOMINAL CONDITIONS ****************************/
-  parameter Modelica.SIunits.MassFlowRate M_dot_nom
-    "Nominal inlet mass flow rate"                                                 annotation (Dialog(tab="Nominal Conditions"));
-  parameter Modelica.SIunits.Pressure p_su_nom "Nominal inlet pressure"
-                       annotation (Dialog(tab="Nominal Conditions"));
-  parameter Modelica.SIunits.Pressure p_ex_nom "Nominal outlet pressure"
-                       annotation (Dialog(tab="Nominal Conditions"));
-  parameter Modelica.SIunits.Temperature T_nom "Nominal inlet temperature"
-                          annotation (Dialog(tab="Nominal Conditions"));
-  parameter Modelica.SIunits.Density rho_nom=Medium.density_pT(
-          p_su_nom,
-          T_nom) "Nominal inlet density"    annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.MassFlowRate M_dot_nom
+    "Nominal inlet mass flow rate" annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Pressure p_su_nom "Nominal inlet pressure"
+    annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Pressure p_ex_nom "Nominal outlet pressure"
+    annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Temperature T_nom "Nominal inlet temperature"
+    annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Density rho_nom=Medium.density_pT(p_su_nom, T_nom)
+    "Nominal inlet density" annotation (Dialog(tab="Nominal Conditions"));
 
   parameter Boolean use_ideal_gas=false
     "If true, uses the ideal gas law to compute the Stodola expression"                                          annotation (Dialog(tab="General"));
 
 /************************* VARIABLES ****************************/
   Medium.ThermodynamicState steamIn(p(start=p_su_nom),T(start=T_nom),d(start=rho_nom));
-  Modelica.SIunits.Angle phi "shaft rotation angle";
-  Modelica.SIunits.Torque tau "net torque acting on the turbine";
-  Modelica.SIunits.AngularVelocity omega "shaft angular velocity";
-  Modelica.SIunits.MassFlowRate M_dot(start=M_dot_start) "Mass flow rate";
+  Modelica.Units.SI.Angle phi "shaft rotation angle";
+  Modelica.Units.SI.Torque tau "net torque acting on the turbine";
+  Modelica.Units.SI.AngularVelocity omega "shaft angular velocity";
+  Modelica.Units.SI.MassFlowRate M_dot(start=M_dot_start) "Mass flow rate";
   Medium.SpecificEnthalpy h_su(start=h_su_start) "Inlet enthalpy";
   Medium.SpecificEnthalpy h_ex(start=h_ex_start) "Outlet enthalpy";
   Medium.SpecificEnthalpy h_ex_s(start=h_ex_start) "Isentropic outlet enthalpy";
   Medium.AbsolutePressure p_ex(start=p_ex_start) "Outlet pressure";
   Real PR "pressure ratio";
   Real PR_nom "nominal pressure ratio";
-  Modelica.SIunits.Power W_dot "Mechanical power input";
+  Modelica.Units.SI.Power W_dot "Mechanical power input";
   Real eta_s "Isentropic efficiency";
-  Modelica.SIunits.Area K(start=Kt) "K coefficient of Stodola's law";
+  Modelica.Units.SI.Area K(start=Kt) "K coefficient of Stodola's law";
   Real x;
   Real x_nom;
   Real delta=0.001;

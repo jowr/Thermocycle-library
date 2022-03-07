@@ -4,8 +4,8 @@ model SinkP_pT
   extends ThermoCycle.Icons.Water.SourceP;
   replaceable package Medium = ThermoCycle.Media.DummyFluid constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model" annotation (choicesAllMatching = true);
-  parameter Modelica.SIunits.Pressure p0=1.01325e5 "Nominal pressure";
-  parameter Modelica.SIunits.Temperature T=283.15 "Nominal specific enthalpy";
+  parameter Modelica.Units.SI.Pressure p0=1.01325e5 "Nominal pressure";
+  parameter Modelica.Units.SI.Temperature T=283.15 "Nominal specific enthalpy";
   parameter Medium.MassFraction X[Medium.nX] = Medium.X_default
     "Fixed value of composition"
     annotation (Evaluate = true,

@@ -10,15 +10,16 @@ model ThreeWayValve
 replaceable package Medium = ThermoCycle.Media.R245fa_CP  constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model" annotation (choicesAllMatching = true);
   Real K "Valve throat area";
-  parameter Modelica.SIunits.MassFlowRate Mdot_nom=0.1
+  parameter Modelica.Units.SI.MassFlowRate Mdot_nom=0.1
     "Nominal mass flow rate (one way or the other)"
-                             annotation (Dialog(tab="Nominal Conditions"));
-  parameter Modelica.SIunits.Pressure   DELTAp_nom=0.01 "Nominal pressure drop"
-                             annotation (Dialog(tab="Nominal Conditions"));
+    annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Pressure DELTAp_nom=0.01 "Nominal pressure drop"
+    annotation (Dialog(tab="Nominal Conditions"));
   parameter Boolean damp_signal=true
     "If true, the on/off signal is damped with a first order filter";
-  parameter Modelica.SIunits.Time tau = 5 "Time constant of the damping" annotation(Dialog(enable=damp_signal));
-  Modelica.SIunits.MassFlowRate Mdot(start=Mdot_nom);
+  parameter Modelica.Units.SI.Time tau=5 "Time constant of the damping"
+    annotation (Dialog(enable=damp_signal));
+  Modelica.Units.SI.MassFlowRate Mdot(start=Mdot_nom);
   Real X(min=0,max=1);
 
   ThermoCycle.Interfaces.Fluid.FlangeA InFlow(redeclare package Medium = Medium)

@@ -2,12 +2,12 @@ within ThermoCycle.Components.Units.Tanks;
 model Tank
 replaceable package Medium = ThermoCycle.Media.R245fa_CP  constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model" annotation (choicesAllMatching = true);
-  parameter Modelica.SIunits.Volume Vtot=0.002 "Volume of the tank";
-  parameter Modelica.SIunits.Pressure p_gas = 0
+  parameter Modelica.Units.SI.Volume Vtot=0.002 "Volume of the tank";
+  parameter Modelica.Units.SI.Pressure p_gas=0
     "Partial pressure of non-condensable gases";
-  parameter Modelica.SIunits.Pressure pstart=5e5 "Initial pressure"
+  parameter Modelica.Units.SI.Pressure pstart=5e5 "Initial pressure"
     annotation (Dialog(tab="Initialisation"));
-  parameter Modelica.SIunits.SpecificEnthalpy hstart=3.82E4
+  parameter Modelica.Units.SI.SpecificEnthalpy hstart=3.82E4
     "Key parameter for the determination of the initial pressure"
     annotation (Dialog(tab="Initialisation"));
   parameter Real level_start=0.6 "Initial level"
@@ -21,29 +21,29 @@ replaceable package Medium = ThermoCycle.Media.R245fa_CP  constrainedby
   //Variables
   Medium.ThermodynamicState fluidState;
   Medium.SaturationProperties sat;
-  Modelica.SIunits.Pressure p_tot "Total pressure of the system";
+  Modelica.Units.SI.Pressure p_tot "Total pressure of the system";
   Medium.Density rho "Inlet density";
-  Modelica.SIunits.Volume Vl(start=Vtot*level_start)
+  Modelica.Units.SI.Volume Vl(start=Vtot*level_start)
     "Volume of the fluid in liquid phase [m3]";
-  Modelica.SIunits.Volume Vv(start=Vtot*(1 - level_start))
+  Modelica.Units.SI.Volume Vv(start=Vtot*(1 - level_start))
     "Volume of the fluid in vapor phase [m3]";
-  Modelica.SIunits.MassFlowRate M_dot_ex "Outlet mass flow [kg/s]";
-  Modelica.SIunits.MassFlowRate M_dot_su "Inlet mass flow [kg/s]";
-  Modelica.SIunits.SpecificEnthalpy h_ex "Outlet enthalpy [kJ/kg] ";
-  Modelica.SIunits.SpecificEnthalpy h_su "Inlet enthalpy [kJ/kg] ";
-  Modelica.SIunits.Pressure p(start=pstart);
-  Modelica.SIunits.Mass M(start=Vtot*level_start*1000)
+  Modelica.Units.SI.MassFlowRate M_dot_ex "Outlet mass flow [kg/s]";
+  Modelica.Units.SI.MassFlowRate M_dot_su "Inlet mass flow [kg/s]";
+  Modelica.Units.SI.SpecificEnthalpy h_ex "Outlet enthalpy [kJ/kg] ";
+  Modelica.Units.SI.SpecificEnthalpy h_su "Inlet enthalpy [kJ/kg] ";
+  Modelica.Units.SI.Pressure p(start=pstart);
+  Modelica.Units.SI.Mass M(start=Vtot*level_start*1000)
     "Total mass of the fluid stored [kg]";
-  Modelica.SIunits.Density rhol "Density of the fluid in liquid phase [kg/m3]";
-  Modelica.SIunits.Density rhov "Density of the fluid in vapor phase [kg/m3]";
-  Modelica.SIunits.SpecificEnthalpy hl
+  Modelica.Units.SI.Density rhol "Density of the fluid in liquid phase [kg/m3]";
+  Modelica.Units.SI.Density rhov "Density of the fluid in vapor phase [kg/m3]";
+  Modelica.Units.SI.SpecificEnthalpy hl
     "Enthalpy of the fluid in liquid phase [kJ/kg]";
-  Modelica.SIunits.SpecificEnthalpy hv
+  Modelica.Units.SI.SpecificEnthalpy hv
     "Enthalpy of the fluid in vapor phase [kJ/kg]";
-  Modelica.SIunits.SpecificEnthalpy h(start=hstart);
-  Modelica.SIunits.DerDensityByEnthalpy drdh
+  Modelica.Units.SI.SpecificEnthalpy h(start=hstart);
+  Modelica.Units.SI.DerDensityByEnthalpy drdh
     "Derivative of average density by enthalpy";
-  Modelica.SIunits.DerDensityByPressure drdp
+  Modelica.Units.SI.DerDensityByPressure drdp
     "Derivative of average density by pressure";
   Modelica.Blocks.Interfaces.RealOutput level annotation (Placement(
         transformation(extent={{90,36},{128,74}}), iconTransformation(extent=

@@ -3,15 +3,15 @@ model SourceP "Pressure source for water/steam flows"
   extends ThermoCycle.Icons.Water.SourceP;
   replaceable package Medium = Media.DummyFluid constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model" annotation (choicesAllMatching = true);
-  parameter Modelica.SIunits.Pressure p0=1.01325e5 "Nominal pressure";
-  parameter Modelica.SIunits.SpecificEnthalpy h_0=1e5
+  parameter Modelica.Units.SI.Pressure p0=1.01325e5 "Nominal pressure";
+  parameter Modelica.Units.SI.SpecificEnthalpy h_0=1e5
     "Enthalpy if no connector" annotation (Dialog(enable=not UseT));
-  parameter Modelica.SIunits.Temperature T_0= 273.15+25
+  parameter Modelica.Units.SI.Temperature T_0=273.15 + 25
     "Temperature of fluid going out if no connector";
   parameter Boolean UseT=true "Use temperature as input instead of enthalpy";
 
-  Modelica.SIunits.SpecificEnthalpy h "Specific enthalpy";
-  Modelica.SIunits.Pressure p "pressure";
+  Modelica.Units.SI.SpecificEnthalpy h "Specific enthalpy";
+  Modelica.Units.SI.Pressure p "pressure";
 
   Modelica.Blocks.Interfaces.RealInput in_p
     annotation (Placement(transformation(

@@ -2,8 +2,8 @@ within ThermoCycle.Components.HeatFlow.Sources;
 model HeatSource_cell "Source of fixed HeatFlux [W/m2] or HeatFlow[W]"
 parameter Boolean HeatFlow= false
     "If True then Heat through thermal port = Phi/A else = Phi";
-parameter Modelica.SIunits.Area A= 1 "Heat flux through the thermal port"
-                                                                         annotation (Dialog(enable=HeatFlow));
+  parameter Modelica.Units.SI.Area A=1 "Heat flux through the thermal port"
+    annotation (Dialog(enable=HeatFlow));
 
   ThermoCycle.Interfaces.HeatTransfer.ThermalPortL thermalPort
     annotation (Placement(transformation(extent={{-10,-52},{10,-32}}),
@@ -16,7 +16,7 @@ parameter Modelica.SIunits.Area A= 1 "Heat flux through the thermal port"
         rotation=90,
         origin={0,40})));
 
-Modelica.SIunits.HeatFlux PhiCell;
+  Modelica.Units.SI.HeatFlux PhiCell;
 
 equation
 if HeatFlow then

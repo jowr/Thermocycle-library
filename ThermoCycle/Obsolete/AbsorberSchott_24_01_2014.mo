@@ -57,43 +57,48 @@ parameter Real A6 = 0.0125 annotation (Dialog(group="Thermal energy loss correla
 /*****************General Geometries**************************/
 parameter Integer N = 2 "number of cells";
 parameter Integer Nt = 1 "number of tubes";
-parameter Modelica.SIunits.Length L "length of tubes";
-final parameter Modelica.SIunits.Length ll= L/(N-1) "Length of each cell";
-parameter Modelica.SIunits.Length A_P "Aperture of the parabola";
+  parameter Modelica.Units.SI.Length L "length of tubes";
+  final parameter Modelica.Units.SI.Length ll=L/(N - 1) "Length of each cell";
+  parameter Modelica.Units.SI.Length A_P "Aperture of the parabola";
 
 /******************** Geometries&Properties of the tube  *******************************/
-parameter Modelica.SIunits.Length Dext_t "External diameter tube" annotation (Dialog(group="GeometriesAndProperties of the glass envelope", tab="General"));
-parameter Modelica.SIunits.Length th_t "tube thickness" annotation (Dialog(group="GeometriesAndProperties of the glass envelope", tab="General"));
-final parameter Modelica.SIunits.Length rext_t = Dext_t/2
-    " External Radius Glass" annotation (Dialog(group="GeometriesAndProperties of the glass envelope", tab="General"));
-final parameter Modelica.SIunits.Length rint_t= rext_t-th_t
-    "Internal Radius Glass" annotation (Dialog(group="GeometriesAndProperties of the glass envelope", tab="General"));
+  parameter Modelica.Units.SI.Length Dext_t "External diameter tube"
+    annotation (Dialog(group="GeometriesAndProperties of the glass envelope",
+        tab="General"));
+  parameter Modelica.Units.SI.Length th_t "tube thickness" annotation (Dialog(
+        group="GeometriesAndProperties of the glass envelope", tab="General"));
+  final parameter Modelica.Units.SI.Length rext_t=Dext_t/2
+    " External Radius Glass" annotation (Dialog(group=
+          "GeometriesAndProperties of the glass envelope", tab="General"));
+  final parameter Modelica.Units.SI.Length rint_t=rext_t - th_t
+    "Internal Radius Glass" annotation (Dialog(group=
+          "GeometriesAndProperties of the glass envelope", tab="General"));
 
 /*************************** VARIABLES ****************************************/
 
 /******************* Area of Collector and Reflector *****************************/
-Modelica.SIunits.Area A_ext_t "Lateral external area of the tube";
-Modelica.SIunits.Area Am_t "Area of the metal cross section";
-Modelica.SIunits.Area A_ref "Area of the reflector";
-Modelica.SIunits.Area A_int_t "Total Internal area";
-Modelica.SIunits.Area A_int_t_l "Internal area of a cell";
+  Modelica.Units.SI.Area A_ext_t "Lateral external area of the tube";
+  Modelica.Units.SI.Area Am_t "Area of the metal cross section";
+  Modelica.Units.SI.Area A_ref "Area of the reflector";
+  Modelica.Units.SI.Area A_int_t "Total Internal area";
+  Modelica.Units.SI.Area A_int_t_l "Internal area of a cell";
 
 /********************* TEMPERATURES **********************************/
-Modelica.SIunits.Temperature T_fluid[N] "temperature of the fluid";
+  Modelica.Units.SI.Temperature T_fluid[N] "temperature of the fluid";
 
 /************* THERMAL FLOW ****************************************/
-Modelica.SIunits.HeatFlowRate Q_tube_tot;
+  Modelica.Units.SI.HeatFlowRate Q_tube_tot;
 
 /**************************************** THERMAL FLOW per cell length [W/m] ****************************************/
 Real HL[N] "Heat losses per meter";
 
 /****************************************THERMAL FLUX ****************************************/
-Modelica.SIunits.HeatFlux Phi_tube_tot[N] "Heat flux to the tube";
-Modelica.SIunits.HeatFlux Phi_conv_f[N] "Heat flux to the fluid";
-Modelica.SIunits.HeatFlux Phi_loss_tube[N] "Heat flux loss per tube surface";
-Modelica.SIunits.HeatFlux Phi_loss_ref[N]
+  Modelica.Units.SI.HeatFlux Phi_tube_tot[N] "Heat flux to the tube";
+  Modelica.Units.SI.HeatFlux Phi_conv_f[N] "Heat flux to the fluid";
+  Modelica.Units.SI.HeatFlux Phi_loss_tube[N] "Heat flux loss per tube surface";
+  Modelica.Units.SI.HeatFlux Phi_loss_ref[N]
     "Heat flux loss per reflector surface";
-Modelica.SIunits.HeatFlux Phi_loss_ref_m
+  Modelica.Units.SI.HeatFlux Phi_loss_ref_m
     "Medium heat flux loss per reflector surface";
 
 /**************************************** EFFICIENCIES ****************************************/

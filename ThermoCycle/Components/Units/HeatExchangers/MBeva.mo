@@ -24,141 +24,144 @@ Medium.ThermodynamicState SuperHeated "Superheated thermodynamic state";
 Medium.ThermodynamicState outlet "Outlet thermodynamic state";
 
 /************* Tube pressure *****************/
-Modelica.SIunits.Pressure p(start=0)
+  Modelica.Units.SI.Pressure p(start=0)
     "Pressure in the heat-exchanger: No pressure drop considered";
 
 /*********** GENERAL VARIABLES AND PARAMETER ***********/
-parameter Modelica.SIunits.Area A
+  parameter Modelica.Units.SI.Area A
     "Cross-sectional area for both side of the heat exchanger";
-parameter Modelica.SIunits.Length L "Total length of the exchanger";
-final parameter Modelica.SIunits.Length D = 2*sqrt(A/pi) "Diameter";
+  parameter Modelica.Units.SI.Length L "Total length of the exchanger";
+  final parameter Modelica.Units.SI.Length D=2*sqrt(A/pi) "Diameter";
 constant Real pi = Modelica.Constants.pi;
 
 /*************** Wall between the fluids *************************/
-parameter Modelica.SIunits.Mass M_tot
+  parameter Modelica.Units.SI.Mass M_tot
     "Total mass of metal walll between the fluids";
-parameter Modelica.SIunits.SpecificHeatCapacity c_wall
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_wall
     "Heat capacity of the wall - assumed constant in the whole heat exchanger";
-parameter Modelica.SIunits.Density rho_wall
+  parameter Modelica.Units.SI.Density rho_wall
     "Density of the wall - assumed constant in the whole heat exchanger";
 
 /********** MASS FLOWS *******************/
 //parameter Modelica.SIunits.MassFlowRate Mdotnom
 //    "Nominal fluid flow rate of the primary fluid";
-Modelica.SIunits.MassFlowRate M_dot_su
+  Modelica.Units.SI.MassFlowRate M_dot_su
     "Mass flow at the inlet of the heat exchanger";
-Modelica.SIunits.MassFlowRate M_dot_A
+  Modelica.Units.SI.MassFlowRate M_dot_A
     "Mass flow at the interface between sub-cooled and two-phase";
-    Modelica.SIunits.MassFlowRate M_dot_B
+  Modelica.Units.SI.MassFlowRate M_dot_B
     "Mass flow at the interface between sub-cooled and two-phase";
-Modelica.SIunits.MassFlowRate M_dot_ex
+  Modelica.Units.SI.MassFlowRate M_dot_ex
     "Mass flow at the outlet of the heat exchanger";
-Modelica.SIunits.MassFlowRate Mdot_sf
+  Modelica.Units.SI.MassFlowRate Mdot_sf
     "Mass flow of the secondary fluid of the heat exchanger";
 
 /*****************HEAT FLOW *************************/
-Modelica.SIunits.Power Q_SB "Thermal energy transfer with the wall";
-Modelica.SIunits.Power Q_TP
+  Modelica.Units.SI.Power Q_SB "Thermal energy transfer with the wall";
+  Modelica.Units.SI.Power Q_TP
     "Thermal energy transfer with the wall in the two-phase region";
-Modelica.SIunits.Power Q_SH
+  Modelica.Units.SI.Power Q_SH
     "Thermal energy transfer with the wall in the superheated region";
-Modelica.SIunits.Power Q_tot
+  Modelica.Units.SI.Power Q_tot
     "Total Thermal energy transfer with the wall from the primary fluid";
-Modelica.SIunits.Power Q_tot_sf
+  Modelica.Units.SI.Power Q_tot_sf
     "Total Thermal energy transfer with the wall from the secondary fluid";
-Modelica.SIunits.Power Qsf_SH;
-Modelica.SIunits.Power Qsf_TP;
-Modelica.SIunits.Power Qsf_SB;
+  Modelica.Units.SI.Power Qsf_SH;
+  Modelica.Units.SI.Power Qsf_TP;
+  Modelica.Units.SI.Power Qsf_SB;
 
 /***************** TEMPERATURES *************************/
 /** primary fluid **/
-Modelica.SIunits.Temperature T_SU
+  Modelica.Units.SI.Temperature T_SU
     "Temperatue at the inlet of the heat exchanger";
-Modelica.SIunits.Temperature T_SB "Mean Temperatue of the subcooled region";
-Modelica.SIunits.Temperature T_TP "Mean Temperatue of the two-phase region";
-Modelica.SIunits.Temperature T_SH "Mean Temperatue of the superheated region";
-Modelica.SIunits.Temperature TwA
+  Modelica.Units.SI.Temperature T_SB "Mean Temperatue of the subcooled region";
+  Modelica.Units.SI.Temperature T_TP "Mean Temperatue of the two-phase region";
+  Modelica.Units.SI.Temperature T_SH
+    "Mean Temperatue of the superheated region";
+  Modelica.Units.SI.Temperature TwA
     "Wall Temperature at the interface between sub-cooled and two-phase";
-Modelica.SIunits.Temperature TwB
+  Modelica.Units.SI.Temperature TwB
     "Wall Temperature at the interface between two-phase and super-heated";
-Modelica.SIunits.Temperature T_out
+  Modelica.Units.SI.Temperature T_out
     "Temperature at the outlet of the moving boundary model";
 
 /** Wall **/
-Modelica.SIunits.Temperature TwSB(start=0)
+  Modelica.Units.SI.Temperature TwSB(start=0)
     "Mean Wall temperature in the sub-cooled region";
-Modelica.SIunits.Temperature TwTP(start=0)
+  Modelica.Units.SI.Temperature TwTP(start=0)
     "Mean Wall Temperature in the two-phase region";
-Modelica.SIunits.Temperature TwSH(start=0)
+  Modelica.Units.SI.Temperature TwSH(start=0)
     "Mean Wall Temperature in the super-heated region";
 
 /** Secondary fluid **/
-parameter Modelica.SIunits.Temperature dTsf_start=10
+  parameter Modelica.Units.SI.Temperature dTsf_start=10
     "|Initialization|Temperature change";
-  parameter Modelica.SIunits.Temperature Tsf_SU_start=273.15+25
+  parameter Modelica.Units.SI.Temperature Tsf_SU_start=273.15 + 25
     "|Initialization|Temperature inlet";
 
-Modelica.SIunits.Temperature Tsf_SU
+  Modelica.Units.SI.Temperature Tsf_SU
     "Tempearture at the inlet of the secondary fluid";
-Modelica.SIunits.Temperature Tsf_SH
+  Modelica.Units.SI.Temperature Tsf_SH
     "Mean Temperatue of the superheated region secondary fluid";
-Modelica.SIunits.Temperature Tsf_B
+  Modelica.Units.SI.Temperature Tsf_B
     "Secondary fluid temperature at the interface between two-phase and super-heated";
-Modelica.SIunits.Temperature Tsf_TP
+  Modelica.Units.SI.Temperature Tsf_TP
     "Mean Temperatue of the two-phase region secondary fluid";
-Modelica.SIunits.Temperature Tsf_A
+  Modelica.Units.SI.Temperature Tsf_A
     "Secondary fluid temperature at the interface between two-phase and super-heated";
-Modelica.SIunits.Temperature Tsf_SB
+  Modelica.Units.SI.Temperature Tsf_SB
     "Mean Temperatue of the subcooled region secondary fluid";
-Modelica.SIunits.Temperature Tsf_EX( start = Tsf_SU_start - dTsf_start)
+  Modelica.Units.SI.Temperature Tsf_EX(start=Tsf_SU_start - dTsf_start)
     "Secondary fluid temperature at the exit of the heat exchanger";
 
 /*************** HEAT TRANSFER PARAMETER ****************/
-parameter Modelica.SIunits.CoefficientOfHeatTransfer U_SB
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_SB
     "Heat transfer coefficient sub-cooled side";
-parameter Modelica.SIunits.CoefficientOfHeatTransfer U_TP
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_TP
     "Heat transfer coefficient two-phase side";
-parameter Modelica.SIunits.CoefficientOfHeatTransfer U_SH
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_SH
     "Heat transfer coefficient Superheated side";
 
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Usf
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Usf
     "Secondary fluid Heat transfer coefficient sub-cooled side";
-parameter Modelica.SIunits.QualityFactor ETA = 1 "Fin efficiency";
+  parameter Modelica.Units.SI.QualityFactor ETA=1 "Fin efficiency";
 
 /*************Tube region length ********************/
-Modelica.SIunits.Length L_SB(start=0) "Length of the subcooled region";
-Modelica.SIunits.Length L_TP(start=0) "Length of the two-phase region";
-Modelica.SIunits.Length L_SH "Length of the Superheated region";
+  Modelica.Units.SI.Length L_SB(start=0) "Length of the subcooled region";
+  Modelica.Units.SI.Length L_TP(start=0) "Length of the two-phase region";
+  Modelica.Units.SI.Length L_SH "Length of the Superheated region";
 
 /********** Densities ***************/
-Modelica.SIunits.Density rho_SB "Mean density of the subcooled region";
-Modelica.SIunits.Density rho_LS "Bubble density";
-Modelica.SIunits.Density rho_VS "Dew density";
-Modelica.SIunits.Density rho_TP "Mean density of the two-phase region";
-Modelica.SIunits.Density rho_SH "Mean density of the superheated region";
-Modelica.SIunits.Density rho_sf "Density of the secondary fluid at the inlet";
+  Modelica.Units.SI.Density rho_SB "Mean density of the subcooled region";
+  Modelica.Units.SI.Density rho_LS "Bubble density";
+  Modelica.Units.SI.Density rho_VS "Dew density";
+  Modelica.Units.SI.Density rho_TP "Mean density of the two-phase region";
+  Modelica.Units.SI.Density rho_SH "Mean density of the superheated region";
+  Modelica.Units.SI.Density rho_sf
+    "Density of the secondary fluid at the inlet";
 
 /********** Specific heat capacity ***************/
-Modelica.SIunits.SpecificHeatCapacity cp_sf
+  Modelica.Units.SI.SpecificHeatCapacity cp_sf
     "Specific heat capacity of the secondary fluid at the inlet";
 
-Modelica.SIunits.SpecificHeatCapacity cp_SB
+  Modelica.Units.SI.SpecificHeatCapacity cp_SB
     "Specific heat capacity of the secondary fluid at the inlet";
- Modelica.SIunits.SpecificHeatCapacity cp_TP
+  Modelica.Units.SI.SpecificHeatCapacity cp_TP
     "Specific heat capacity of the secondary fluid at the inlet";
- Modelica.SIunits.SpecificHeatCapacity cp_SH
+  Modelica.Units.SI.SpecificHeatCapacity cp_SH
     "Specific heat capacity of the secondary fluid at the inlet";
 
 /************** Enthalpies ************************/
-Modelica.SIunits.SpecificEnthalpy h_SB "Mean Enthalpy of the subcooled region";
-Modelica.SIunits.SpecificEnthalpy h_LS "Bubble enthalpy";
-Modelica.SIunits.SpecificEnthalpy h_VS "Dew enthalpy";
+  Modelica.Units.SI.SpecificEnthalpy h_SB
+    "Mean Enthalpy of the subcooled region";
+  Modelica.Units.SI.SpecificEnthalpy h_LS "Bubble enthalpy";
+  Modelica.Units.SI.SpecificEnthalpy h_VS "Dew enthalpy";
 //Modelica.SIunits.SpecificEnthalpy h_TP "Mean Enthalpy of the two-phase region";
-Modelica.SIunits.SpecificEnthalpy h_SH
+  Modelica.Units.SI.SpecificEnthalpy h_SH
     "Mean Enthalpy of the Superheated region";
-Modelica.SIunits.SpecificEnthalpy h_SU
+  Modelica.Units.SI.SpecificEnthalpy h_SU
     "Enthalpy at the inlet of the heat exchanger of the primary fluid";
-Modelica.SIunits.SpecificEnthalpy h_EX(start= 0)
+  Modelica.Units.SI.SpecificEnthalpy h_EX(start=0)
     "Enthalpy at the outlet of the heat exchanger of the primary fluid";
 
 /***** Enthalpy&Density****/
@@ -166,23 +169,23 @@ Modelica.SIunits.SpecificEnthalpy h_EX(start= 0)
 Real rhoh_TP "Density times enthalpy in the two-phase region";
 
 /******************* Density derivatives ********************/
-Modelica.SIunits.DerDensityByEnthalpy drdh_SB
+  Modelica.Units.SI.DerDensityByEnthalpy drdh_SB
     "Density derivative with respect to enthalpy at constant pressure in the subcooled region";
-Modelica.SIunits.DerDensityByPressure drdp_SB
+  Modelica.Units.SI.DerDensityByPressure drdp_SB
     "Density derivative with respect to pressure at constant enthalpy in the subcooled region";
-Modelica.SIunits.DerDensityByPressure drdp_LS
+  Modelica.Units.SI.DerDensityByPressure drdp_LS
     "Bubble point density derivative with respect to pressure";
-Modelica.SIunits.DerDensityByPressure drdp_VS
+  Modelica.Units.SI.DerDensityByPressure drdp_VS
     "Dew point density derivative with respect to pressure";
-Modelica.SIunits.DerDensityByEnthalpy drdh_SH
+  Modelica.Units.SI.DerDensityByEnthalpy drdh_SH
     "Density derivative with respect to enthalpy at constant pressure in the superheated region";
-Modelica.SIunits.DerDensityByPressure drdp_SH
+  Modelica.Units.SI.DerDensityByPressure drdp_SH
     "Density derivative with respect to pressure at constant enthalpy in the superheated region";
 
 /*************** Enthalpy derivatives *******************/
-Modelica.SIunits.DerEnthalpyByPressure dhdp_LS
+  Modelica.Units.SI.DerEnthalpyByPressure dhdp_LS
     "Bubble point specific enthalpy derivative with respect to pressure";
-Modelica.SIunits.DerEnthalpyByPressure dhdp_VS
+  Modelica.Units.SI.DerEnthalpyByPressure dhdp_VS
     "Dew point specific enthalpy derivative with respect to pressure";
 
 /************ Derivative with respect to time **************/
@@ -419,20 +422,20 @@ dhdt_SH = (1/2)*( dhdp_VS*der(p) + der(h_EX));
 
 protected
 parameter Integer N = 3;
-Modelica.SIunits.Temperature[N] T_fluid_;
-Modelica.SIunits.Temperature[N] T_wall_;
-Modelica.SIunits.Temperature[N] T_sf_;
+  Modelica.Units.SI.Temperature[N] T_fluid_;
+  Modelica.Units.SI.Temperature[N] T_wall_;
+  Modelica.Units.SI.Temperature[N] T_sf_;
 public
 record SummaryBase
   replaceable Arrays T_profile;
   record Arrays
    parameter Integer n;
-   Modelica.SIunits.Temperature[n] Twf;
-   Modelica.SIunits.Temperature[n] Twall;
-   Modelica.SIunits.Temperature[n] Tsf;
+      Modelica.Units.SI.Temperature[n] Twf;
+      Modelica.Units.SI.Temperature[n] Twall;
+      Modelica.Units.SI.Temperature[n] Tsf;
   end Arrays;
   //Modelica.SIunits.Pressure p_sf;
-  Modelica.SIunits.Pressure p_wf;
+    Modelica.Units.SI.Pressure p_wf;
   //Modelica.SIunits.Power Q_sf;
   //Modelica.SIunits.Power Q_wf;
 end SummaryBase;

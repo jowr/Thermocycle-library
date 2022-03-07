@@ -9,15 +9,15 @@ public
     replaceable Arrays T_profile;
     record Arrays
     parameter Integer n;
-    Modelica.SIunits.Temperature[n] T_cell;
+      Modelica.Units.SI.Temperature[n] T_cell;
     end Arrays;
     parameter Integer n;
-    Modelica.SIunits.SpecificEnthalpy[n] h;
-    Modelica.SIunits.SpecificEnthalpy[n+1] hnode;
-    Modelica.SIunits.Density[n] rho;
-    Modelica.SIunits.MassFlowRate[n+1] Mdot;
+    Modelica.Units.SI.SpecificEnthalpy[n] h;
+    Modelica.Units.SI.SpecificEnthalpy[n + 1] hnode;
+    Modelica.Units.SI.Density[n] rho;
+    Modelica.Units.SI.MassFlowRate[n + 1] Mdot;
     Real[n] x;
-   Modelica.SIunits.Pressure p;
+    Modelica.Units.SI.Pressure p;
  end SummaryClass;
  SummaryClass Summary(  T_profile(n=N,T_cell = Cells[:].T), n=N, h = Cells[:].h, hnode = hnode_, rho = Cells.rho, Mdot = Mdot_, x=Cells.x, p = Cells[1].p);
 /************ Thermal and fluid ports ***********/
@@ -41,23 +41,23 @@ public
   parameter Integer Nt(min=1)=1 "Number of cells in parallel";
   constant Real pi = Modelica.Constants.pi "pi-greco";
   parameter Integer N(min=1)=10 "Number of cells";
-  parameter Modelica.SIunits.Area A = 16.18
+  parameter Modelica.Units.SI.Area A=16.18
     "Lateral surface of the tube: heat exchange area";
-  parameter Modelica.SIunits.Volume V = 0.03781 "Volume of the tube";
-  final parameter Modelica.SIunits.Volume Vi=V/N "Volume of a single cell";
-  final parameter Modelica.SIunits.Area Ai=A/N
+  parameter Modelica.Units.SI.Volume V=0.03781 "Volume of the tube";
+  final parameter Modelica.Units.SI.Volume Vi=V/N "Volume of a single cell";
+  final parameter Modelica.Units.SI.Area Ai=A/N
     "Lateral surface of a single cell";
-  parameter Modelica.SIunits.MassFlowRate Mdotnom = 0.2588
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom=0.2588
     "Nominal fluid flow rate";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_l = 100
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_l=100
     "if HTtype = LiqVap : Heat transfer coefficient, liquid zone ";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_tp = 100
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_tp=100
     "if HTtype = LiqVap : heat transfer coefficient, two-phase zone";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_v = 100
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_v=100
     "if HTtype = LiqVap : heat transfer coefficient, vapor zone";
   /************ FLUID INITIAL VALUES ***************/
-parameter Modelica.SIunits.Pressure pstart "Fluid pressure start value"
-                                     annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure pstart "Fluid pressure start value"
+    annotation (Dialog(tab="Initialization"));
   parameter Medium.Temperature Tstart_inlet "Inlet temperature start value"
      annotation (Dialog(tab="Initialization"));
   parameter Medium.Temperature Tstart_outlet "Outlet temperature start value"
@@ -81,7 +81,7 @@ parameter Modelica.SIunits.Pressure pstart "Fluid pressure start value"
     annotation (Dialog(tab="Numerical options"));
   parameter Real max_drhodt=100 "Maximum value for the density derivative"
     annotation (Dialog(enable=max_der, tab="Numerical options"));
-  parameter Modelica.SIunits.Time TT=1
+  parameter Modelica.Units.SI.Time TT=1
     "Integration time of the first-order filter"
     annotation (Dialog(enable=filter_dMdt, tab="Numerical options"));
   parameter Boolean steadystate=true
@@ -94,8 +94,8 @@ constrainedby
     ThermoCycle.Components.HeatFlow.HeatTransfer.BaseClasses.PartialHeatTransferZones
     "Fluid heat transfer model" annotation (choicesAllMatching = true);
 /***************  VARIABLES ******************/
- Modelica.SIunits.Power Q_tot "Total heat flux exchanged by the thermal port";
- Modelica.SIunits.Mass M_tot "Total mass of the fluid in the component";
+  Modelica.Units.SI.Power Q_tot "Total heat flux exchanged by the thermal port";
+  Modelica.Units.SI.Mass M_tot "Total mass of the fluid in the component";
  replaceable ThermoCycle.Components.FluidFlow.Pipes.Cell1Dim_limit
         Cells[N](
     redeclare package Medium = Medium,
@@ -121,8 +121,8 @@ constrainedby
                        thermalPortConverter(N=N)
     annotation (Placement(transformation(extent={{-10,6},{10,26}})));
 protected
-  Modelica.SIunits.SpecificEnthalpy hnode_[N+1];
-  Modelica.SIunits.MassFlowRate Mdot_[N+1];
+  Modelica.Units.SI.SpecificEnthalpy hnode_[N + 1];
+  Modelica.Units.SI.MassFlowRate Mdot_[N + 1];
 equation
   // Connect wall and refrigerant cells with eachother
   for i in 1:N-1 loop

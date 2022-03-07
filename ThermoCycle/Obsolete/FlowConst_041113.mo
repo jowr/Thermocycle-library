@@ -22,28 +22,26 @@ parameter HT_sf HTtype=HT_sf.Const "Select type of heat transfer coefficient";
 //   parameter Modelica.SIunits.Length D_int "Tube internal diameter";
 //   final parameter Modelica.SIunits.Area A_cross = D_int^2*pi/4
 //     "Cross sectional area of the tube";
-  parameter Modelica.SIunits.Area A= 16.18
+  parameter Modelica.Units.SI.Area A=16.18
     "Lateral surface of the tube: heat exchange area";
-  parameter Modelica.SIunits.Volume V = 0.03781 "Volume of the tube";
-  final parameter Modelica.SIunits.Volume Vi=V/N "Volume of a single cell";
-  final parameter Modelica.SIunits.Area Ai=A/N
+  parameter Modelica.Units.SI.Volume V=0.03781 "Volume of the tube";
+  final parameter Modelica.Units.SI.Volume Vi=V/N "Volume of a single cell";
+  final parameter Modelica.Units.SI.Area Ai=A/N
     "Lateral surface of a single cell";
-  parameter Modelica.SIunits.MassFlowRate Mdotnom= 3
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom=3
     "Norminal  fluid flow rate";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer  Unom=500
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom=500
     "Nominal heat transfer coefficient,secondary fluid";
 
  /************ FLUID INITIAL VALUES ***************/
-  parameter Modelica.SIunits.Temperature Tstart_inlet = 145 + 273.15
-    "Inlet temperature start value"
-    annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature Tstart_outlet = 135 + 273.15
-    "Outlet temperature start value"
-    annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature Tstart[N]=linspace(
-        Tstart_inlet,
-        Tstart_outlet,
-        N) "Start value of temperature vector (initialized by default)"
+  parameter Modelica.Units.SI.Temperature Tstart_inlet=145 + 273.15
+    "Inlet temperature start value" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature Tstart_outlet=135 + 273.15
+    "Outlet temperature start value" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature Tstart[N]=linspace(
+      Tstart_inlet,
+      Tstart_outlet,
+      N) "Start value of temperature vector (initialized by default)"
     annotation (Dialog(tab="Initialization"));
 parameter Boolean steadystate_T=true
     "if true, sets the derivative of T to zero during Initialization"
@@ -55,18 +53,18 @@ parameter Boolean steadystate_T=true
     "Selection of the spatial discretization scheme"  annotation (Dialog(tab="Numerical options"));
 
 /***************  VARIABLES ******************/
-  Modelica.SIunits.MassFlowRate Mdot;
-  Modelica.SIunits.SpecificHeatCapacity cp;
-  Modelica.SIunits.Temperature T_su;
-  Modelica.SIunits.Density rho_su;
-  Modelica.SIunits.Temperature T[N](start=Tstart) "Node temperatures";
-  Modelica.SIunits.HeatFlux qdot[N] "Average heat flux";
-  Modelica.SIunits.Temperature Tnode[N + 1];
-  Modelica.SIunits.Temperature T_wall[N] "Internal wall temperature";
-  Modelica.SIunits.CoefficientOfHeatTransfer U
+  Modelica.Units.SI.MassFlowRate Mdot;
+  Modelica.Units.SI.SpecificHeatCapacity cp;
+  Modelica.Units.SI.Temperature T_su;
+  Modelica.Units.SI.Density rho_su;
+  Modelica.Units.SI.Temperature T[N](start=Tstart) "Node temperatures";
+  Modelica.Units.SI.HeatFlux qdot[N] "Average heat flux";
+  Modelica.Units.SI.Temperature Tnode[N + 1];
+  Modelica.Units.SI.Temperature T_wall[N] "Internal wall temperature";
+  Modelica.Units.SI.CoefficientOfHeatTransfer U
     "Heat transfer coefficient,secondary fluid";
-  Modelica.SIunits.Power Q_tot "Total heat flux exchanged by the thermal port";
-  Modelica.SIunits.Mass M_tot "Total mass";
+  Modelica.Units.SI.Power Q_tot "Total heat flux exchanged by the thermal port";
+  Modelica.Units.SI.Mass M_tot "Total mass";
 
 equation
   Tnode[1] = T_su;

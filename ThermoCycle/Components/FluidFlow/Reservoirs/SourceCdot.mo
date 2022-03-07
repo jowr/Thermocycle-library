@@ -1,14 +1,14 @@
 within ThermoCycle.Components.FluidFlow.Reservoirs;
 model SourceCdot "Flowrate source for Cdot-type heat source"
-  parameter Modelica.SIunits.MassFlowRate Mdot_0=0
+  parameter Modelica.Units.SI.MassFlowRate Mdot_0=0
     "Mass flowrate if input not connected";
-  parameter Modelica.SIunits.Temperature T_0=298.13
+  parameter Modelica.Units.SI.Temperature T_0=298.13
     "Temperature if input not connected";
-  parameter Modelica.SIunits.Temperature T_ref=323.15
+  parameter Modelica.Units.SI.Temperature T_ref=323.15
     "Reference Temperature for the calculation of H_dot";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp=1000
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp=1000
     "Specific Heat capacity";
-  parameter Modelica.SIunits.Density rho=1000 "Fluid Density";
+  parameter Modelica.Units.SI.Density rho=1000 "Fluid Density";
   Modelica.Blocks.Interfaces.RealInput T_source
     annotation (Placement(transformation(
         origin={-40,60},

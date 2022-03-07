@@ -1,14 +1,14 @@
 within ThermoCycle.Components.HeatFlow.Walls;
 model MetalWallL
 // Wall initial values:
-  parameter Modelica.SIunits.Area Aext
+  parameter Modelica.Units.SI.Area Aext
     "Heat exchange area of one cell external side";
-  parameter Modelica.SIunits.Area Aint
+  parameter Modelica.Units.SI.Area Aint
     "Heat exchange area of one cell internal side";
-  parameter Modelica.SIunits.Mass M_wall "Mass of one cell";
-  parameter Modelica.SIunits.SpecificHeatCapacity c_wall
+  parameter Modelica.Units.SI.Mass M_wall "Mass of one cell";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_wall
     "Specific heat capacity of the metal";
-  parameter Modelica.SIunits.Temperature Tstart_wall
+  parameter Modelica.Units.SI.Temperature Tstart_wall
     "Start value of temperature (initialized by default)"
     annotation (Dialog(tab="Initialization"));
 /*Numerical Option */
@@ -21,8 +21,7 @@ ThermoCycle.Interfaces.HeatTransfer.ThermalPortL  Wall_ext(T(start=Tstart_wall))
     annotation (Placement(transformation(extent={{-30,-20},{30,0}}),
         iconTransformation(extent={{-32,-40},{28,-20}})));
 /* METAL WALL */
-Modelica.SIunits.Temperature T_wall(start=
-          Tstart_wall) "Cell temperature";
+  Modelica.Units.SI.Temperature T_wall(start=Tstart_wall) "Cell temperature";
 equation
     /*Metal wall */
     M_wall*der(T_wall)*c_wall = Aext*Wall_ext.phi + Aint*Wall_int.phi;

@@ -1,9 +1,9 @@
 within ThermoCycle.Components.FluidFlow.Reservoirs;
 model Source_Cdot
   "Flowrate source for Cdot-type heat source, must be connected to an external signal"
-  parameter Modelica.SIunits.SpecificHeatCapacity cp=1000
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp=1000
     "Specific Heat capacity";
-  parameter Modelica.SIunits.Density rho=1000 "Fluid Density";
+  parameter Modelica.Units.SI.Density rho=1000 "Fluid Density";
   Modelica.Blocks.Interfaces.RealInput source[2] annotation (Placement(
         transformation(
         origin={-40,60},

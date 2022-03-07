@@ -3,26 +3,26 @@ partial model PartialCylinderHeatTransfer
   extends
     Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.PartialVesselHeatTransfer;
 
-  input Modelica.SIunits.Angle crankshaftAngle;
-  input Modelica.SIunits.Area pistonCrossArea;
-  input Modelica.SIunits.Length strokeLength;
+  input Modelica.Units.SI.Angle crankshaftAngle;
+  input Modelica.Units.SI.Area pistonCrossArea;
+  input Modelica.Units.SI.Length strokeLength;
 
   parameter Integer initialize = 0 "0: None, 1: High HTC, 2: Low HTC";
 
   import Modelica.Constants.pi;
-  Modelica.SIunits.CoefficientOfHeatTransfer[n] h;
-  Modelica.SIunits.HeatFlux[n] q_w "Heat flux from wall";
+  Modelica.Units.SI.CoefficientOfHeatTransfer[n] h;
+  Modelica.Units.SI.HeatFlux[n] q_w "Heat flux from wall";
 
   // Some convenience variables
-  Modelica.SIunits.Velocity        c_c "Current piston speed";
-  Modelica.SIunits.Velocity        c_m "Mean piston speed";
-  Modelica.SIunits.Angle           theta "Crankshaft angle";
-  Modelica.SIunits.AngularVelocity omega_c "Current angular crank velocity";
-  Modelica.SIunits.AngularVelocity omega_m "Mean angular crank velocity";
-  Modelica.SIunits.Length          bore(start=0.1);
-  Modelica.SIunits.Length          stroke;
-  Modelica.SIunits.Length[n]       position "Clearance from cyl. head";
-  Modelica.SIunits.Length          position_m "Mean clearance from cyl. head";
+  Modelica.Units.SI.Velocity c_c "Current piston speed";
+  Modelica.Units.SI.Velocity c_m "Mean piston speed";
+  Modelica.Units.SI.Angle theta "Crankshaft angle";
+  Modelica.Units.SI.AngularVelocity omega_c "Current angular crank velocity";
+  Modelica.Units.SI.AngularVelocity omega_m "Mean angular crank velocity";
+  Modelica.Units.SI.Length bore(start=0.1);
+  Modelica.Units.SI.Length stroke;
+  Modelica.Units.SI.Length[n] position "Clearance from cyl. head";
+  Modelica.Units.SI.Length position_m "Mean clearance from cyl. head";
   Real                             HTC_gain "Amplifier for h[i]";
 
 equation

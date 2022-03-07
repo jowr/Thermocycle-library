@@ -7,40 +7,43 @@ model SecondaryFluid
   ThermoCycle.Interfaces.Fluid.Flange_Cdot InFlow_sf
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
 
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Usf
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Usf
     "Secondary fluid Heat transfer coefficient sub-cooled side";
 constant Real pi = Modelica.Constants.pi;
-parameter Modelica.SIunits.Area AA "Channel cross section";
-parameter Modelica.SIunits.Length YY "Channel perimeter";
-parameter Modelica.SIunits.Length L_total "Channel total length";
+  parameter Modelica.Units.SI.Area AA "Channel cross section";
+  parameter Modelica.Units.SI.Length YY "Channel perimeter";
+  parameter Modelica.Units.SI.Length L_total "Channel total length";
 parameter Boolean eps_NTU = false "Set true to for eps-NTU relation";
-parameter Modelica.SIunits.Temperature Tstart
+  parameter Modelica.Units.SI.Temperature Tstart
     "Start value for average temperature of inlet cell";
-parameter Modelica.SIunits.Temperature DTstart
+  parameter Modelica.Units.SI.Temperature DTstart
     "Delta T to initialize second and third volume average temperature";
-final parameter Modelica.SIunits.Temperature Tsf_start[n] = {Tstart - DTstart*i for i in 1:n}
-    "Initial temperature of the secondary fluid";
+  final parameter Modelica.Units.SI.Temperature Tsf_start[n]={Tstart - DTstart*
+      i for i in 1:n} "Initial temperature of the secondary fluid";
 /******* Secondary fluid  ****************/
-Modelica.SIunits.SpecificHeatCapacity cp_sf
+  Modelica.Units.SI.SpecificHeatCapacity cp_sf
     "Specific heat capacity of the secondary fluid at the inlet";
-    Modelica.SIunits.Temperature T_sfA[n]
+  Modelica.Units.SI.Temperature T_sfA[n]
     "Temperature at the inlet of the volume";
-    Modelica.SIunits.Temperature T_sf[n](start = Tsf_start)
+  Modelica.Units.SI.Temperature T_sf[n](start=Tsf_start)
     "Temperature at the center of the volume";
-Modelica.SIunits.Temperature T_sfB[n] "Temperature at the outlet of the volume";
+  Modelica.Units.SI.Temperature T_sfB[n]
+    "Temperature at the outlet of the volume";
 
-Modelica.SIunits.Power Qsf[n] "Heat from the secondary side";
+  Modelica.Units.SI.Power Qsf[n] "Heat from the secondary side";
 
-Modelica.SIunits.MassFlowRate Mdot_sf "Mass flow rate of the secondary fluid";
-Modelica.SIunits.Density rho_sf "Density of the secondary fluid";
+  Modelica.Units.SI.MassFlowRate Mdot_sf
+    "Mass flow rate of the secondary fluid";
+  Modelica.Units.SI.Density rho_sf "Density of the secondary fluid";
 /******* Heat transfer coefficient  ****************/
 Real epsilon[n] "Epsilon Sub-cooled secondary fluid - wall Side";
 Real NTU[n] "NTU Sub-cooled secondary fluid-Wall side";
 Real Cdot_wf[n] "Thermal energy capacity rate of the working fluid [J/k]";
 Real  Cdot_sf "Thermal energy capacity rate of the secondary fluid [J/k]";
 /* Variable for the summary case */
-Modelica.SIunits.Temperature Temp[n*3] "Fluid temperature for SummaryClass";
-Modelica.SIunits.Power qtot "Total thermal energy transfer from/into the fluid";
+  Modelica.Units.SI.Temperature Temp[n*3] "Fluid temperature for SummaryClass";
+  Modelica.Units.SI.Power qtot
+    "Total thermal energy transfer from/into the fluid";
   ThermoCycle.Interfaces.Fluid.Flange_ex_Cdot OutFlow_sf
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
 equation
@@ -97,11 +100,11 @@ public
     replaceable Arrays T_profile;
      record Arrays
        parameter Integer n;
-     Modelica.SIunits.Temperature[n*3] T_cell;
+      Modelica.Units.SI.Temperature[n*3] T_cell;
      end Arrays;
      parameter Integer n;
-     Modelica.SIunits.Power[n] Qflow;
-     Modelica.SIunits.Power Qtot;
+    Modelica.Units.SI.Power[n] Qflow;
+    Modelica.Units.SI.Power Qtot;
   end SummaryClass;
   SummaryClass Summary(T_profile(n=n,T_cell = Temp[:]),n=n, Qflow = Qsf[:], Qtot = qtot);
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,

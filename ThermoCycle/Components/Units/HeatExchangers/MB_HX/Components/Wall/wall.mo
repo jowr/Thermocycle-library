@@ -3,25 +3,28 @@ model wall "Moving-boundary wall model"
   import Modelica.Constants;
 
  parameter Integer n = 3 "number of volumes";
-parameter Modelica.SIunits.SpecificHeatCapacity cp_w
-    "Specific heat capacity (constant)"                                                       annotation(Dialog(group="Specific heat capacity",enable=cpw_sel==1,__Dymola_label="Constant value:"));
- parameter Modelica.SIunits.Length L_total "Total length of the Hx";
- parameter Modelica.SIunits.Mass M_w "Total mass flow of the wall";
- parameter Modelica.SIunits.Temperature TstartWall[n]
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_w
+    "Specific heat capacity (constant)" annotation (Dialog(
+      group="Specific heat capacity",
+      enable=cpw_sel == 1,
+      __Dymola_label="Constant value:"));
+  parameter Modelica.Units.SI.Length L_total "Total length of the Hx";
+  parameter Modelica.Units.SI.Mass M_w "Total mass flow of the wall";
+  parameter Modelica.Units.SI.Temperature TstartWall[n]
     "Start temperature of the wall";
- Modelica.SIunits.Length ll[n] = {QmbIn[i].ll for i in 1:n};
- Modelica.SIunits.Length la[n] "Left boundary of segment length";
- Modelica.SIunits.Length lb[n] "Right boundary of segment length";
- Modelica.SIunits.Temperature Tw[n]( start = TstartWall)
+  Modelica.Units.SI.Length ll[n]={QmbIn[i].ll for i in 1:n};
+  Modelica.Units.SI.Length la[n] "Left boundary of segment length";
+  Modelica.Units.SI.Length lb[n] "Right boundary of segment length";
+  Modelica.Units.SI.Temperature Tw[n](start=TstartWall)
     "Inner wall temperature";
 
- Modelica.SIunits.Temperature Twa[n] "Left boundary temperature";
- Modelica.SIunits.Temperature Twb[n] "Right boundary temperature";
+  Modelica.Units.SI.Temperature Twa[n] "Left boundary temperature";
+  Modelica.Units.SI.Temperature Twb[n] "Right boundary temperature";
 /* Variable for the summary case */
-Modelica.SIunits.Temperature Temp[n*3] "Fluid temperature for SummaryClass";
-Modelica.SIunits.Power Q_totIn "Total thermal power in";
-Modelica.SIunits.Power Q_totOut "Total thermal power out";
-Modelica.SIunits.HeatFlowRate dUdt[n] "Rate of energy change";
+  Modelica.Units.SI.Temperature Temp[n*3] "Fluid temperature for SummaryClass";
+  Modelica.Units.SI.Power Q_totIn "Total thermal power in";
+  Modelica.Units.SI.Power Q_totOut "Total thermal power out";
+  Modelica.Units.SI.HeatFlowRate dUdt[n] "Rate of energy change";
 public
   ThermoCycle.Components.Units.HeatExchangers.MB_HX.Interfaces.MbIn QmbIn[n]
     annotation (Placement(transformation(extent={{-20,-32},{20,-12}})));
@@ -99,7 +102,7 @@ public
     replaceable Arrays T_profile;
      record Arrays
        parameter Integer n;
-     Modelica.SIunits.Temperature[n*3] T_cell;
+      Modelica.Units.SI.Temperature[n*3] T_cell;
      end Arrays;
   end SummaryClass;
   SummaryClass Summary(T_profile(n=n,T_cell = Temp[:]));

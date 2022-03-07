@@ -20,7 +20,7 @@ model GungorWinterton1987
     q_dot = q_dot);
 
   Real G(unit="kg/(s.m.m)") "Mass flux";
-  Modelica.SIunits.FroudeNumber Fr_l;
+  Modelica.Units.SI.FroudeNumber Fr_l;
   Real Bo(unit="1") "Boiling number";
   Real Term1;
   Real Term2 "Boiling enhancement terms";

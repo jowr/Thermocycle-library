@@ -8,15 +8,15 @@ model YanLioLin1999 "Yan, Lio & Lin correlation for condensation"
 
   Real G(unit="kg/(s.m.m)") "Mass flux";
   Real G_eq(unit="kg/(s.m.m)") "Equivalent mass flux";
-  Modelica.SIunits.PrandtlNumber Pr_l(min=0);
-  Modelica.SIunits.NusseltNumber Nu(min=0);
-  Modelica.SIunits.ReynoldsNumber Re(min=0);
-  Modelica.SIunits.ReynoldsNumber Re_eq(min=0);
+  Modelica.Units.SI.PrandtlNumber Pr_l(min=0);
+  Modelica.Units.SI.NusseltNumber Nu(min=0);
+  Modelica.Units.SI.ReynoldsNumber Re(min=0);
+  Modelica.Units.SI.ReynoldsNumber Re_eq(min=0);
 
   Medium.Density rho_l;
   Medium.Density rho_v;
 
-  Modelica.SIunits.QualityFactor X_m "Average vapour quality";
+  Modelica.Units.SI.QualityFactor X_m "Average vapour quality";
 
   Medium.DynamicViscosity mu_l;
   Medium.ThermalConductivity k_l;

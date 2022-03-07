@@ -5,11 +5,11 @@ model SourceMdot_pT
   extends ThermoCycle.Icons.Water.SourceW;
   replaceable package Medium = ThermoCycle.Media.DummyFluid constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model" annotation (choicesAllMatching = true);
-  parameter Modelica.SIunits.MassFlowRate Mdot_0=0
+  parameter Modelica.Units.SI.MassFlowRate Mdot_0=0
     "Mass flowrate if no connector";
-  parameter Modelica.SIunits.Temperature T_0=298.15
+  parameter Modelica.Units.SI.Temperature T_0=298.15
     "Temperature if no connector";
-  parameter Modelica.SIunits.Pressure p=101325 "Pressure";
+  parameter Modelica.Units.SI.Pressure p=101325 "Pressure";
   parameter Medium.MassFraction X[Medium.nX] = Medium.X_default
     "Fixed value of composition"
     annotation (Evaluate = true,

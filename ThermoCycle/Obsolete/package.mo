@@ -1,6 +1,6 @@
 within ThermoCycle;
 package Obsolete "Package with all the obsolete components including the date of their phasing out"
-  extends Modelica.Icons.Library;
+  extends Modelica.Icons.Package;
 
 
 annotation (Documentation(info="<HTML>

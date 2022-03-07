@@ -8,18 +8,18 @@ model Kornhauser1994 "Gas spring correlation of Kornhauser 1994"
 
   import Modelica.Constants.pi;
 
-  Modelica.SIunits.Length[n] Gamma(min=0) "Characteristic length";
-  Modelica.SIunits.Velocity[n] Lambda(min=0) "Characteristic velocity";
+  Modelica.Units.SI.Length[n] Gamma(min=0) "Characteristic length";
+  Modelica.Units.SI.Velocity[n] Lambda(min=0) "Characteristic velocity";
 
-  Modelica.SIunits.PecletNumber[n] Pe(min=0);
-  Modelica.SIunits.SpecificHeatCapacityAtConstantPressure[n] cp;
-  Modelica.SIunits.Volume[n] volume "Cylinder volume";
-  Modelica.SIunits.Length[n] D_h "Hydraulic diameter";
-  Modelica.SIunits.ThermalDiffusivity[n] alpha_f "Thermal diffusivity";
+  Modelica.Units.SI.PecletNumber[n] Pe(min=0);
+  Modelica.Units.SI.SpecificHeatCapacityAtConstantPressure[n] cp;
+  Modelica.Units.SI.Volume[n] volume "Cylinder volume";
+  Modelica.Units.SI.Length[n] D_h "Hydraulic diameter";
+  Modelica.Units.SI.ThermalDiffusivity[n] alpha_f "Thermal diffusivity";
 
-  Modelica.SIunits.NusseltNumber[n] Nu(min=0);
-  Modelica.SIunits.ThermalConductivity[n] lambda;
-  Modelica.SIunits.DynamicViscosity[n] eta;
+  Modelica.Units.SI.NusseltNumber[n] Nu(min=0);
+  Modelica.Units.SI.ThermalConductivity[n] lambda;
+  Modelica.Units.SI.DynamicViscosity[n] eta;
 
   //Real dT[n];
 

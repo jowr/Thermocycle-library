@@ -10,25 +10,25 @@ replaceable package Medium = ThermoCycle.Media.DummyFluid constrainedby
 // Settings for heat transfer
 Medium.ThermodynamicState state(phase(start=0));
 // Settings for correlation
-parameter Modelica.SIunits.MassFlowRate m_dot_nom = 1 "Nomnial Mass flow rate"
-                           annotation (Dialog(tab="Heat transfer"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer U_nom_l = 2000
+    parameter Modelica.Units.SI.MassFlowRate m_dot_nom=1
+      "Nomnial Mass flow rate" annotation (Dialog(tab="Heat transfer"));
+    parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_nom_l=2000
       "Nominal heat transfer coefficient liquid side"
-                                                  annotation (Dialog(tab="Heat transfer"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer U_nom_tp = 3000
+      annotation (Dialog(tab="Heat transfer"));
+    parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_nom_tp=3000
       "Nominal heat transfer coefficient two phase side"
-                                                     annotation (Dialog(tab="Heat transfer"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer U_nom_v = 1500
+      annotation (Dialog(tab="Heat transfer"));
+    parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_nom_v=1500
       "Nominal heat transfer coefficient vapor side"
-                                                 annotation (Dialog(tab="Heat transfer"));
+      annotation (Dialog(tab="Heat transfer"));
 Medium.AbsolutePressure p;
 Medium.SpecificEnthalpy h;
 Medium.SpecificEnthalpy h_start;
 Medium.SpecificEnthalpy h_end;
-Modelica.SIunits.MassFlowRate m_dot "Inlet massflow";
+    Modelica.Units.SI.MassFlowRate m_dot "Inlet massflow";
 Real x "Vapor quality";
 Real y "Relative position";
-Modelica.SIunits.Time c = 10;
+    Modelica.Units.SI.Time c=10;
 
 Medium.ThermodynamicState bubbleState(h(start=0));
     Medium.ThermodynamicState dewState(h(start=0));
@@ -54,8 +54,8 @@ replaceable model HeatTransfer =
     parameter Medium.AbsolutePressure p_start = 1e5 "Start pressure";
     parameter Medium.AbsolutePressure p_end = p_start "Final pressure";
 
-    parameter Modelica.SIunits.MassFlowRate m_dot_start = 1 "Start flow rate";
-    parameter Modelica.SIunits.MassFlowRate m_dot_end = m_dot_start
+    parameter Modelica.Units.SI.MassFlowRate m_dot_start=1 "Start flow rate";
+    parameter Modelica.Units.SI.MassFlowRate m_dot_end=m_dot_start
       "Final flow rate";
 
     parameter Boolean twoPhase = false "is two-phase medium?";

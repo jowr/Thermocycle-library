@@ -2,9 +2,9 @@ within ThermoCycle.Components.HeatFlow.Sources;
 model AmbientLosses
 
 parameter Integer N = 1;
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Uloss = 100;
-Modelica.SIunits.HeatFlux Phi_loss[N];
-Modelica.SIunits.Temperature T[N];
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Uloss=100;
+  Modelica.Units.SI.HeatFlux Phi_loss[N];
+  Modelica.Units.SI.Temperature T[N];
 
   Modelica.Blocks.Interfaces.RealInput T_input annotation (Placement(
         transformation(

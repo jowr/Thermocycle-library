@@ -28,102 +28,131 @@ parameter Real eps6 = 0.96 "Unaccounted FORSE DA LEVARE"
 parameter Integer N(min=1) = 10 "Number of cells per tube";
 parameter Integer Ns(min=1) = 2 "Number of tube in series";
 parameter Integer Nt(min=1) = 1 "Number of tubes in parallel";
-parameter Modelica.SIunits.Length L = 8 "Length of tube";
-parameter Modelica.SIunits.Length A_P = 5 "Aperture of the parabola";
+  parameter Modelica.Units.SI.Length L=8 "Length of tube";
+  parameter Modelica.Units.SI.Length A_P=5 "Aperture of the parabola";
 
-final parameter Modelica.SIunits.Length D_int_t= Dext_t - 2*th_t
+  final parameter Modelica.Units.SI.Length D_int_t=Dext_t - 2*th_t
     "internal diameter of the metal tube";
-final parameter Modelica.SIunits.Area A_lateral= L*D_int_t*pi*Nt
+  final parameter Modelica.Units.SI.Area A_lateral=L*D_int_t*pi*Nt
     "Lateral internal surface of the metal tube";
-final parameter Modelica.SIunits.Volume V_tube_int = pi*D_int_t^2/4*L*Nt
+  final parameter Modelica.Units.SI.Volume V_tube_int=pi*D_int_t^2/4*L*Nt
     "Internal volume of the metal tube";
 
 /*********************** GLASS PROPERTIES ***********************/
-parameter Modelica.SIunits.Density rho_g = 2400 "Glass density"
-                                                              annotation (Dialog(group="Properties of the glass envelope", tab="General"));
-parameter Modelica.SIunits.SpecificHeatCapacity Cp_g = 753
-    "Specific heat capacity of the glass"
-                                         annotation (Dialog(group="Properties of the glass envelope", tab="General"));
-parameter Modelica.SIunits.ThermalConductivity lambda_g = 1.05
-    "Thermal conductivity of the glass"
-                                       annotation (Dialog(group="Properties of the glass envelope", tab="General"));
-parameter Modelica.SIunits.Length Dext_g = 0.12 "External glass diameter"
-                                                                         annotation (Dialog(group="Properties of the glass envelope", tab="General"));
-parameter Modelica.SIunits.Length th_g = 0.0025 "Glass thickness"
-                                                                 annotation (Dialog(group="Properties of the glass envelope", tab="General"));
+  parameter Modelica.Units.SI.Density rho_g=2400 "Glass density" annotation (
+      Dialog(group="Properties of the glass envelope", tab="General"));
+  parameter Modelica.Units.SI.SpecificHeatCapacity Cp_g=753
+    "Specific heat capacity of the glass" annotation (Dialog(group=
+          "Properties of the glass envelope", tab="General"));
+  parameter Modelica.Units.SI.ThermalConductivity lambda_g=1.05
+    "Thermal conductivity of the glass" annotation (Dialog(group=
+          "Properties of the glass envelope", tab="General"));
+  parameter Modelica.Units.SI.Length Dext_g=0.12 "External glass diameter"
+    annotation (Dialog(group="Properties of the glass envelope", tab="General"));
+  parameter Modelica.Units.SI.Length th_g=0.0025 "Glass thickness" annotation (
+      Dialog(group="Properties of the glass envelope", tab="General"));
 
 /***********************  TUBE PROPERTIES ***********************/
-parameter Modelica.SIunits.Length Dext_t =  0.07 "External diameter tube"
-                                                                         annotation (Dialog(group="Properties of the metal envelope", tab="General"));
+  parameter Modelica.Units.SI.Length Dext_t=0.07 "External diameter tube"
+    annotation (Dialog(group="Properties of the metal envelope", tab="General"));
                               //if PTR then 0.07 elseif UVAC then 0.056 else 0.056
-parameter Modelica.SIunits.Length th_t =  0.002 "tube thickness"
-                                                                annotation (Dialog(group="Properties of the metal envelope", tab="General"));
+  parameter Modelica.Units.SI.Length th_t=0.002 "tube thickness" annotation (
+      Dialog(group="Properties of the metal envelope", tab="General"));
                       //if PTR then 0.0025 elseif UVAC then 0.003 else 0.003
-parameter Modelica.SIunits.Density rho_t = 8000 "tube density"
-                                                             annotation (Dialog(group="Properties of the metal envelope", tab="General"));
-parameter Modelica.SIunits.SpecificHeatCapacity Cp_t = 500
-    "Specific heat capacity of the tube"
-                                        annotation (Dialog(group="Properties of the metal envelope", tab="General"));
-parameter Modelica.SIunits.ThermalConductivity lambda_t = 54
-    "Thermal conductivity of the tube"
-                                      annotation (Dialog(group="Properties of the metal envelope", tab="General"));
+  parameter Modelica.Units.SI.Density rho_t=8000 "tube density" annotation (
+      Dialog(group="Properties of the metal envelope", tab="General"));
+  parameter Modelica.Units.SI.SpecificHeatCapacity Cp_t=500
+    "Specific heat capacity of the tube" annotation (Dialog(group=
+          "Properties of the metal envelope", tab="General"));
+  parameter Modelica.Units.SI.ThermalConductivity lambda_t=54
+    "Thermal conductivity of the tube" annotation (Dialog(group=
+          "Properties of the metal envelope", tab="General"));
 
 /*********************** PRESSURE VACUUM ***********************/
-parameter Modelica.SIunits.Pressure Pvacuum = 0.013332237
-    "Vacuum Pressure [Pa]"                                                      annotation (Dialog(group="Vacuum properties: between metal and glass envelope", tab="General"));
+  parameter Modelica.Units.SI.Pressure Pvacuum=0.013332237
+    "Vacuum Pressure [Pa]" annotation (Dialog(group=
+          "Vacuum properties: between metal and glass envelope", tab="General"));
 
 /*********************** Parameter for coefficient of heat transfer air ***********************/
 parameter Real Pr= 0.72 "Prandt number"
                                        annotation (Dialog(group="Atmospheric characteristic", tab="General"));
-parameter Modelica.SIunits.Pressure Patm = 1e5 "Atmosphere Pressure [Pa]"
-                                                                        annotation (Dialog(group="Atmospheric characteristic", tab="General"));
+  parameter Modelica.Units.SI.Pressure Patm=1e5 "Atmosphere Pressure [Pa]"
+    annotation (Dialog(group="Atmospheric characteristic", tab="General"));
 
 /*********************** TEMPERATURE INITIALIZATION GLASS AND METAL WALL ***********************/
-parameter Modelica.SIunits.Temperature T_g_start_in = 42 + 273.15
+  parameter Modelica.Units.SI.Temperature T_g_start_in=42 + 273.15
     "Temperature at the inlet of the glass"
-                                           annotation (Dialog(tab="Initialization"));
-parameter Modelica.SIunits.Temperature T_g_start_out = 54 + 273.15
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_g_start_out=54 + 273.15
     "Temperature at the outlet of the glass"
-                                            annotation (Dialog(tab="Initialization"));
+    annotation (Dialog(tab="Initialization"));
 
-final parameter Modelica.SIunits.Temperature[Ns] T_g_start_inlet_collector =  ThermoCycle.Functions.Solar.T_start_inlet(T_start_inlet=T_g_start_in,T_start_outlet=T_g_start_out,Ns=Ns);
+  final parameter Modelica.Units.SI.Temperature[Ns] T_g_start_inlet_collector=
+      ThermoCycle.Functions.Solar.T_start_inlet(
+      T_start_inlet=T_g_start_in,
+      T_start_outlet=T_g_start_out,
+      Ns=Ns);
 
-final parameter Modelica.SIunits.Temperature[Ns] T_g_start_outlet_collector = ThermoCycle.Functions.Solar.T_start_outlet(T_start_inlet=T_g_start_in,T_start_outlet=T_g_start_out,Ns=Ns);
+  final parameter Modelica.Units.SI.Temperature[Ns] T_g_start_outlet_collector=
+      ThermoCycle.Functions.Solar.T_start_outlet(
+      T_start_inlet=T_g_start_in,
+      T_start_outlet=T_g_start_out,
+      Ns=Ns);
 
-parameter Modelica.SIunits.Temperature T_t_start_in = 195 + 273.15
+  parameter Modelica.Units.SI.Temperature T_t_start_in=195 + 273.15
     "Temperature at the inlet of the tube"
-                                          annotation (Dialog(tab="Initialization"));
-parameter Modelica.SIunits.Temperature T_t_start_out = 305 + 273.15
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_t_start_out=305 + 273.15
     "Temperature at the outlet of the tube"
-                                           annotation (Dialog(tab="Initialization"));
+    annotation (Dialog(tab="Initialization"));
 
-final parameter Modelica.SIunits.Temperature[Ns] T_t_start_inlet_collector =  ThermoCycle.Functions.Solar.T_start_inlet(T_start_inlet=T_t_start_in,T_start_outlet=T_t_start_out,Ns=Ns);
+  final parameter Modelica.Units.SI.Temperature[Ns] T_t_start_inlet_collector=
+      ThermoCycle.Functions.Solar.T_start_inlet(
+      T_start_inlet=T_t_start_in,
+      T_start_outlet=T_t_start_out,
+      Ns=Ns);
 
-final parameter Modelica.SIunits.Temperature[Ns] T_t_start_outlet_collector = ThermoCycle.Functions.Solar.T_start_outlet(T_start_inlet=T_t_start_in,T_start_outlet=T_t_start_out,Ns=Ns);
+  final parameter Modelica.Units.SI.Temperature[Ns] T_t_start_outlet_collector=
+      ThermoCycle.Functions.Solar.T_start_outlet(
+      T_start_inlet=T_t_start_in,
+      T_start_outlet=T_t_start_out,
+      Ns=Ns);
 
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_l=300
-    "if HTtype = LiqVap: heat transfer coefficient, liquid zone" annotation (Dialog(group="Heat transfer", tab="General"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_tp=700
-    "if HTtype = LiqVap: heat transfer coefficient, two-phase zone" annotation (Dialog(group="Heat transfer", tab="General"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_v=400
-    "if HTtype = LiqVap: heat transfer coefficient, vapor zone" annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_l=300
+    "if HTtype = LiqVap: heat transfer coefficient, liquid zone"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_tp=700
+    "if HTtype = LiqVap: heat transfer coefficient, two-phase zone"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_v=400
+    "if HTtype = LiqVap: heat transfer coefficient, vapor zone"
+    annotation (Dialog(group="Heat transfer", tab="General"));
 //parameter Real kw "Exponent of the mass flow rate in the h.t.c. correlation";
-parameter Modelica.SIunits.MassFlowRate Mdotnom= 0.5 "Total nominal Mass flow";
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom=0.5
+    "Total nominal Mass flow";
 // Fluid initial values
-parameter Modelica.SIunits.Temperature Tstart_inlet
+  parameter Modelica.Units.SI.Temperature Tstart_inlet
     "Temperature of the fluid at the inlet of the collector"
-                                                            annotation (Dialog(tab="Initialization"));
-parameter Modelica.SIunits.Temperature Tstart_outlet
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature Tstart_outlet
     "Temperature of the fluid at the outlet of the collector"
-                                                             annotation (Dialog(tab="Initialization"));
+    annotation (Dialog(tab="Initialization"));
 
-final parameter Modelica.SIunits.Temperature[Ns] Tstart_inlet_collector =  ThermoCycle.Functions.Solar.T_start_inlet(T_start_inlet=Tstart_inlet,T_start_outlet=Tstart_outlet,Ns=Ns);
+  final parameter Modelica.Units.SI.Temperature[Ns] Tstart_inlet_collector=
+      ThermoCycle.Functions.Solar.T_start_inlet(
+      T_start_inlet=Tstart_inlet,
+      T_start_outlet=Tstart_outlet,
+      Ns=Ns);
 
-final parameter Modelica.SIunits.Temperature[Ns] Tstart_outlet_collector = ThermoCycle.Functions.Solar.T_start_outlet(T_start_inlet=Tstart_inlet,T_start_outlet=Tstart_outlet,Ns=Ns);
+  final parameter Modelica.Units.SI.Temperature[Ns] Tstart_outlet_collector=
+      ThermoCycle.Functions.Solar.T_start_outlet(
+      T_start_inlet=Tstart_inlet,
+      T_start_outlet=Tstart_outlet,
+      Ns=Ns);
 
-parameter Modelica.SIunits.Pressure pstart
+  parameter Modelica.Units.SI.Pressure pstart
     "Temperature of the fluid at the inlet of the collector"
-                                                            annotation (Dialog(tab="Initialization"));
+    annotation (Dialog(tab="Initialization"));
 /*steady state */
  parameter Boolean steadystate_T_fl=false
     "if true, sets the derivative of the fluid Temperature in each cell to zero during Initialization"
@@ -147,7 +176,7 @@ parameter Modelica.SIunits.Pressure pstart
   parameter Real max_drhodt=100
     "Maximum value for the density derivative of primary fluid"
     annotation (Dialog(enable=max_der_wf, tab="Numerical options"));
-   parameter Modelica.SIunits.Time TT=1
+  parameter Modelica.Units.SI.Time TT=1
     "Integration time of the first-order filter"
     annotation (Dialog(enable=filter_dMdt, tab="Numerical options"));
 
@@ -248,32 +277,32 @@ public
      record Arrays
       parameter Integer n;
       parameter Integer Ns;
-      Modelica.SIunits.Temperature[Ns,n] T_fluid;
-      Modelica.SIunits.Temperature[Ns,n] T_int_t;
-      Modelica.SIunits.Temperature[Ns,n] T_t;
-      Modelica.SIunits.Temperature[Ns,n] T_ext_t;
-      Modelica.SIunits.Temperature[Ns,n] T_int_g;
-      Modelica.SIunits.Temperature[Ns,n] T_g;
-      Modelica.SIunits.Temperature[Ns,n] T_ext_g;
+      Modelica.Units.SI.Temperature[Ns,n] T_fluid;
+      Modelica.Units.SI.Temperature[Ns,n] T_int_t;
+      Modelica.Units.SI.Temperature[Ns,n] T_t;
+      Modelica.Units.SI.Temperature[Ns,n] T_ext_t;
+      Modelica.Units.SI.Temperature[Ns,n] T_int_g;
+      Modelica.Units.SI.Temperature[Ns,n] T_g;
+      Modelica.Units.SI.Temperature[Ns,n] T_ext_g;
      end Arrays;
         Real Eta_solarCollector "Total efficiency of solar collector";
-        Modelica.SIunits.HeatFlux Philoss "Heat Flux lost to the environment";
-         Modelica.SIunits.Power Q_htf
+    Modelica.Units.SI.HeatFlux Philoss "Heat Flux lost to the environment";
+    Modelica.Units.SI.Power Q_htf
       "Total heat through the termal heat transfer fluid flowing in the solar collector";
   end SummaryBase;
    replaceable record SummaryClass = SummaryBase;
    SummaryClass Summary( T_profile( n=N,Ns=Ns, T_fluid = T_fluid_,   T_int_t=T_int_t_,  T_t=T_t_, T_ext_t=T_ext_t_,  T_int_g=T_int_g_,  T_g=T_g_, T_ext_g=T_ext_g_), Eta_solarCollector=Eta_solarCollector_,Philoss=Philoss_,Q_htf=Q_htf_);
 protected
-  Modelica.SIunits.Temperature T_fluid_[Ns,N];
-  Modelica.SIunits.Temperature T_int_t_[Ns,N];
-      Modelica.SIunits.Temperature T_t_[Ns,N];
-      Modelica.SIunits.Temperature T_ext_t_[Ns,N];
-      Modelica.SIunits.Temperature T_int_g_[Ns,N];
-      Modelica.SIunits.Temperature T_g_[Ns,N];
-      Modelica.SIunits.Temperature T_ext_g_[Ns,N];
+  Modelica.Units.SI.Temperature T_fluid_[Ns,N];
+  Modelica.Units.SI.Temperature T_int_t_[Ns,N];
+  Modelica.Units.SI.Temperature T_t_[Ns,N];
+  Modelica.Units.SI.Temperature T_ext_t_[Ns,N];
+  Modelica.Units.SI.Temperature T_int_g_[Ns,N];
+  Modelica.Units.SI.Temperature T_g_[Ns,N];
+  Modelica.Units.SI.Temperature T_ext_g_[Ns,N];
 Real Eta_solarCollector_;
-Modelica.SIunits.HeatFlux Philoss_;
-Modelica.SIunits.Power Q_htf_;
+  Modelica.Units.SI.HeatFlux Philoss_;
+  Modelica.Units.SI.Power Q_htf_;
 equation
          for i in 1:Ns loop
     for k in 1:N loop

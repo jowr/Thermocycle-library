@@ -3,16 +3,16 @@ model Test_HeatTransferTester "A test driver for the different implementations o
   heat transfer models"
   extends Modelica.Icons.Example;
 
-  parameter Modelica.SIunits.Length a_hat = 0.0012;
-  parameter Modelica.SIunits.Angle phi = Modelica.SIunits.Conversions.from_deg(65);
-  parameter Modelica.SIunits.Length Lambda = 0.0075;
-  parameter Modelica.SIunits.Length B_p = 0.04;
+  parameter Modelica.Units.SI.Length a_hat=0.0012;
+  parameter Modelica.Units.SI.Angle phi=Modelica.Units.Conversions.from_deg(65);
+  parameter Modelica.Units.SI.Length Lambda=0.0075;
+  parameter Modelica.Units.SI.Length B_p=0.04;
 
   parameter Real X =   2 * Modelica.Constants.pi*a_hat/Lambda;
   parameter Real Phi = 1/6 * ( 1 + sqrt(1+X^2) + 4 * sqrt(1+X^2/2));
-  parameter Modelica.SIunits.Length d_h = 4 * a_hat / Phi;
-  parameter Modelica.SIunits.Length d_e = 2 * a_hat;
-  parameter Modelica.SIunits.Area A_cro = 2 * a_hat * B_p;
+  parameter Modelica.Units.SI.Length d_h=4*a_hat/Phi;
+  parameter Modelica.Units.SI.Length d_e=2*a_hat;
+  parameter Modelica.Units.SI.Area A_cro=2*a_hat*B_p;
 
   model InputSelector
     replaceable package Medium = ThermoCycle.Media.DummyFluid constrainedby
@@ -22,15 +22,15 @@ model Test_HeatTransferTester "A test driver for the different implementations o
     // Settings for heat transfer
     Medium.ThermodynamicState state(phase(start=0));
     // Settings for correlation
-    parameter Modelica.SIunits.MassFlowRate m_dot_nom=m_dot_start
+    parameter Modelica.Units.SI.MassFlowRate m_dot_nom=m_dot_start
       "Nomnial Mass flow rate" annotation (Dialog(tab="Heat transfer"));
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer U_nom_l=1500
+    parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_nom_l=1500
       "Nominal heat transfer coefficient liquid side"
       annotation (Dialog(tab="Heat transfer"));
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer U_nom_tp=6000
+    parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_nom_tp=6000
       "Nominal heat transfer coefficient two phase side"
       annotation (Dialog(tab="Heat transfer"));
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer U_nom_v=1000
+    parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_nom_v=1000
       "Nominal heat transfer coefficient vapor side"
       annotation (Dialog(tab="Heat transfer"));
     Medium.AbsolutePressure p;
@@ -40,10 +40,10 @@ model Test_HeatTransferTester "A test driver for the different implementations o
     Medium.Temperature T_end;
     Medium.SpecificEnthalpy h_start;
     Medium.SpecificEnthalpy h_end;
-    Modelica.SIunits.MassFlowRate m_dot "Inlet massflow";
+    Modelica.Units.SI.MassFlowRate m_dot "Inlet massflow";
     Real x "Vapor quality";
     Real y "Relative position";
-    Modelica.SIunits.Time c=10;
+    Modelica.Units.SI.Time c=10;
 
     Medium.ThermodynamicState bubbleState(h(start=0));
     Medium.ThermodynamicState dewState(h(start=0));
@@ -68,14 +68,14 @@ model Test_HeatTransferTester "A test driver for the different implementations o
     parameter Medium.AbsolutePressure p_start=1e5 "Start pressure";
     parameter Medium.AbsolutePressure p_end=p_start "Final pressure";
 
-    parameter Modelica.SIunits.MassFlowRate m_dot_start=1 "Start flow rate";
-    parameter Modelica.SIunits.MassFlowRate m_dot_end=m_dot_start
+    parameter Modelica.Units.SI.MassFlowRate m_dot_start=1 "Start flow rate";
+    parameter Modelica.Units.SI.MassFlowRate m_dot_end=m_dot_start
       "Final flow rate";
 
     parameter Boolean use_T=true "use temp. or heat flux?";
-    parameter Modelica.SIunits.HeatFlux q=1.5e4 "constant heat flux";
+    parameter Modelica.Units.SI.HeatFlux q=1.5e4 "constant heat flux";
     parameter Boolean Delta_T_const=false "Constant dT?";
-    parameter Modelica.SIunits.TemperatureDifference Delta_T=5
+    parameter Modelica.Units.SI.TemperatureDifference Delta_T=5
       "wall temperature difference";
     ThermoCycle.Components.HeatFlow.Sources.Source_T_cell source_T;
     parameter Boolean twoPhase=false "is two-phase medium?";

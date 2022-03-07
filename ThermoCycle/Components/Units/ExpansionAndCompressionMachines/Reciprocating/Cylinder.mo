@@ -22,11 +22,11 @@ model Cylinder
         zeta_out=zeta_leak,
         zeta_in=zeta_leak)});
 
-  parameter Modelica.SIunits.Length d_inlet(displayUnit="mm")=1
+  parameter Modelica.Units.SI.Length d_inlet(displayUnit="mm") = 1
     "Hydraulic diameter of inlet port";
-  parameter Modelica.SIunits.Length d_outlet(displayUnit="mm")=1
+  parameter Modelica.Units.SI.Length d_outlet(displayUnit="mm") = 1
     "Hydraulic diameter of outlet port";
-  parameter Modelica.SIunits.Length d_leak(displayUnit="mm")=1
+  parameter Modelica.Units.SI.Length d_leak(displayUnit="mm") = 1
     "Hydraulic diameter of leakage gap";
   parameter Real zeta_inout = 0.0005 "drag coefficient valve ports";
   parameter Real zeta_leak =  0.2500 "drag coefficient leakage";
@@ -34,7 +34,7 @@ model Cylinder
   parameter Boolean use_angle_in = false
     "Enable input connector for crankshaft angle"
     annotation (Dialog(tab="Assumptions", group="Heat transfer"));
-  parameter Modelica.SIunits.Length stroke = 0 "Input for max. stroke"
+  parameter Modelica.Units.SI.Length stroke=0 "Input for max. stroke"
     annotation (Dialog(tab="Assumptions", group="Heat transfer"));
 //     parameter Real stroke = 0
 //     "Assume a sine-like piston movement"

@@ -36,27 +36,27 @@ parameter Real eps6= 1
 
 /*****************General Geometries**************************/
 parameter Integer N = 2 "number of cells";
-final parameter Modelica.SIunits.Length ll= geometry.L/(N-1)
+  final parameter Modelica.Units.SI.Length ll=geometry.L/(N - 1)
     "Length of each cell";
 
 /*************************** VARIABLES ****************************************/
 
 /********************* TEMPERATURES **********************************/
-Modelica.SIunits.Temperature T_fluid[N] "temperature of the fluid";
+  Modelica.Units.SI.Temperature T_fluid[N] "temperature of the fluid";
 
 /************* THERMAL FLOW ****************************************/
-Modelica.SIunits.HeatFlowRate Q_tube_tot;
+  Modelica.Units.SI.HeatFlowRate Q_tube_tot;
 
 /**************************************** THERMAL FLOW per cell length [W/m] ****************************************/
 Real HL[N] "Heat losses per meter";
 
 /****************************************THERMAL FLUX ****************************************/
-Modelica.SIunits.HeatFlux Phi_tube_tot[N] "Heat flux to the tube";
-Modelica.SIunits.HeatFlux Phi_conv_f[N] "Heat flux to the fluid";
-Modelica.SIunits.HeatFlux Phi_loss_tube[N] "Heat flux loss per tube surface";
-Modelica.SIunits.HeatFlux Phi_loss_ref[N]
+  Modelica.Units.SI.HeatFlux Phi_tube_tot[N] "Heat flux to the tube";
+  Modelica.Units.SI.HeatFlux Phi_conv_f[N] "Heat flux to the fluid";
+  Modelica.Units.SI.HeatFlux Phi_loss_tube[N] "Heat flux loss per tube surface";
+  Modelica.Units.SI.HeatFlux Phi_loss_ref[N]
     "Heat flux loss per reflector surface";
-Modelica.SIunits.HeatFlux Phi_loss_ref_m
+  Modelica.Units.SI.HeatFlux Phi_loss_ref_m
     "Medium heat flux loss per reflector surface";
 
 /**************************************** EFFICIENCIES ****************************************/

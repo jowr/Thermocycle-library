@@ -3,12 +3,12 @@ model SinkMdot "Mass sink for current working fluid"
   extends ThermoCycle.Icons.Water.SourceP;
   replaceable package Medium = ThermoCycle.Media.DummyFluid constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model" annotation (choicesAllMatching = true);
-  parameter Modelica.SIunits.MassFlowRate Mdot_0=0
+  parameter Modelica.Units.SI.MassFlowRate Mdot_0=0
     "Imposed volumetric flow rate";
   parameter Medium.SpecificEnthalpy h_0= 1e5 "Nominal specific enthalpy";
   parameter Medium.AbsolutePressure pstart = 1E6 "Start value for the pressure";
-  Modelica.SIunits.MassFlowRate Mdot;
-  Modelica.SIunits.SpecificEnthalpy h;
+  Modelica.Units.SI.MassFlowRate Mdot;
+  Modelica.Units.SI.SpecificEnthalpy h;
   Interfaces.Fluid.FlangeB flangeB(redeclare package Medium =
         Medium)
     annotation (Placement(transformation(extent={{-108,-10},{-88,10}})));

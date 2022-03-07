@@ -12,7 +12,7 @@ model Test_Nozzle
     P_ex_start=1400000)
     annotation (Placement(transformation(extent={{-10,-14},{10,6}})));
   Modelica.Blocks.Sources.Sine sine(
-    freqHz=0.25,
+    f=0.25,
     phase=0,
     amplitude=4.1e5,
     offset=12e5)

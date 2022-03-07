@@ -6,8 +6,8 @@ replaceable package Medium = ThermoCycle.Media.DummyFluid;
 
 Medium.ThermodynamicState inlet;
 Medium.ThermodynamicState outlet;
-parameter Modelica.SIunits.ThermalConductance AU = 35 "Thermal conductance";
-Modelica.SIunits.Power Q_dot;
+  parameter Modelica.Units.SI.ThermalConductance AU=35 "Thermal conductance";
+  Modelica.Units.SI.Power Q_dot;
 Medium.Temperature T_iso; //Température de la plaque isotherme
 Real C_dot_min;
 Real NTU;

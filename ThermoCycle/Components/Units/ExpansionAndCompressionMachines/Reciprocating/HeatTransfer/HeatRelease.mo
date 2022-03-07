@@ -3,14 +3,14 @@ model HeatRelease "Heat release model for IC engines"
   extends
     ThermoCycle.Components.Units.ExpansionAndCompressionMachines.Reciprocating.BaseClasses.PartialCylinderHeatTransfer;
 
-    parameter Modelica.SIunits.HeatFlowRate peak = 5e3
+  parameter Modelica.Units.SI.HeatFlowRate peak=5e3
     "Peak value of heat release.";
 
-    parameter Modelica.SIunits.Angle on =  Modelica.SIunits.Conversions.from_deg(5)
+  parameter Modelica.Units.SI.Angle on=Modelica.Units.Conversions.from_deg(5)
     "Start of heat release.";
-    parameter Modelica.SIunits.Angle off = Modelica.SIunits.Conversions.from_deg(15)
+  parameter Modelica.Units.SI.Angle off=Modelica.Units.Conversions.from_deg(15)
     "End of heat release.";
-    parameter Modelica.SIunits.Angle swi = Modelica.SIunits.Conversions.from_deg(5)
+  parameter Modelica.Units.SI.Angle swi=Modelica.Units.Conversions.from_deg(5)
     "Length for heat release development.";
 
   ValveTimer valveTimer(

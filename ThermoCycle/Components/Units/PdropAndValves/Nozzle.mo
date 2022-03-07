@@ -9,9 +9,9 @@ model Nozzle
   Medium.ThermodynamicState throat_start;
   Medium.ThermodynamicState throat;
   Medium.ThermodynamicState throat_choked;
-  parameter Modelica.SIunits.Area Afull=5e-7
+  parameter Modelica.Units.SI.Area Afull=5e-7
     "Cross-sectional area of the fully open valve";
-  Modelica.SIunits.Area A(start=Afull) "Valve throat area";
+  Modelica.Units.SI.Area A(start=Afull) "Valve throat area";
   parameter Real Xopen(
     min=0,
     max=1) = 1
@@ -45,11 +45,11 @@ model Nozzle
   Medium.AbsolutePressure p_su(start=P_su_start);
   Medium.SpecificEntropy s_su;
   Medium.AbsolutePressure p_choked(start=p_choked_start);
-  Modelica.SIunits.VolumeFlowRate V_dot_leak;
-  Modelica.SIunits.Velocity C_thr(start=Medium.velocityOfSound(
-      Medium.setState_pT(p_choked_start, T_su_start)));
-  Modelica.SIunits.MassFlowRate Mdot_thr;
-  Modelica.SIunits.MassFlowRate Mdot_choked;
+  Modelica.Units.SI.VolumeFlowRate V_dot_leak;
+  Modelica.Units.SI.Velocity C_thr(start=Medium.velocityOfSound(
+        Medium.setState_pT(p_choked_start, T_su_start)));
+  Modelica.Units.SI.MassFlowRate Mdot_thr;
+  Modelica.Units.SI.MassFlowRate Mdot_choked;
 
   Real gamma "Equivalent isentropic expansion factor";
 

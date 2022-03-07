@@ -26,23 +26,23 @@ annotation (choicesAllMatching = true);
 //   parameter Modelica.SIunits.Length D_int "Tube internal diameter";
 //   final parameter Modelica.SIunits.Area A_cross = D_int^2*pi/4
 //     "Cross sectional area of the tube";
-  parameter Modelica.SIunits.Area A = 16.18
+  parameter Modelica.Units.SI.Area A=16.18
     "Lateral surface of the tube: heat exchange area";
-  parameter Modelica.SIunits.Volume V = 0.03781 "Volume of the tube";
-  final parameter Modelica.SIunits.Volume Vi=V/N "Volume of a single cell";
-  final parameter Modelica.SIunits.Area Ai=A/N
+  parameter Modelica.Units.SI.Volume V=0.03781 "Volume of the tube";
+  final parameter Modelica.Units.SI.Volume Vi=V/N "Volume of a single cell";
+  final parameter Modelica.Units.SI.Area Ai=A/N
     "Lateral surface of a single cell";
-  parameter Modelica.SIunits.MassFlowRate Mdotnom = 0.2588
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom=0.2588
     "Nominal fluid flow rate";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_l = 100
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_l=100
     "if HTtype = LiqVap : Heat transfer coefficient, liquid zone ";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_tp = 100
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_tp=100
     "if HTtype = LiqVap : heat transfer coefficient, two-phase zone";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_v = 100
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_v=100
     "if HTtype = LiqVap : heat transfer coefficient, vapor zone";
  /* FLUID INITIAL VALUES */
-parameter Modelica.SIunits.Pressure pstart "Fluid pressure start value"
-                                     annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure pstart "Fluid pressure start value"
+    annotation (Dialog(tab="Initialization"));
   parameter Medium.Temperature Tstart_inlet "Inlet temperature start value"
      annotation (Dialog(tab="Initialization"));
   parameter Medium.Temperature Tstart_outlet "Outlet temperature start value"
@@ -66,7 +66,7 @@ parameter Modelica.SIunits.Pressure pstart "Fluid pressure start value"
     annotation (Dialog(tab="Numerical options"));
   parameter Real max_drhodt=100 "Maximum value for the density derivative"
     annotation (Dialog(enable=filter_dMdt, tab="Numerical options"));
-  parameter Modelica.SIunits.Time TT=1
+  parameter Modelica.Units.SI.Time TT=1
     "Integration time of the first-order filter"
     annotation (Dialog(enable=max_der, tab="Numerical options"));
 //enable=filter_dMdt,enable=max_der,
@@ -78,28 +78,28 @@ parameter Modelica.SIunits.Pressure pstart "Fluid pressure start value"
   Medium.SaturationProperties sat;
   //Medium.Temperature T_sat "Saturation temperature";
   Medium.AbsolutePressure p(start=pstart);
-  Modelica.SIunits.MassFlowRate M_dot_su;
+  Modelica.Units.SI.MassFlowRate M_dot_su;
   Medium.SpecificEnthalpy h[N](start=hstart)
     "Fluid specific enthalpy at the cells";
   Medium.Temperature T[N];//(start=Tstart) "Fluid temperature";
-  Modelica.SIunits.Temperature T_wall[N] "Internal wall temperature";
+  Modelica.Units.SI.Temperature T_wall[N] "Internal wall temperature";
   Medium.Density rho[N] "Fluid cell density";
-  Modelica.SIunits.DerDensityByEnthalpy drdh[N]
+  Modelica.Units.SI.DerDensityByEnthalpy drdh[N]
     "Derivative of density by enthalpy";
-  Modelica.SIunits.DerDensityByPressure drdp[N]
+  Modelica.Units.SI.DerDensityByPressure drdp[N]
     "Derivative of density by pressure";
-  Modelica.SIunits.SpecificEnthalpy hnode[N + 1]
+  Modelica.Units.SI.SpecificEnthalpy hnode[N + 1]
     "Enthalpy state variables at each node";
   Real dMdt[N] "Time derivative of mass in each cell between two nodes";
-  Modelica.SIunits.HeatFlux qdot[N] "heat flux at each cell";
-  Modelica.SIunits.MassFlowRate Mdot[N + 1](each start=Mdotnom, each min=0);
-  Modelica.SIunits.CoefficientOfHeatTransfer U[N]
+  Modelica.Units.SI.HeatFlux qdot[N] "heat flux at each cell";
+  Modelica.Units.SI.MassFlowRate Mdot[N + 1](each start=Mdotnom, each min=0);
+  Modelica.Units.SI.CoefficientOfHeatTransfer U[N]
     "Heat transfer coefficient between wall and working fluid";
   Real x[N] "Vapor quality";
-  Modelica.SIunits.SpecificEnthalpy h_l;
-  Modelica.SIunits.SpecificEnthalpy h_v;
-  Modelica.SIunits.Power Q_tot "Total heat flux exchanged by the thermal port";
-  Modelica.SIunits.Mass M_tot "Total mass of the fluid in the component";
+  Modelica.Units.SI.SpecificEnthalpy h_l;
+  Modelica.Units.SI.SpecificEnthalpy h_v;
+  Modelica.Units.SI.Power Q_tot "Total heat flux exchanged by the thermal port";
+  Modelica.Units.SI.Mass M_tot "Total mass of the fluid in the component";
 equation
   Mdot[1] = M_dot_su;
   //Saturation

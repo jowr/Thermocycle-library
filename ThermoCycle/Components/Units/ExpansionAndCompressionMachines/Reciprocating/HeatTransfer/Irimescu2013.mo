@@ -4,7 +4,7 @@ model Irimescu2013 "Recip ICE correlation of Irimescu 2013"
 
   import Modelica.Constants.pi;
   Medium.ThermodynamicState[n] states_w "Thermodynamic states at wall";
-  Modelica.SIunits.DynamicViscosity[n] eta_w "At wall temperature";
+  Modelica.Units.SI.DynamicViscosity[n] eta_w "At wall temperature";
 
 equation
   for i in 1:n loop

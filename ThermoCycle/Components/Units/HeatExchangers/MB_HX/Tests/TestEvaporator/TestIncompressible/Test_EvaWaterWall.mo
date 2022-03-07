@@ -3,10 +3,11 @@ model Test_EvaWaterWall
 replaceable package Medium =
      ExternalMedia.Examples.WaterCoolProp;
 
-  parameter Modelica.SIunits.AbsolutePressure p_out = 60E5;
-  parameter Modelica.SIunits.Temperature T_sf_su = 1000+273.15;
+  parameter Modelica.Units.SI.AbsolutePressure p_out=60E5;
+  parameter Modelica.Units.SI.Temperature T_sf_su=1000 + 273.15;
 parameter Medium.ThermodynamicState stateOut= Medium.setState_pT(p_out,T_sf_su-100);
-parameter Modelica.SIunits.SpecificEnthalpy h0 = Medium.specificEnthalpy(stateOut);
+  parameter Modelica.Units.SI.SpecificEnthalpy h0=Medium.specificEnthalpy(
+      stateOut);
 parameter Integer n=3;
 parameter Boolean counterCurrent = true;
 ThermoCycle.Components.Units.HeatExchangers.MB_HX.Components.Evaporator.EvaGeneral  evaGeneral(

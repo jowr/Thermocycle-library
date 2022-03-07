@@ -10,8 +10,9 @@ replaceable package Medium = ThermoCycle.Media.R245fa_CP  constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model" annotation (choicesAllMatching = true);
   parameter Boolean UseNom=false
     "if true, uses Nominal Conditions to compute valve throat area";
-  parameter Modelica.SIunits.Area Afull=10e-5
-    "Cross-sectional area of the fully open valve"                                           annotation (Dialog(enable=(not UseNom)));
+  parameter Modelica.Units.SI.Area Afull=10e-5
+    "Cross-sectional area of the fully open valve"
+    annotation (Dialog(enable=(not UseNom)));
   parameter Real Xopen(
     min=0,
     max=1) = 1
@@ -19,13 +20,13 @@ replaceable package Medium = ThermoCycle.Media.R245fa_CP  constrainedby
   parameter Boolean CheckValve=false
     "Set to true to allow only positive flow rate";
   Real K(start=Afull) "Valve throat area";
-  parameter Modelica.SIunits.MassFlowRate Mdot_nom=0.1 "Nominal mass flow rate"
-                             annotation (Dialog(tab="Nominal Conditions"));
-  parameter Modelica.SIunits.Pressure   DELTAp_nom=0 "Nominal pressure drop"
-                           annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.MassFlowRate Mdot_nom=0.1
+    "Nominal mass flow rate" annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Pressure DELTAp_nom=0 "Nominal pressure drop"
+    annotation (Dialog(tab="Nominal Conditions"));
 
-  Modelica.SIunits.Pressure DELTAp(start=DELTAp_nom);
-  Modelica.SIunits.MassFlowRate Mdot(start=Mdot_nom);
+  Modelica.Units.SI.Pressure DELTAp(start=DELTAp_nom);
+  Modelica.Units.SI.MassFlowRate Mdot(start=Mdot_nom);
 
   ThermoCycle.Interfaces.Fluid.FlangeA InFlow(redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));

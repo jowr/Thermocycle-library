@@ -5,24 +5,24 @@ partial model GnielinskiHeatTransfer
     ThermoCycle.Components.Units.ExpansionAndCompressionMachines.Reciprocating.BaseClasses.PartialCylinderHeatTransfer;
 
   import Modelica.Constants.pi;
-  Modelica.SIunits.Length[n] Gamma(min=0) "Characteristic length";
-  Modelica.SIunits.Velocity[n] Lambda(min=0) "Characteristic velocity";
+  Modelica.Units.SI.Length[n] Gamma(min=0) "Characteristic length";
+  Modelica.Units.SI.Velocity[n] Lambda(min=0) "Characteristic velocity";
 
   // Other things to define
   Real[n] xtra "Reynolds correction factor";
   Real[n] zeta "Friction factor";
   Real[n] K "Correction term";
 
-  Modelica.SIunits.Length[n] D(min=0) "Pipe diameter";
-  Modelica.SIunits.Length[n] L(min=0) "Pipe length";
+  Modelica.Units.SI.Length[n] D(min=0) "Pipe diameter";
+  Modelica.Units.SI.Length[n] L(min=0) "Pipe length";
 
-  Modelica.SIunits.ReynoldsNumber[n] Re(min=0);
-  Modelica.SIunits.PrandtlNumber[n] Pr(min=0);
-  Modelica.SIunits.NusseltNumber[n] Nu(min=0);
+  Modelica.Units.SI.ReynoldsNumber[n] Re(min=0);
+  Modelica.Units.SI.PrandtlNumber[n] Pr(min=0);
+  Modelica.Units.SI.NusseltNumber[n] Nu(min=0);
 
-  Modelica.SIunits.ThermalConductivity[n] lambda;
-  Modelica.SIunits.DynamicViscosity[n] eta;
-  Modelica.SIunits.SpecificHeatCapacityAtConstantPressure[n] cp;
+  Modelica.Units.SI.ThermalConductivity[n] lambda;
+  Modelica.Units.SI.DynamicViscosity[n] eta;
+  Modelica.Units.SI.SpecificHeatCapacityAtConstantPressure[n] cp;
 
   Real[n] numerator;
   Real[n] denominator;

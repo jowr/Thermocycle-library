@@ -55,56 +55,68 @@ extends ThermoCycle.Components.Units.BaseUnits.BaseHx;
     annotation (Placement(transformation(extent={{-42,-152},{42,-68}})));
 /* GEOMETRIES */
 parameter Integer N=5 "Number of nodes for the heat exchanger";
-parameter Modelica.SIunits.Volume Vhot = 0.03781 "Volume hot fluid";
-parameter Modelica.SIunits.Volume Vcold= 0.03781 "Volume cold fluid";
-parameter Modelica.SIunits.Area Ahot = 16.18 "Area hot fluid";
-parameter Modelica.SIunits.Area Acold = 16.18 "Area cold fluid";
+  parameter Modelica.Units.SI.Volume Vhot=0.03781 "Volume hot fluid";
+  parameter Modelica.Units.SI.Volume Vcold=0.03781 "Volume cold fluid";
+  parameter Modelica.Units.SI.Area Ahot=16.18 "Area hot fluid";
+  parameter Modelica.Units.SI.Area Acold=16.18 "Area cold fluid";
 /*HEAT TRANSFER */
   import ThermoCycle.Functions.Enumerations.HTtypes;
   parameter HTtypes HTtypeCold=HTtypes.LiqVap
     "Cold fluid: Choose heat transfer coeff. type. Set LiqVap with Unom_l=Unom_tp=Unom_v to have a Const HT"
                                                                                                         annotation (Dialog(group="Heat transfer", tab="General"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_l_cold=100
-    "if HTtype = LiqVap: heat transfer coefficient, liquid zone " annotation (Dialog(group="Heat transfer", tab="General"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_tp_cold=100
-    "if HTtype = LiqVap: heat transfer coefficient, two-phase zone" annotation (Dialog(group="Heat transfer", tab="General"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_v_cold=100
-    "if HTtype = LiqVap: heat transfer coefficient, vapor zone" annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_l_cold=100
+    "if HTtype = LiqVap: heat transfer coefficient, liquid zone "
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_tp_cold=100
+    "if HTtype = LiqVap: heat transfer coefficient, two-phase zone"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_v_cold=100
+    "if HTtype = LiqVap: heat transfer coefficient, vapor zone"
+    annotation (Dialog(group="Heat transfer", tab="General"));
 parameter HTtypes HTtypeHot=HTtypes.LiqVap
     "Hot fluid: Choose heat transfer coeff. type. Set LiqVap with Unom_l=Unom_tp=Unom_v to have a Const HT"
                                                                                                         annotation (Dialog(group="Heat transfer", tab="General"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_l_hot=100
-    "if HTtype = LiqVap: heat transfer coefficient, liquid zone " annotation (Dialog(group="Heat transfer", tab="General"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_tp_hot=100
-    "if HTtype = LiqVap: heat transfer coefficient, two-phase zone" annotation (Dialog(group="Heat transfer", tab="General"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_v_hot=100
-    "if HTtype = LiqVap: heat transfer coefficient, vapor zone" annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_l_hot=100
+    "if HTtype = LiqVap: heat transfer coefficient, liquid zone "
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_tp_hot=100
+    "if HTtype = LiqVap: heat transfer coefficient, two-phase zone"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_v_hot=100
+    "if HTtype = LiqVap: heat transfer coefficient, vapor zone"
+    annotation (Dialog(group="Heat transfer", tab="General"));
  /*METAL WALL*/
-parameter Modelica.SIunits.Mass M_wall= 69
+  parameter Modelica.Units.SI.Mass M_wall=69
     "Mass of the metal wall between the two fluids";
-parameter Modelica.SIunits.SpecificHeatCapacity c_wall= 500
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_wall=500
     "Specific heat capacity of metal wall";
 /*MASS FLOW*/
-parameter Modelica.SIunits.MassFlowRate MdotNom_Hot= 0.2588
+  parameter Modelica.Units.SI.MassFlowRate MdotNom_Hot=0.2588
     "Nominal flow rate of hot fluid";
-parameter Modelica.SIunits.MassFlowRate MdotNom_Cold = 0.2588
+  parameter Modelica.Units.SI.MassFlowRate MdotNom_Cold=0.2588
     "Nominal flow rate of cold fluid";
 /*INITIAL VALUES*/
   /*pressure*/
-parameter Modelica.SIunits.Pressure pstart_cold = 23.57e5
-    "Nominal inlet pressure of cold fluid"  annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.Pressure pstart_hot = 1.54883e5
-    "Nominal inlet pressure of hot fluid"  annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure pstart_cold=23.57e5
+    "Nominal inlet pressure of cold fluid"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure pstart_hot=1.54883e5
+    "Nominal inlet pressure of hot fluid"
+    annotation (Dialog(tab="Initialization"));
 /*Temperatures*/
-parameter Modelica.SIunits.Temperature Tstart_inlet_cold = 308.43
-    "Initial value of cold fluid temperature at the inlet"  annotation (Dialog(tab="Initialization"));
-parameter Modelica.SIunits.Temperature Tstart_outlet_cold = 334.78
-    "Initial value of cold fluid temperature at the outlet"  annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature Tstart_inlet_cold=308.43
+    "Initial value of cold fluid temperature at the inlet"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature Tstart_outlet_cold=334.78
+    "Initial value of cold fluid temperature at the outlet"
+    annotation (Dialog(tab="Initialization"));
 /*Temperatures*/
-parameter Modelica.SIunits.Temperature Tstart_inlet_hot =  353.82
-    "Initial value of hot fluid temperature at the inlet"  annotation (Dialog(tab="Initialization"));
-parameter Modelica.SIunits.Temperature Tstart_outlet_hot = 316.91
-    "Initial value of hot fluid temperature at the outlet"  annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature Tstart_inlet_hot=353.82
+    "Initial value of hot fluid temperature at the inlet"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature Tstart_outlet_hot=316.91
+    "Initial value of hot fluid temperature at the outlet"
+    annotation (Dialog(tab="Initialization"));
 /*steady state */
 parameter Boolean steadystate_h_cold=false
     "if true, sets the derivative of h of cold fluid to zero during Initialization"
@@ -131,7 +143,7 @@ parameter Boolean steadystate_T_wall=false
   parameter Real max_drhodt_cold=100
     "Maximum value for the density derivative of primary fluid"
     annotation (Dialog(enable=max_der, tab="Numerical options"));
-  parameter Modelica.SIunits.Time TT_cold=1
+  parameter Modelica.Units.SI.Time TT_cold=1
     "Integration time of the first-order filter"
     annotation (Dialog(enable=filter_dMdt, tab="Numerical options"));
 /*Hot fluid */
@@ -148,28 +160,28 @@ parameter Boolean steadystate_T_wall=false
   parameter Real max_drhodt_hot=100
     "Maximum value for the density derivative of primary fluid"
     annotation (Dialog(enable=max_der, tab="Numerical options"));
-  parameter Modelica.SIunits.Time TT_hot=1
+  parameter Modelica.Units.SI.Time TT_hot=1
     "Integration time of the first-order filter"
     annotation (Dialog(enable=filter_dMdt, tab="Numerical options"));
 //Variables
 protected
-Modelica.SIunits.Power Q_hot_;
-Modelica.SIunits.Power Q_cold_;
+  Modelica.Units.SI.Power Q_hot_;
+  Modelica.Units.SI.Power Q_cold_;
 Real PinchPoint_;
 public
 record SummaryBase
   replaceable Arrays T_profile;
   record Arrays
    parameter Integer n;
-   Modelica.SIunits.Temperature[n] Thot;
-   Modelica.SIunits.Temperature[n] Twall;
-   Modelica.SIunits.Temperature[n] Tcold;
+      Modelica.Units.SI.Temperature[n] Thot;
+      Modelica.Units.SI.Temperature[n] Twall;
+      Modelica.Units.SI.Temperature[n] Tcold;
    Real PinchPoint;
   end Arrays;
-  Modelica.SIunits.Pressure p_hot;
-  Modelica.SIunits.Pressure p_cold;
-  Modelica.SIunits.Power Q_hot;
-  Modelica.SIunits.Power Q_cold;
+    Modelica.Units.SI.Pressure p_hot;
+    Modelica.Units.SI.Pressure p_cold;
+    Modelica.Units.SI.Power Q_hot;
+    Modelica.Units.SI.Power Q_cold;
 end SummaryBase;
 replaceable record SummaryClass = SummaryBase;
 SummaryClass Summary( T_profile( n=N, Thot = Hotside.Cells[end:-1:1].T,  Twall = metalWall.T_wall,  Tcold = Coldside.Cells.T,PinchPoint = PinchPoint_), p_hot = Hotside.Summary.p, p_cold = Coldside.Summary.p,Q_hot = Q_hot_,Q_cold = Q_cold_);

@@ -23,7 +23,7 @@ Modelica.Blocks.Interfaces.RealOutput Tsat annotation (Placement(
         iconTransformation(extent={{60,4},{100,44}})));
 
 /********************* VARIABLES *********************/
-Modelica.SIunits.SpecificEnthalpy h "Specific Enthalpy of the fluid";
+  Modelica.Units.SI.SpecificEnthalpy h "Specific Enthalpy of the fluid";
 Medium.ThermodynamicState fluidState "Thermodynamic state of the fluid";
 Medium.SaturationProperties sat "Saturation state";
 

@@ -40,7 +40,7 @@ package TestNumericalMethods
       offset=0.3335,
       amplitude=0.5,
       phase=0,
-      freqHz=0.1)
+      f=0.1)
       annotation (Placement(transformation(extent={{-114,44},{-100,58}})));
   equation
     connect(const.y, source_T.Temperature) annotation (Line(
@@ -112,7 +112,7 @@ package TestNumericalMethods
       offset=0.3335,
       amplitude=0.5,
       phase=0,
-      freqHz=0.1)
+      f=0.1)
       annotation (Placement(transformation(extent={{-126,40},{-112,54}})));
   equation
     connect(source_T.thermalPort, flow1Dim.Wall_int) annotation (Line(

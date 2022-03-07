@@ -24,16 +24,16 @@ parameter Real epsilon_s=0.7 "Isentropic Efficiency"
   /****************************************** PARAMETERES ******************************************/
   parameter Real FF_exp=1 "Filling factor"
     annotation (Dialog(enable=(ExpType == ExpTypes.UD)));
-  parameter Modelica.SIunits.Volume V_s "Swept volume";
+  parameter Modelica.Units.SI.Volume V_s "Swept volume";
   parameter Real epsilon_start=0.5782 "Isentropic Efficiency"
     annotation (Dialog(tab="Initialization"));
   parameter Real FF_start=0.00003915 "Filling factor"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Pressure p_su_start=23.39e5
+  parameter Modelica.Units.SI.Pressure p_su_start=23.39e5
     "Inlet pressure start value" annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Pressure p_ex_start=1.77175e5
+  parameter Modelica.Units.SI.Pressure p_ex_start=1.77175e5
     "Outlet pressure start value" annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature T_su_start=423.15
+  parameter Modelica.Units.SI.Temperature T_su_start=423.15
     "Inlet temperature start value" annotation (Dialog(tab="Initialization"));
   parameter Medium.SpecificEnthalpy h_su_start = Medium.specificEnthalpy_pT(p_su_start, T_su_start)
     "Inlet enthalpy start value"                                                                                                annotation (Dialog(tab="Initialization"));
@@ -45,9 +45,12 @@ parameter Real epsilon_s=0.7 "Isentropic Efficiency"
   parameter Boolean constinit=false
     "if true, sets the efficiencies to a constant value at the beginning of the simulation"
     annotation (Dialog(group="Initialization options",tab="Initialization"));
-  parameter Modelica.SIunits.Time t_init=10
+  parameter Modelica.Units.SI.Time t_init=10
     "if constinit is true, time during which the efficiencies are set to their start values"
-    annotation (Dialog(group="Initialization options",tab="Initialization", enable=constinit));
+    annotation (Dialog(
+      group="Initialization options",
+      tab="Initialization",
+      enable=constinit));
 
   /****************************************** VARIABLES ******************************************/
   Medium.ThermodynamicState steamIn
@@ -57,10 +60,10 @@ parameter Real epsilon_s=0.7 "Isentropic Efficiency"
   Real epsilon(start=epsilon_start);
   Real FF( start=FF_start);
   Real rpm;
-  Modelica.SIunits.Frequency N_rot(start=48.3);
-  Modelica.SIunits.Power W_dot;
-  Modelica.SIunits.VolumeFlowRate V_dot_su;
-  Modelica.SIunits.MassFlowRate M_dot;
+  Modelica.Units.SI.Frequency N_rot(start=48.3);
+  Modelica.Units.SI.Power W_dot;
+  Modelica.Units.SI.VolumeFlowRate V_dot_su;
+  Modelica.Units.SI.MassFlowRate M_dot;
   Medium.Density rho_su(start=40);
   Medium.SpecificEntropy s_su;
   Medium.SpecificEnthalpy h_su(start=h_su_start);

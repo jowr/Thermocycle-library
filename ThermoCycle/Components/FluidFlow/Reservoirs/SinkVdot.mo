@@ -3,7 +3,7 @@ model SinkVdot "Volumetric flow sink for current working fluid"
   extends ThermoCycle.Icons.Water.SourceP;
   replaceable package Medium = ThermoCycle.Media.DummyFluid constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model"  annotation (choicesAllMatching = true);
-  parameter Modelica.SIunits.VolumeFlowRate Vdot_0=0.0017
+  parameter Modelica.Units.SI.VolumeFlowRate Vdot_0=0.0017
     "Imposed volumetric flow rate";
   parameter Medium.SpecificEnthalpy h_out=1e5 "Nominal specific enthalpy";
   parameter Medium.AbsolutePressure pstart = 1E6 "Start value for the pressure";
@@ -11,7 +11,7 @@ model SinkVdot "Volumetric flow sink for current working fluid"
   Medium.SpecificEnthalpy h "enthalpy of the fluid coming in";
   Medium.Density rho(start=Medium.density_ph(pstart,h_out))
     "density of the fluid coming in";
-  Modelica.SIunits.SpecificVolume Vdot;
+  Modelica.Units.SI.SpecificVolume Vdot;
   Interfaces.Fluid.FlangeB flangeB(redeclare package Medium =
         Medium)
     annotation (Placement(transformation(extent={{-108,-10},{-88,10}})));

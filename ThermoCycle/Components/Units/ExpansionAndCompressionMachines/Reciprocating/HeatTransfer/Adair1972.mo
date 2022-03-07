@@ -10,9 +10,9 @@ model Adair1972 "Recip compressor correlation of Adair 1972"
     "admission at TDC (expander) or BDC (compressor)";
 
   import Modelica.Constants.pi;
-  Modelica.SIunits.Length[n]          De "Equivalent diameter 6V/A";
-  Modelica.SIunits.AngularVelocity[n] omega_g "Swirl velocity";
-  Modelica.SIunits.Volume[n]          volume "Cylinder volume";
+  Modelica.Units.SI.Length[n] De "Equivalent diameter 6V/A";
+  Modelica.Units.SI.AngularVelocity[n] omega_g "Swirl velocity";
+  Modelica.Units.SI.Volume[n] volume "Cylinder volume";
   Real tFactor[n];
   Real tFactor1[n];
   Real tFactor2[n] "Transition factor";

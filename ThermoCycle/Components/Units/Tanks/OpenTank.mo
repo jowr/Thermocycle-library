@@ -23,43 +23,42 @@ Modelica.Blocks.Interfaces.RealOutput Level
 
 /************ Geometric Characteristics  ************/
   parameter Real H_D= 2.5 "Height to diameter ratio";
-  parameter Modelica.SIunits.Volume V_tank= 4 "Volume of the Tank";
-  final parameter Modelica.SIunits.Length r_int=((V_tank/(H_D)*4/pi)^(1/3))/2
+  parameter Modelica.Units.SI.Volume V_tank=4 "Volume of the Tank";
+  final parameter Modelica.Units.SI.Length r_int=((V_tank/(H_D)*4/pi)^(1/3))/2
     "Internal tank radius ";
-  final parameter Modelica.SIunits.Length D_int=r_int*2
+  final parameter Modelica.Units.SI.Length D_int=r_int*2
     "Internal tank Diameter ";
-  final parameter Modelica.SIunits.Length H=V_tank/(A_cross) "Tank Height ";
-  final parameter Modelica.SIunits.Area A_lateral=pi*H*D_int
+  final parameter Modelica.Units.SI.Length H=V_tank/(A_cross) "Tank Height ";
+  final parameter Modelica.Units.SI.Area A_lateral=pi*H*D_int
     "Lateral External Area ";
-  final parameter Modelica.SIunits.Area A_cross=pi*r_int^2
+  final parameter Modelica.Units.SI.Area A_cross=pi*r_int^2
     "Cross section of the tank External Area ";
-  final parameter Modelica.SIunits.Area Atot_tank=A_lateral + 2*A_cross
+  final parameter Modelica.Units.SI.Area Atot_tank=A_lateral + 2*A_cross
     "Total External Area (lateral + bottom + top)";
 
-  parameter Modelica.SIunits.Pressure p_ext=3e5
+  parameter Modelica.Units.SI.Pressure p_ext=3e5
     "External pressure imposed to the system";
 
   /************ FLUID INITIAL VALUES ***************/
-parameter Modelica.SIunits.Temperature Tstart= 100+273.15 "Initial temperature"
-  annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Pressure pstart=2e5 "Initial pressure"
-  annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature Tstart=100 + 273.15
+    "Initial temperature" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure pstart=2e5 "Initial pressure"
+    annotation (Dialog(tab="Initialization"));
 
-  final parameter Modelica.SIunits.SpecificEnthalpy hstart=
-    Medium.specificEnthalpy_pTX(
-            pstart,
-            Tstart,
-            fill(0, 0))
-    "Start value of enthalpy vector (initialized by default)"
-  annotation (Dialog(tab="Initialization"));
+  final parameter Modelica.Units.SI.SpecificEnthalpy hstart=
+      Medium.specificEnthalpy_pTX(
+      pstart,
+      Tstart,
+      fill(0, 0)) "Start value of enthalpy vector (initialized by default)"
+    annotation (Dialog(tab="Initialization"));
 
   parameter Real L_lstart(min=0, max=1) =  0.3
     "Start value for the liquid level with respect to the height of the tank,Min=0,Max=1"
     annotation (Dialog(tab="Initialization"));
 
-  parameter Modelica.SIunits.MassFlowRate Mdotnom= 2 "Nominal fluid flow rate"
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom=2 "Nominal fluid flow rate"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom=1
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom=1
     "Nominal Heat transfer coefficient for the fluid";
 
 /********************************* HEAT TRANSFER WITH EXTERNAL AMBIENT ********************************/
@@ -84,27 +83,27 @@ parameter Modelica.SIunits.Temperature Tstart= 100+273.15 "Initial temperature"
   /********** Variables ****************/
   Medium.ThermodynamicState fluidState;
   Medium.AbsolutePressure p(start=pstart);
-  Modelica.SIunits.Volume V_l(stateSelect=StateSelect.never)
+  Modelica.Units.SI.Volume V_l(stateSelect=StateSelect.never)
     "Volume of the liquid";
-  Modelica.SIunits.Area A_l "Lateral area of the tank occupied by the fluid";
+  Modelica.Units.SI.Area A_l "Lateral area of the tank occupied by the fluid";
   Real L_l(stateSelect=StateSelect.prefer, start=L_lstart)
     "Height of the liquid with respect to tank height";
-  Modelica.SIunits.Mass M_l(start=Medium.density_pTX(
-              pstart,
-              Tstart,
-              fill(0, 0))*V_tank*L_lstart) "Liquid Mass";
+  Modelica.Units.SI.Mass M_l(start=Medium.density_pTX(
+        pstart,
+        Tstart,
+        fill(0, 0))*V_tank*L_lstart) "Liquid Mass";
   Medium.SpecificEnthalpy h(start=hstart) "Fluid specific enthalpy";
-  Modelica.SIunits.SpecificEnthalpy h_su(start=hstart)
+  Modelica.Units.SI.SpecificEnthalpy h_su(start=hstart)
     "Enthalpy state variable at inlet node";
- Modelica.SIunits.SpecificEnthalpy h_ex(start=hstart)
+  Modelica.Units.SI.SpecificEnthalpy h_ex(start=hstart)
     "Enthalpy state variable at outlet node";
   Medium.Density rho "Fluid density";
   Medium.Temperature T "Fluid temperature";
-  Modelica.SIunits.MassFlowRate M_dot_su(start=Mdotnom);
-  Modelica.SIunits.MassFlowRate M_dot_ex(start=Mdotnom);
-  Modelica.SIunits.DerDensityByEnthalpy drdh
+  Modelica.Units.SI.MassFlowRate M_dot_su(start=Mdotnom);
+  Modelica.Units.SI.MassFlowRate M_dot_ex(start=Mdotnom);
+  Modelica.Units.SI.DerDensityByEnthalpy drdh
     "Derivative of average density by enthalpy";
-  Modelica.SIunits.HeatFlux qdot "heat flux with the external ambient";
+  Modelica.Units.SI.HeatFlux qdot "heat flux with the external ambient";
   Real dMdt;
 
 equation
