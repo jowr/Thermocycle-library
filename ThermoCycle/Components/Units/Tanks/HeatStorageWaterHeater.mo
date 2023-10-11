@@ -7,10 +7,10 @@ package HeatStorageWaterHeater
                                                  constrainedby
       Modelica.Media.Interfaces.PartialMedium "Main fluid"   annotation (choicesAllMatching = true);
 
-    parameter Modelica.SIunits.Length htot=1 "Total height of the tank";
-    parameter Modelica.SIunits.Length h1=0.3
+    parameter Modelica.Units.SI.Length htot=1 "Total height of the tank";
+    parameter Modelica.Units.SI.Length h1=0.3
       "Height of the bottom of the heat exchanger";
-    parameter Modelica.SIunits.Length h2=0.6
+    parameter Modelica.Units.SI.Length h2=0.6
       "Height of the top of the heat exchanger";
 
     parameter Integer N=15 "Total number of cells";
@@ -19,48 +19,58 @@ package HeatStorageWaterHeater
     parameter Integer N2=integer(h2*N/htot)
       "Cell corresponding to the top of the heat exhcanger";
 
-    parameter Modelica.SIunits.Area A_amb=2
-      "Total heat exchange area from the tank to the ambient" annotation(group="Tank");
-    parameter Modelica.SIunits.Area A_hx=1
-      "Total heat exchanger area from in the heat exchanger" annotation(group="Heat exchanger");
-    parameter Modelica.SIunits.Volume V_tank=0.3 "Total capacity of the tank" annotation(group="Tank");
-    parameter Modelica.SIunits.Volume V_hx=0.005
-      "Internal volume of the heat exchanger" annotation(group="Heat exchanger");
-    parameter Modelica.SIunits.MassFlowRate Mdot_nom=0.1
-      "Nominal mass flow rate in the heat exchanger" annotation(group="Heat exchanger");
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer U_amb=1
-      "Heat transfer coefficient between the tank and the ambient" annotation(group="Tank");
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_hx=4000
-      "Nominal heat transfer coefficient in the heat exchanger" annotation(group="Heat exchanger");
+    parameter Modelica.Units.SI.Area A_amb=2
+      "Total heat exchange area from the tank to the ambient"
+      annotation (group="Tank");
+    parameter Modelica.Units.SI.Area A_hx=1
+      "Total heat exchanger area from in the heat exchanger"
+      annotation (group="Heat exchanger");
+    parameter Modelica.Units.SI.Volume V_tank=0.3 "Total capacity of the tank"
+      annotation (group="Tank");
+    parameter Modelica.Units.SI.Volume V_hx=0.005
+      "Internal volume of the heat exchanger"
+      annotation (group="Heat exchanger");
+    parameter Modelica.Units.SI.MassFlowRate Mdot_nom=0.1
+      "Nominal mass flow rate in the heat exchanger"
+      annotation (group="Heat exchanger");
+    parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_amb=1
+      "Heat transfer coefficient between the tank and the ambient"
+      annotation (group="Tank");
+    parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_hx=4000
+      "Nominal heat transfer coefficient in the heat exchanger"
+      annotation (group="Heat exchanger");
 
-  parameter Modelica.SIunits.Mass M_wall_hx= 5
-      "Mass of the metal wall between the two fluids" annotation(group="Heat exchanger");
-  parameter Modelica.SIunits.SpecificHeatCapacity c_wall_hx= 500
-      "Specific heat capacity of metal wall" annotation(group="Heat exchanger");
+    parameter Modelica.Units.SI.Mass M_wall_hx=5
+      "Mass of the metal wall between the two fluids"
+      annotation (group="Heat exchanger");
+    parameter Modelica.Units.SI.SpecificHeatCapacity c_wall_hx=500
+      "Specific heat capacity of metal wall" annotation (group="Heat exchanger");
 
      parameter Boolean FlowReversal = false
       "Allow flow reversal (might complexify the final system of equations)";
-   parameter Modelica.SIunits.Pressure pstart_tank=1E5
-      "Tank pressure start value"      annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.Temperature Tstart_inlet_tank=273.15+10
+    parameter Modelica.Units.SI.Pressure pstart_tank=1E5
+      "Tank pressure start value" annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.Temperature Tstart_inlet_tank=273.15 + 10
       "Tank inlet temperature start value"
-       annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.Temperature Tstart_outlet_tank=273.15+60
+      annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.Temperature Tstart_outlet_tank=273.15 + 60
       "Tank outlet temperature start value"
-       annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.SpecificEnthalpy hstart_tank[N]=linspace(
-          MainFluid.specificEnthalpy_pT(pstart_tank,Tstart_inlet_tank),MainFluid.specificEnthalpy_pT(pstart_tank,Tstart_outlet_tank),
-          N) "Start value of enthalpy vector (initialized by default)" annotation (Dialog(tab="Initialization"));
+      annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.SpecificEnthalpy hstart_tank[N]=linspace(
+          MainFluid.specificEnthalpy_pT(pstart_tank, Tstart_inlet_tank),
+          MainFluid.specificEnthalpy_pT(pstart_tank, Tstart_outlet_tank),
+          N) "Start value of enthalpy vector (initialized by default)"
+      annotation (Dialog(tab="Initialization"));
 
-    parameter Modelica.SIunits.Pressure pstart_hx=1E5
+    parameter Modelica.Units.SI.Pressure pstart_hx=1E5
       "Heat exchanger pressure start value"
-                                       annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.Temperature Tstart_inlet_hx=273.15+70
+      annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.Temperature Tstart_inlet_hx=273.15 + 70
       "Heat exchanger inlet temperature start value"
-       annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.Temperature Tstart_outlet_hx=273.15+50
+      annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.Temperature Tstart_outlet_hx=273.15 + 50
       "Heat exchanger outlet temperature start value"
-       annotation (Dialog(tab="Initialization"));
+      annotation (Dialog(tab="Initialization"));
 
     parameter Boolean steadystate_tank=true
       "if true, sets the derivative of h (working fluids enthalpy in each cell) to zero during Initialization"
@@ -98,11 +108,11 @@ package HeatStorageWaterHeater
   ThermoCycle.Interfaces.HeatTransfer.ThermalPortL Wall_ext
       annotation (Placement(transformation(extent={{-14,48},{16,60}}),
           iconTransformation(extent={{-40,-6},{-34,12}})));
-    ThermoCycle.Interfaces.Fluid.FlangeA MainFluid_su(redeclare package Medium
-        = MainFluid) annotation (Placement(transformation(extent={{-52,-94},{-32,-74}}),
+    ThermoCycle.Interfaces.Fluid.FlangeA MainFluid_su(redeclare package Medium =
+          MainFluid) annotation (Placement(transformation(extent={{-52,-94},{-32,-74}}),
                      iconTransformation(extent={{-42,-84},{-32,-74}})));
-    ThermoCycle.Interfaces.Fluid.FlangeB MainFluid_ex(redeclare package Medium
-        = MainFluid) annotation (Placement(transformation(extent={{-14,72},{6,
+    ThermoCycle.Interfaces.Fluid.FlangeB MainFluid_ex(redeclare package Medium =
+          MainFluid) annotation (Placement(transformation(extent={{-14,72},{6,
               92}}),
           iconTransformation(extent={{-6,80},{6,92}})));
   equation
@@ -178,10 +188,10 @@ package HeatStorageWaterHeater
                                                  constrainedby
       Modelica.Media.Interfaces.PartialMedium "Secondary fluid"  annotation (choicesAllMatching = true);
 
-    parameter Modelica.SIunits.Length htot=1 "Total height of the tank";
-    parameter Modelica.SIunits.Length h1=0.3
+    parameter Modelica.Units.SI.Length htot=1 "Total height of the tank";
+    parameter Modelica.Units.SI.Length h1=0.3
       "Height of the bottom of the heat exchanger";
-    parameter Modelica.SIunits.Length h2=0.6
+    parameter Modelica.Units.SI.Length h2=0.6
       "Height of the top of the heat exchanger";
 
     parameter Integer N=15 "Total number of cells";
@@ -190,47 +200,57 @@ package HeatStorageWaterHeater
     parameter Integer N2=integer(h2*N/htot)
       "Cell corresponding to the top of the heat exhcanger";
 
-    parameter Modelica.SIunits.Area A_amb=2
-      "Total heat exchange area from the tank to the ambient" annotation(group="Tank");
-    parameter Modelica.SIunits.Area A_hx=1
-      "Total heat exchanger area from in the heat exchanger" annotation(group="Heat exchanger");
-    parameter Modelica.SIunits.Volume V_tank=0.3 "Total capacity of the tank" annotation(group="Tank");
-    parameter Modelica.SIunits.Volume V_hx=0.005
-      "Internal volume of the heat exchanger" annotation(group="Heat exchanger");
-    parameter Modelica.SIunits.MassFlowRate Mdot_nom=0.1
-      "Nominal mass flow rate in the heat exchanger" annotation(group="Heat exchanger");
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer U_amb=1
-      "Heat transfer coefficient between the tank and the ambient" annotation(group="Tank");
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_hx=4000
-      "Nominal heat transfer coefficient in the heat exchanger" annotation(group="Heat exchanger");
+    parameter Modelica.Units.SI.Area A_amb=2
+      "Total heat exchange area from the tank to the ambient"
+      annotation (group="Tank");
+    parameter Modelica.Units.SI.Area A_hx=1
+      "Total heat exchanger area from in the heat exchanger"
+      annotation (group="Heat exchanger");
+    parameter Modelica.Units.SI.Volume V_tank=0.3 "Total capacity of the tank"
+      annotation (group="Tank");
+    parameter Modelica.Units.SI.Volume V_hx=0.005
+      "Internal volume of the heat exchanger"
+      annotation (group="Heat exchanger");
+    parameter Modelica.Units.SI.MassFlowRate Mdot_nom=0.1
+      "Nominal mass flow rate in the heat exchanger"
+      annotation (group="Heat exchanger");
+    parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_amb=1
+      "Heat transfer coefficient between the tank and the ambient"
+      annotation (group="Tank");
+    parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_hx=4000
+      "Nominal heat transfer coefficient in the heat exchanger"
+      annotation (group="Heat exchanger");
 
-  parameter Modelica.SIunits.Mass M_wall_hx= 5
-      "Mass of the metal wall between the two fluids" annotation(group="Heat exchanger");
-  parameter Modelica.SIunits.SpecificHeatCapacity c_wall_hx= 500
-      "Specific heat capacity of metal wall" annotation(group="Heat exchanger");
+    parameter Modelica.Units.SI.Mass M_wall_hx=5
+      "Mass of the metal wall between the two fluids"
+      annotation (group="Heat exchanger");
+    parameter Modelica.Units.SI.SpecificHeatCapacity c_wall_hx=500
+      "Specific heat capacity of metal wall" annotation (group="Heat exchanger");
   parameter Boolean FlowReversal = false
       "Allow flow reversal (might complexify the final system of equations)";
-   parameter Modelica.SIunits.Pressure pstart_tank=1E5
-      "Tank pressure start value"      annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.Temperature Tstart_inlet_tank=273.15+10
+    parameter Modelica.Units.SI.Pressure pstart_tank=1E5
+      "Tank pressure start value" annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.Temperature Tstart_inlet_tank=273.15 + 10
       "Tank inlet temperature start value"
-       annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.Temperature Tstart_outlet_tank=273.15+60
+      annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.Temperature Tstart_outlet_tank=273.15 + 60
       "Tank outlet temperature start value"
-       annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.SpecificEnthalpy hstart_tank[N]=linspace(
-          MainFluid.specificEnthalpy_pT(pstart_tank,Tstart_inlet_tank),MainFluid.specificEnthalpy_pT(pstart_tank,Tstart_outlet_tank),
-          N) "Start value of enthalpy vector (initialized by default)" annotation (Dialog(tab="Initialization"));
+      annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.SpecificEnthalpy hstart_tank[N]=linspace(
+          MainFluid.specificEnthalpy_pT(pstart_tank, Tstart_inlet_tank),
+          MainFluid.specificEnthalpy_pT(pstart_tank, Tstart_outlet_tank),
+          N) "Start value of enthalpy vector (initialized by default)"
+      annotation (Dialog(tab="Initialization"));
 
-    parameter Modelica.SIunits.Pressure pstart_hx=1E5
+    parameter Modelica.Units.SI.Pressure pstart_hx=1E5
       "Heat exchanger pressure start value"
-                                       annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.Temperature Tstart_inlet_hx=273.15+70
+      annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.Temperature Tstart_inlet_hx=273.15 + 70
       "Heat exchanger inlet temperature start value"
-       annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.Temperature Tstart_outlet_hx=273.15+50
+      annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.Temperature Tstart_outlet_hx=273.15 + 50
       "Heat exchanger outlet temperature start value"
-       annotation (Dialog(tab="Initialization"));
+      annotation (Dialog(tab="Initialization"));
 
     parameter Boolean steadystate_tank=true
       "if true, sets the derivative of h (working fluids enthalpy in each cell) to zero during Initialization"
@@ -302,15 +322,15 @@ package HeatStorageWaterHeater
   ThermoCycle.Interfaces.HeatTransfer.ThermalPortL Wall_ext
       annotation (Placement(transformation(extent={{-14,48},{16,60}}),
           iconTransformation(extent={{-40,-6},{-34,12}})));
-    ThermoCycle.Interfaces.Fluid.FlangeA MainFluid_su(redeclare package Medium
-        = MainFluid) annotation (Placement(transformation(extent={{-52,-94},{-32,-74}}),
+    ThermoCycle.Interfaces.Fluid.FlangeA MainFluid_su(redeclare package Medium =
+          MainFluid) annotation (Placement(transformation(extent={{-52,-94},{-32,-74}}),
                      iconTransformation(extent={{-42,-84},{-32,-74}})));
     ThermoCycle.Interfaces.Fluid.FlangeB SecondaryFluid_ex(redeclare package
         Medium = SecondaryFluid)
                      annotation (Placement(transformation(extent={{-64,-76},{-44,-56}}),
           iconTransformation(extent={{34,-36},{46,-24}})));
-    ThermoCycle.Interfaces.Fluid.FlangeB MainFluid_ex(redeclare package Medium
-        = MainFluid) annotation (Placement(transformation(extent={{-14,72},{6,
+    ThermoCycle.Interfaces.Fluid.FlangeB MainFluid_ex(redeclare package Medium =
+          MainFluid) annotation (Placement(transformation(extent={{-14,72},{6,
               92}}),
           iconTransformation(extent={{-6,80},{6,92}})));
     ThermoCycle.Interfaces.Fluid.FlangeA SecondaryFluid_su(redeclare package
@@ -445,17 +465,17 @@ package HeatStorageWaterHeater
 
     /************ Geometric characteristics **************/
     constant Real pi=Modelica.Constants.pi "pi-greco";
-    parameter Modelica.SIunits.Volume Vi "Volume of a single cell";
-    parameter Modelica.SIunits.Area Ai "Lateral surface of a single cell";
-    parameter Modelica.SIunits.MassFlowRate Mdotnom "Nominal fluid flow rate";
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom;
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_hx
+    parameter Modelica.Units.SI.Volume Vi "Volume of a single cell";
+    parameter Modelica.Units.SI.Area Ai "Lateral surface of a single cell";
+    parameter Modelica.Units.SI.MassFlowRate Mdotnom "Nominal fluid flow rate";
+    parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom;
+    parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_hx
       "Nominal Heat transfer coefficient ";
 
-    parameter Modelica.SIunits.Area A_hx;
+    parameter Modelica.Units.SI.Area A_hx;
 
     /************ FLUID INITIAL VALUES ***************/
-    parameter Modelica.SIunits.Pressure pstart "Fluid pressure start value"
+    parameter Modelica.Units.SI.Pressure pstart "Fluid pressure start value"
       annotation (Dialog(tab="Initialization"));
     parameter Medium.SpecificEnthalpy hstart=1E5 "Start value of enthalpy"
       annotation (Dialog(tab="Initialization"));
@@ -505,24 +525,24 @@ package HeatStorageWaterHeater
     /***************  VARIABLES ******************/
     Medium.ThermodynamicState fluidState;
     Medium.AbsolutePressure p(start=pstart);
-    Modelica.SIunits.MassFlowRate M_dot(start=Mdotnom);
+    Modelica.Units.SI.MassFlowRate M_dot(start=Mdotnom);
     Medium.SpecificEnthalpy h(start=hstart, stateSelect=StateSelect.always)
       "Fluid specific enthalpy at the cells";
     Medium.Temperature T "Fluid temperature";
     //Modelica.SIunits.Temperature T_wall "Internal wall temperature";
     Medium.Density rho "Fluid cell density";
-    Modelica.SIunits.SpecificEnthalpy hnode_su(start=hstart)
+    Modelica.Units.SI.SpecificEnthalpy hnode_su(start=hstart)
       "Enthalpy state variable at inlet node";
-    Modelica.SIunits.SpecificEnthalpy hnode_ex(start=hstart)
+    Modelica.Units.SI.SpecificEnthalpy hnode_ex(start=hstart)
       "Enthalpy state variable at outlet node";
-    Modelica.SIunits.HeatFlux qdot "heat flux at each cell";
+    Modelica.Units.SI.HeatFlux qdot "heat flux at each cell";
     //   Modelica.SIunits.CoefficientOfHeatTransfer U
     //     "Heat transfer coefficient between wall and working fluid";
-    Modelica.SIunits.Power Q_tot
+    Modelica.Units.SI.Power Q_tot
       "Total heat flux exchanged by the thermal port";
-    Modelica.SIunits.Mass M_tot "Total mass of the fluid in the component";
+    Modelica.Units.SI.Mass M_tot "Total mass of the fluid in the component";
 
-    Modelica.SIunits.HeatFlux qdot_hx;
+    Modelica.Units.SI.HeatFlux qdot_hx;
 
     /***********************************  EQUATIONS ************************************/
 
@@ -720,12 +740,12 @@ package HeatStorageWaterHeater
                                                  constrainedby
       Modelica.Media.Interfaces.PartialMedium "Secondary fluid"  annotation (choicesAllMatching = true);
 
-    parameter Modelica.SIunits.Length htot=1 "Total height of the tank";
-    parameter Modelica.SIunits.Length h1=0.3
+    parameter Modelica.Units.SI.Length htot=1 "Total height of the tank";
+    parameter Modelica.Units.SI.Length h1=0.3
       "Height of the bottom of the heat exchanger";
-    parameter Modelica.SIunits.Length h2=0.6
+    parameter Modelica.Units.SI.Length h2=0.6
       "Height of the top of the heat exchanger";
-    parameter Modelica.SIunits.Length h_T = 0.7
+    parameter Modelica.Units.SI.Length h_T=0.7
       "Height of the temperature sensor";
 
     parameter Integer N=15 "Total number of cells";
@@ -736,49 +756,59 @@ package HeatStorageWaterHeater
     parameter Integer N_T = integer(h_T*N/htot)
       "Cell corresponding to the tempearture sensor";
 
-    parameter Modelica.SIunits.Area A_amb=2
-      "Total heat exchange area from the tank to the ambient" annotation(group="Tank");
-    parameter Modelica.SIunits.Area A_hx=1
-      "Total heat exchanger area from in the heat exchanger" annotation(group="Heat exchanger");
-    parameter Modelica.SIunits.Volume V_tank=0.3 "Total capacity of the tank" annotation(group="Tank");
-    parameter Modelica.SIunits.Volume V_hx=0.005
-      "Internal volume of the heat exchanger" annotation(group="Heat exchanger");
-    parameter Modelica.SIunits.MassFlowRate Mdot_nom=0.1
-      "Nominal mass flow rate in the heat exchanger" annotation(group="Heat exchanger");
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer U_amb=1
-      "Heat transfer coefficient between the tank and the ambient" annotation(group="Tank");
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_hx=4000
-      "Nominal heat transfer coefficient in the heat exchanger" annotation(group="Heat exchanger");
+    parameter Modelica.Units.SI.Area A_amb=2
+      "Total heat exchange area from the tank to the ambient"
+      annotation (group="Tank");
+    parameter Modelica.Units.SI.Area A_hx=1
+      "Total heat exchanger area from in the heat exchanger"
+      annotation (group="Heat exchanger");
+    parameter Modelica.Units.SI.Volume V_tank=0.3 "Total capacity of the tank"
+      annotation (group="Tank");
+    parameter Modelica.Units.SI.Volume V_hx=0.005
+      "Internal volume of the heat exchanger"
+      annotation (group="Heat exchanger");
+    parameter Modelica.Units.SI.MassFlowRate Mdot_nom=0.1
+      "Nominal mass flow rate in the heat exchanger"
+      annotation (group="Heat exchanger");
+    parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_amb=1
+      "Heat transfer coefficient between the tank and the ambient"
+      annotation (group="Tank");
+    parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_hx=4000
+      "Nominal heat transfer coefficient in the heat exchanger"
+      annotation (group="Heat exchanger");
 
-  parameter Modelica.SIunits.Mass M_wall_hx= 5
-      "Mass of the metal wall between the two fluids" annotation(group="Heat exchanger");
-  parameter Modelica.SIunits.SpecificHeatCapacity c_wall_hx= 500
-      "Specific heat capacity of metal wall" annotation(group="Heat exchanger");
-   parameter Modelica.SIunits.Power Wdot_res=3000
+    parameter Modelica.Units.SI.Mass M_wall_hx=5
+      "Mass of the metal wall between the two fluids"
+      annotation (group="Heat exchanger");
+    parameter Modelica.Units.SI.SpecificHeatCapacity c_wall_hx=500
+      "Specific heat capacity of metal wall" annotation (group="Heat exchanger");
+    parameter Modelica.Units.SI.Power Wdot_res=3000
       "Nominal power of the electrical resistance";
-   parameter Modelica.SIunits.Temperature Tmax = 273.15+90;
+    parameter Modelica.Units.SI.Temperature Tmax=273.15 + 90;
 
-   parameter Modelica.SIunits.Pressure pstart_tank=1E5
-      "Tank pressure start value"      annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.Temperature Tstart_inlet_tank=273.15+10
+    parameter Modelica.Units.SI.Pressure pstart_tank=1E5
+      "Tank pressure start value" annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.Temperature Tstart_inlet_tank=273.15 + 10
       "Tank inlet temperature start value"
-       annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.Temperature Tstart_outlet_tank=273.15+60
+      annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.Temperature Tstart_outlet_tank=273.15 + 60
       "Tank outlet temperature start value"
-       annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.SpecificEnthalpy hstart_tank[N]=linspace(
-          MainFluid.specificEnthalpy_pT(pstart_tank,Tstart_inlet_tank),MainFluid.specificEnthalpy_pT(pstart_tank,Tstart_outlet_tank),
-          N) "Start value of enthalpy vector (initialized by default)" annotation (Dialog(tab="Initialization"));
+      annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.SpecificEnthalpy hstart_tank[N]=linspace(
+          MainFluid.specificEnthalpy_pT(pstart_tank, Tstart_inlet_tank),
+          MainFluid.specificEnthalpy_pT(pstart_tank, Tstart_outlet_tank),
+          N) "Start value of enthalpy vector (initialized by default)"
+      annotation (Dialog(tab="Initialization"));
 
-    parameter Modelica.SIunits.Pressure pstart_hx=1E5
+    parameter Modelica.Units.SI.Pressure pstart_hx=1E5
       "Heat exchanger pressure start value"
-                                       annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.Temperature Tstart_inlet_hx=273.15+70
+      annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.Temperature Tstart_inlet_hx=273.15 + 70
       "Heat exchanger inlet temperature start value"
-       annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.Temperature Tstart_outlet_hx=273.15+50
+      annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.Temperature Tstart_outlet_hx=273.15 + 50
       "Heat exchanger outlet temperature start value"
-       annotation (Dialog(tab="Initialization"));
+      annotation (Dialog(tab="Initialization"));
 
     parameter Boolean steadystate_tank=true
       "if true, sets the derivative of h (working fluids enthalpy in each cell) to zero during Initialization"
@@ -850,15 +880,15 @@ package HeatStorageWaterHeater
   ThermoCycle.Interfaces.HeatTransfer.ThermalPortL Wall_ext
       annotation (Placement(transformation(extent={{-14,48},{16,60}}),
           iconTransformation(extent={{-40,-6},{-34,12}})));
-    ThermoCycle.Interfaces.Fluid.FlangeA MainFluid_su(redeclare package Medium
-        = MainFluid) annotation (Placement(transformation(extent={{-52,-94},{-32,-74}}),
+    ThermoCycle.Interfaces.Fluid.FlangeA MainFluid_su(redeclare package Medium =
+          MainFluid) annotation (Placement(transformation(extent={{-52,-94},{-32,-74}}),
                      iconTransformation(extent={{-42,-84},{-32,-74}})));
     ThermoCycle.Interfaces.Fluid.FlangeB SecondaryFluid_ex(redeclare package
         Medium = SecondaryFluid)
                      annotation (Placement(transformation(extent={{-64,-76},{-44,-56}}),
           iconTransformation(extent={{34,-36},{46,-24}})));
-    ThermoCycle.Interfaces.Fluid.FlangeB MainFluid_ex(redeclare package Medium
-        = MainFluid) annotation (Placement(transformation(extent={{-14,72},{6,
+    ThermoCycle.Interfaces.Fluid.FlangeB MainFluid_ex(redeclare package Medium =
+          MainFluid) annotation (Placement(transformation(extent={{-14,72},{6,
               92}}),
           iconTransformation(extent={{-6,80},{6,92}})));
     ThermoCycle.Interfaces.Fluid.FlangeA SecondaryFluid_su(redeclare package

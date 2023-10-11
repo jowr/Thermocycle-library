@@ -19,10 +19,10 @@ ThermoCycle.Interfaces.HeatTransfer.ThermalPortL Wall_ext
 
   constant Real pi = Modelica.Constants.pi "pi-greco";
   parameter Integer Nt(min=1) = 1 "Number of cells in parallel";
-  parameter Modelica.SIunits.Volume Vi "Volume of a single cell";
-  parameter Modelica.SIunits.Area Ai "Lateral surface of a single cell";
-  parameter Modelica.SIunits.MassFlowRate Mdotnom "Nominal fluid flow rate";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom
+  parameter Modelica.Units.SI.Volume Vi "Volume of a single cell";
+  parameter Modelica.Units.SI.Area Ai "Lateral surface of a single cell";
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom "Nominal fluid flow rate";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom
     "Constant heat transfer coefficient";
 
   parameter Medium.Temperature T_start=273.15+25 annotation (tab="Numerical options");
@@ -44,13 +44,13 @@ final FluidState={fluidState})
    annotation (Placement(transformation(extent={{-8,-16},{12,4}})));
 /********************* VARIABLES *********************/
   Medium.ThermodynamicState  fluidState;
-  Modelica.SIunits.MassFlowRate Mdot;
+  Modelica.Units.SI.MassFlowRate Mdot;
   Medium.SpecificEnthalpy h(start=Medium.specificEnthalpy(Medium.setState_pT(1E5,T_start)))
     "Average fluid enthalpy";
   Medium.Density rho "Average fluid cell density";
-  Modelica.SIunits.HeatFlux qdot "heat flux at each cell";
-  Modelica.SIunits.Power Q_tot "Total heat flux exchanged by the thermal port";
-  Modelica.SIunits.Mass M_tot "Total mass of the fluid in the component";
+  Modelica.Units.SI.HeatFlux qdot "heat flux at each cell";
+  Modelica.Units.SI.Power Q_tot "Total heat flux exchanged by the thermal port";
+  Modelica.Units.SI.Mass M_tot "Total mass of the fluid in the component";
 equation
   /* Fluid Properties */
   h = (OutFlow.h_outflow + inStream(InFlow.h_outflow))/2;

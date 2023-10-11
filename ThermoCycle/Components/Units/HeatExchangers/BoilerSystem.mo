@@ -14,14 +14,14 @@ replaceable package Medium_sf =
    replaceable Arrays T_profile;
    record Arrays
      parameter Integer n=6;
-     Modelica.SIunits.Power[n] Xaxis;
-     Modelica.SIunits.Temperature[n] Tsf;
-     Modelica.SIunits.Temperature[n] Twall_eco;
-     Modelica.SIunits.Temperature[n] Twall_eva;
-     Modelica.SIunits.Temperature[n] Twall_sh1;
-     Modelica.SIunits.Temperature[n] Twall_sh2;
-     Modelica.SIunits.Temperature[n] Twf_1;
-     Modelica.SIunits.Temperature[n] Twf_2;
+      Modelica.Units.SI.Power[n] Xaxis;
+      Modelica.Units.SI.Temperature[n] Tsf;
+      Modelica.Units.SI.Temperature[n] Twall_eco;
+      Modelica.Units.SI.Temperature[n] Twall_eva;
+      Modelica.Units.SI.Temperature[n] Twall_sh1;
+      Modelica.Units.SI.Temperature[n] Twall_sh2;
+      Modelica.Units.SI.Temperature[n] Twf_1;
+      Modelica.Units.SI.Temperature[n] Twf_2;
    end Arrays;
      Real p;
      Real level;
@@ -76,18 +76,20 @@ parameter Medium_wf.Temperature T_w_ex_start = 273.15 + 390
     "Medium_wf outlet temperature"                                                     annotation(Dialog(tab="Initialization"));
 parameter Medium_wf.Temperature T_w_su_SH2_start= 273.15 + 320
     "Medium_wf temperature after the first superheater"                                                        annotation(Dialog(tab="Initialization"));
-parameter Modelica.SIunits.ThermodynamicTemperature pinch_start(displayUnit="K")=15
-    "Pinch point temperature difference"                                                                                annotation(Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.ThermodynamicTemperature pinch_start(displayUnit=
+        "K") = 15 "Pinch point temperature difference"
+    annotation (Dialog(tab="Initialization"));
 
-parameter Modelica.SIunits.ThermodynamicTemperature DELTAT_approach(displayUnit="K")=10
-    "Approach temperature difference between the economizer and the drum"                                                                                     annotation(Dialog(tab="Initialization"));
-parameter Real x_ex_ev_nom=0.32 "Vapor quality at the outlet of the evaporator"
-                                                                                  annotation(Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.ThermodynamicTemperature DELTAT_approach(
+      displayUnit="K") = 10
+    "Approach temperature difference between the economizer and the drum"
+    annotation (Dialog(tab="Initialization"));
+parameter Real x_ex_ev_nom=0.32 "Vapor quality at the outlet of the evaporator"   annotation(Dialog(tab="Initialization"));
 parameter Medium_sf.Temperature T_sf_su_start=273.15+400
     "Secondary fluid inlet temperature"                                                      annotation(Dialog(tab="Initialization"));
 
  /***************  VARIABLES ******************/
-    Modelica.SIunits.Power Q_dot_tot "Boiler's power";
+  Modelica.Units.SI.Power Q_dot_tot "Boiler's power";
 
 ThermoCycle.Components.Units.HeatExchangers.HX_twophase_pT EVA(
     redeclare package Medium_iso = Medium_wf,

@@ -5,7 +5,7 @@ replaceable package Medium = ThermoCycle.Media.DummyFluid
                                           constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium Model"                                                     annotation (choicesAllMatching = true);
 
-Modelica.SIunits.MassFlowRate M_dot "Exhaust mass flow rate";
+  Modelica.Units.SI.MassFlowRate M_dot "Exhaust mass flow rate";
 
   ThermoCycle.Interfaces.Fluid.FlangeA InFlow(redeclare package Medium = Medium,
       m_flow(min=0))

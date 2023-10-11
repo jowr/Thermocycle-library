@@ -31,17 +31,16 @@ ThermoCycle.Components.FluidFlow.Pipes.Flow1Dim_MD  flow1Dim(
     offset=0.3335,
     amplitude=0.5,
     phase=0,
-    freqHz=0.1)
-    annotation (Placement(transformation(extent={{-116,50},{-102,64}})));
+    f=0.1) annotation (Placement(transformation(extent={{-116,50},{-102,64}})));
   Components.HeatFlow.Sources.Source_T             source_T(N=N)
     annotation (Placement(transformation(extent={{-20,52},{14,74}})));
   Modelica.Blocks.Sources.Constant const(k=273.15 + 140)
     annotation (Placement(transformation(extent={{-52,74},{-44,82}})));
-  Components.FluidFlow.Sensors.SensTpSat T_su_Sensor(redeclare package Medium
-      = ThermoCycle.Media.SES36_CP)
+  Components.FluidFlow.Sensors.SensTpSat T_su_Sensor(redeclare package Medium =
+        ThermoCycle.Media.SES36_CP)
     annotation (Placement(transformation(extent={{-60,12},{-40,32}})));
-  Components.FluidFlow.Sensors.SensTpSat T_ex_Sensor(redeclare package Medium
-      = ThermoCycle.Media.SES36_CP)
+  Components.FluidFlow.Sensors.SensTpSat T_ex_Sensor(redeclare package Medium =
+        ThermoCycle.Media.SES36_CP)
     annotation (Placement(transformation(extent={{18,16},{38,36}})));
 equation
   connect(sine.y, sourceMdot1.in_Mdot) annotation (Line(

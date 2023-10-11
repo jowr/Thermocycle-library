@@ -21,18 +21,18 @@ ThermoCycle.Interfaces.HeatTransfer.ThermalPortL  Wall_int
         iconTransformation(extent={{-40,40},{40,60}})));
 // Geometric characteristics
   constant Real pi = Modelica.Constants.pi "pi-greco";
-  parameter Modelica.SIunits.Volume Vi "Volume of a single cell";
-  parameter Modelica.SIunits.Area Ai "Lateral surface of a single cell";
-  parameter Modelica.SIunits.MassFlowRate Mdotnom "Nominal fluid flow rate";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_l
+  parameter Modelica.Units.SI.Volume Vi "Volume of a single cell";
+  parameter Modelica.Units.SI.Area Ai "Lateral surface of a single cell";
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom "Nominal fluid flow rate";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_l
     "if HTtype = LiqVap : Heat transfer coefficient, liquid zone ";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_tp
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_tp
     "if HTtype = LiqVap : heat transfer coefficient, two-phase zone";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_v
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_v
     "if HTtype = LiqVap : heat transfer coefficient, vapor zone";
  /* FLUID INITIAL VALUES */
-parameter Modelica.SIunits.Pressure pstart "Fluid pressure start value"
-                                     annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure pstart "Fluid pressure start value"
+    annotation (Dialog(tab="Initialization"));
   parameter Medium.Temperature Tstart "Inlet temperature start value"
      annotation (Dialog(tab="Initialization"));
   parameter Medium.SpecificEnthalpy hstart=Medium.specificEnthalpy_pT(pstart,Tstart)
@@ -53,7 +53,7 @@ parameter Modelica.SIunits.Pressure pstart "Fluid pressure start value"
     annotation (Dialog(tab="Numerical options"));
   parameter Real max_drhodt=100 "Maximum value for the density derivative"
     annotation (Dialog(enable=filter_dMdt, tab="Numerical options"));
-  parameter Modelica.SIunits.Time TT=1
+  parameter Modelica.Units.SI.Time TT=1
     "Integration time of the first-order filter"
     annotation (Dialog(enable=max_der, tab="Numerical options"));
 //enable=filter_dMdt,enable=max_der,
@@ -65,30 +65,30 @@ parameter Modelica.SIunits.Pressure pstart "Fluid pressure start value"
   Medium.SaturationProperties sat;
   //Medium.Temperature T_sat "Saturation temperature";
   Medium.AbsolutePressure p(start=pstart);
-  Modelica.SIunits.MassFlowRate M_dot_su(start=Mdotnom, min=0);
-  Modelica.SIunits.MassFlowRate M_dot_ex(start=Mdotnom, min=0);
+  Modelica.Units.SI.MassFlowRate M_dot_su(start=Mdotnom, min=0);
+  Modelica.Units.SI.MassFlowRate M_dot_ex(start=Mdotnom, min=0);
   Medium.SpecificEnthalpy h(start=hstart)
     "Fluid specific enthalpy at the cells";
   Medium.Temperature T;//(start=Tstart) "Fluid temperature";
-  Modelica.SIunits.Temperature T_wall "Internal wall temperature";
+  Modelica.Units.SI.Temperature T_wall "Internal wall temperature";
   Medium.Density rho "Fluid cell density";
-  Modelica.SIunits.DerDensityByEnthalpy drdh
+  Modelica.Units.SI.DerDensityByEnthalpy drdh
     "Derivative of density by enthalpy";
-  Modelica.SIunits.DerDensityByPressure drdp
+  Modelica.Units.SI.DerDensityByPressure drdp
     "Derivative of density by pressure";
-  Modelica.SIunits.SpecificEnthalpy hnode_su
+  Modelica.Units.SI.SpecificEnthalpy hnode_su
     "Enthalpy state variable at inlet node";
-  Modelica.SIunits.SpecificEnthalpy hnode_ex
+  Modelica.Units.SI.SpecificEnthalpy hnode_ex
     "Enthalpy state variable at outlet node";
   Real dMdt "Time derivative of mass in cell";
-  Modelica.SIunits.HeatFlux qdot "heat flux at each cell";
-  Modelica.SIunits.CoefficientOfHeatTransfer U
+  Modelica.Units.SI.HeatFlux qdot "heat flux at each cell";
+  Modelica.Units.SI.CoefficientOfHeatTransfer U
     "Heat transfer coefficient between wall and working fluid";
   Real x "Vapor quality";
-  Modelica.SIunits.SpecificEnthalpy h_l;
-  Modelica.SIunits.SpecificEnthalpy h_v;
-  Modelica.SIunits.Power Q_tot "Total heat flux exchanged by the thermal port";
-  Modelica.SIunits.Mass M_tot "Total mass of the fluid in the component";
+  Modelica.Units.SI.SpecificEnthalpy h_l;
+  Modelica.Units.SI.SpecificEnthalpy h_v;
+  Modelica.Units.SI.Power Q_tot "Total heat flux exchanged by the thermal port";
+  Modelica.Units.SI.Mass M_tot "Total mass of the fluid in the component";
 equation
   //Saturation
   sat = Medium.setSat_p(p);

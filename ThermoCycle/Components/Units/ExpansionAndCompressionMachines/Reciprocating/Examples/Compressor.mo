@@ -116,11 +116,11 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   connect(suctionValve.port_b, cylinder.ports[1])   annotation (Line(
-      points={{-10,0},{0,0},{0,-10},{-2,-10}},
+      points={{-10,0},{0,0},{0,-10},{-1,-10}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(exhaustValve.port_a, cylinder.ports[2]) annotation (Line(
-      points={{10,0},{0,0},{0,-10},{2,-10}},
+      points={{10,0},{0,0},{0,-10},{1,-10}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(angleSensor.phi, cylinder.angle_in) annotation (Line(

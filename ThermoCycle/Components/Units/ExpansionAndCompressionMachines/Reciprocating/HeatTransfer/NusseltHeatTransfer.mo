@@ -2,9 +2,9 @@ within ThermoCycle.Components.Units.ExpansionAndCompressionMachines.Reciprocatin
 model NusseltHeatTransfer "Recip heat transfer with constant Nusselt number"
   extends
     ThermoCycle.Components.Units.ExpansionAndCompressionMachines.Reciprocating.BaseClasses.PartialCylinderHeatTransfer;
-  parameter Modelica.SIunits.NusseltNumber Nu0 "constant Nusselt number";
-  parameter Modelica.SIunits.Length Gamma0(min=0) "Characteristic length";
-  Modelica.SIunits.ThermalConductivity[n] lambda;
+  parameter Modelica.Units.SI.NusseltNumber Nu0 "constant Nusselt number";
+  parameter Modelica.Units.SI.Length Gamma0(min=0) "Characteristic length";
+  Modelica.Units.SI.ThermalConductivity[n] lambda;
 equation
   for i in 1:n loop
     lambda[i]  = Medium.thermalConductivity(states[i]);

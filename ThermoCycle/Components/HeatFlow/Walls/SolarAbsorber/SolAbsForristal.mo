@@ -58,42 +58,64 @@ Real Eps_t[N] "Coating emissivity  funzione della temperature Forristal pag 18";
 /***********************General Geometries***********************/
 parameter Integer N = 2 "number of cells";
 parameter Integer Nt = 1 "number of tubes";
-parameter Modelica.SIunits.Length L "length of tubes";
-parameter Modelica.SIunits.Length A_P "Aperture of the parabola";
+  parameter Modelica.Units.SI.Length L "length of tubes";
+  parameter Modelica.Units.SI.Length A_P "Aperture of the parabola";
 
 /*********************** Geometries&Properties of the glass ***********************/
-parameter Modelica.SIunits.Length Dext_g = 0.12 "External glass diameter" annotation (Dialog(group="GeometriesAndProperties of the glass envelope", tab="General"));  //if PTR then 0.12 elseif UVAC then 0.115 else 0.115
-parameter Modelica.SIunits.Length th_g = 0.0025 "Glass thickness" annotation (Dialog(group="GeometriesAndProperties of the glass envelope", tab="General")); //if PTR then 0.0025 elseif UVAC then 0.003 else 0.003
-final parameter Modelica.SIunits.Length rext_g = Dext_g/2
-    " External Radius Glass" annotation (Dialog(group="GeometriesAndProperties of the glass envelope", tab="General"));
-final parameter Modelica.SIunits.Length rint_g= rext_g-th_g
-    "Internal Radius Glass" annotation (Dialog(group="GeometriesAndProperties of the glass envelope", tab="General"));
-parameter Modelica.SIunits.Density rho_g "Glass density" annotation (Dialog(group="GeometriesAndProperties of the glass envelope", tab="General"));
-parameter Modelica.SIunits.SpecificHeatCapacity Cp_g
-    "Specific heat capacity of the glass" annotation (Dialog(group="GeometriesAndProperties of the glass envelope", tab="General"));
-parameter Modelica.SIunits.ThermalConductivity lambda_g
-    "Thermal conductivity of the glass" annotation (Dialog(group="GeometriesAndProperties of the glass envelope", tab="General"));
+  parameter Modelica.Units.SI.Length Dext_g=0.12 "External glass diameter"
+    annotation (Dialog(group="GeometriesAndProperties of the glass envelope",
+        tab="General"));                                                                                                                                              //if PTR then 0.12 elseif UVAC then 0.115 else 0.115
+  parameter Modelica.Units.SI.Length th_g=0.0025 "Glass thickness" annotation (
+      Dialog(group="GeometriesAndProperties of the glass envelope", tab=
+          "General"));                                                                                                                                       //if PTR then 0.0025 elseif UVAC then 0.003 else 0.003
+  final parameter Modelica.Units.SI.Length rext_g=Dext_g/2
+    " External Radius Glass" annotation (Dialog(group=
+          "GeometriesAndProperties of the glass envelope", tab="General"));
+  final parameter Modelica.Units.SI.Length rint_g=rext_g - th_g
+    "Internal Radius Glass" annotation (Dialog(group=
+          "GeometriesAndProperties of the glass envelope", tab="General"));
+  parameter Modelica.Units.SI.Density rho_g "Glass density" annotation (Dialog(
+        group="GeometriesAndProperties of the glass envelope", tab="General"));
+  parameter Modelica.Units.SI.SpecificHeatCapacity Cp_g
+    "Specific heat capacity of the glass" annotation (Dialog(group=
+          "GeometriesAndProperties of the glass envelope", tab="General"));
+  parameter Modelica.Units.SI.ThermalConductivity lambda_g
+    "Thermal conductivity of the glass" annotation (Dialog(group=
+          "GeometriesAndProperties of the glass envelope", tab="General"));
 
 /***********************Geometries&Properties of the tube***********************/
-parameter Modelica.SIunits.Length Dext_t = 0.07 "External diameter tube" annotation (Dialog(group="GeometriesAndProperties of the metal envelope", tab="General"));//if PTR then 0.07 elseif UVAC then 0.056 else 0.056
-parameter Modelica.SIunits.Length th_t= 0.002 "tube thickness" annotation (Dialog(group="GeometriesAndProperties of the metal envelope", tab="General")); //if PTR then 0.002 elseif UVAC then 0.003 else 0.003
-final parameter Modelica.SIunits.Length rext_t = Dext_t/2
-    " External Radius Glass" annotation (Dialog(group="GeometriesAndProperties of the metal envelope", tab="General"));
-final parameter Modelica.SIunits.Length rint_t= rext_t-th_t
-    "Internal Radius Glass" annotation (Dialog(group="GeometriesAndProperties of the metal envelope", tab="General"));
-parameter Modelica.SIunits.Density rho_t "tube density" annotation (Dialog(group="GeometriesAndProperties of the metal envelope", tab="General"));
-parameter Modelica.SIunits.SpecificHeatCapacity Cp_t
-    "Specific heat capacity of the tube" annotation (Dialog(group="GeometriesAndProperties of the metal envelope", tab="General"));
-parameter Modelica.SIunits.ThermalConductivity lambda_t
-    "Thermal conductivity of the tube" annotation (Dialog(group="GeometriesAndProperties of the metal envelope", tab="General"));
+  parameter Modelica.Units.SI.Length Dext_t=0.07 "External diameter tube"
+    annotation (Dialog(group="GeometriesAndProperties of the metal envelope",
+        tab="General"));                                                                                                                                           //if PTR then 0.07 elseif UVAC then 0.056 else 0.056
+  parameter Modelica.Units.SI.Length th_t=0.002 "tube thickness" annotation (
+      Dialog(group="GeometriesAndProperties of the metal envelope", tab=
+          "General"));                                                                                                                                    //if PTR then 0.002 elseif UVAC then 0.003 else 0.003
+  final parameter Modelica.Units.SI.Length rext_t=Dext_t/2
+    " External Radius Glass" annotation (Dialog(group=
+          "GeometriesAndProperties of the metal envelope", tab="General"));
+  final parameter Modelica.Units.SI.Length rint_t=rext_t - th_t
+    "Internal Radius Glass" annotation (Dialog(group=
+          "GeometriesAndProperties of the metal envelope", tab="General"));
+  parameter Modelica.Units.SI.Density rho_t "tube density" annotation (Dialog(
+        group="GeometriesAndProperties of the metal envelope", tab="General"));
+  parameter Modelica.Units.SI.SpecificHeatCapacity Cp_t
+    "Specific heat capacity of the tube" annotation (Dialog(group=
+          "GeometriesAndProperties of the metal envelope", tab="General"));
+  parameter Modelica.Units.SI.ThermalConductivity lambda_t
+    "Thermal conductivity of the tube" annotation (Dialog(group=
+          "GeometriesAndProperties of the metal envelope", tab="General"));
 
 /*********************** ATMOSPHERIC PROPERTIES ***********************/
-parameter Modelica.SIunits.Pressure Patm "Atmospheric pressure" annotation (Dialog(group="Atmospheric characteristic", tab="General"));
-parameter Modelica.SIunits.ThermalConductivity k_air = 0.025574811
-    "Thermal conductivity of air at constant pressure" annotation (Dialog(group="Atmospheric characteristic", tab="General"));
-parameter Modelica.SIunits.Density rho_air = 1.183650626 "Density of air" annotation (Dialog(group="Atmospheric characteristic", tab="General"));
-parameter Modelica.SIunits.DynamicViscosity mu_air = 1.83055E-05
-    "Dynamic viscosity of air at glass temperature" annotation (Dialog(group="Atmospheric characteristic", tab="General"));
+  parameter Modelica.Units.SI.Pressure Patm "Atmospheric pressure"
+    annotation (Dialog(group="Atmospheric characteristic", tab="General"));
+  parameter Modelica.Units.SI.ThermalConductivity k_air=0.025574811
+    "Thermal conductivity of air at constant pressure"
+    annotation (Dialog(group="Atmospheric characteristic", tab="General"));
+  parameter Modelica.Units.SI.Density rho_air=1.183650626 "Density of air"
+    annotation (Dialog(group="Atmospheric characteristic", tab="General"));
+  parameter Modelica.Units.SI.DynamicViscosity mu_air=1.83055E-05
+    "Dynamic viscosity of air at glass temperature"
+    annotation (Dialog(group="Atmospheric characteristic", tab="General"));
 Real C = if Re < 40 then
   0.75
  else
@@ -123,86 +145,97 @@ Real Re "Reynolds number of atmosphere";
 Real Nu "Nusselt number of atmophere";
 
 /*********************** VACUUM PROPERTIES: air is considered as annulus gas ***********************/
-parameter Modelica.SIunits.Pressure Pvacuum "Vacuum Pressure [Pa]" annotation (Dialog(group="Vacuum properties: between metal and glass envelope", tab="General"));
+  parameter Modelica.Units.SI.Pressure Pvacuum "Vacuum Pressure [Pa]"
+    annotation (Dialog(group=
+          "Vacuum properties: between metal and glass envelope", tab="General"));
 final parameter Real P_mmhg = Pvacuum/133.322368;
 parameter Real GAMMA= 1.39 "Ratio of specific heats for the annulus gas " annotation (Dialog(group="Vacuum properties: between metal and glass envelope", tab="General"));
 parameter Real DELTA = 3.53e-8 "Molecular diameter for the annulus gas [cm]" annotation (Dialog(group="Vacuum properties: between metal and glass envelope", tab="General"));
 parameter Real BB = 1.571 "Interaction coefficient" annotation (Dialog(group="Vacuum properties: between metal and glass envelope", tab="General"));
-parameter Modelica.SIunits.ThermalConductivity k_st = 0.02551
-    "Thermal conductivity at standard pressure and temperature" annotation (Dialog(group="Vacuum properties: between metal and glass envelope", tab="General"));
+  parameter Modelica.Units.SI.ThermalConductivity k_st=0.02551
+    "Thermal conductivity at standard pressure and temperature" annotation (
+      Dialog(group="Vacuum properties: between metal and glass envelope", tab=
+          "General"));
 
 /***********************INITIAL VALUES OF TEMPERATURE AT THE CENTER OF TUBE & GLASS***********************/
 //Glass
-parameter Modelica.SIunits.Temperature T_g_start_in
-    "Temperature of the glass_inlet"
-                                    annotation(Dialog(tab = "Initialization"));
-parameter Modelica.SIunits.Temperature T_g_start_out
-    "Temperature of the glass outlet" annotation(Dialog(tab = "Initialization"));
-parameter Modelica.SIunits.Temperature T_g_start[N] = linspace(T_g_start_in,T_g_start_out,N)
-    "start value of the tube temperature vector" annotation(Dialog(tab = "Initialization"));
+  parameter Modelica.Units.SI.Temperature T_g_start_in
+    "Temperature of the glass_inlet" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_g_start_out
+    "Temperature of the glass outlet" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_g_start[N]=linspace(
+      T_g_start_in,
+      T_g_start_out,
+      N) "start value of the tube temperature vector"
+    annotation (Dialog(tab="Initialization"));
 //Tube
-parameter Modelica.SIunits.Temperature T_t_start_in
-    "Temperature of the tube inlet" annotation(Dialog(tab = "Initialization"));
-parameter Modelica.SIunits.Temperature T_t_start_out
-    "Average temperature of the tube outlet" annotation(Dialog(tab = "Initialization"));
-parameter Modelica.SIunits.Temperature T_t_start[N] = linspace(T_t_start_in,T_t_start_out,N)
-    "start value of the tube temperature vector" annotation(Dialog(tab = "Initialization"));
+  parameter Modelica.Units.SI.Temperature T_t_start_in
+    "Temperature of the tube inlet" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_t_start_out
+    "Average temperature of the tube outlet"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_t_start[N]=linspace(
+      T_t_start_in,
+      T_t_start_out,
+      N) "start value of the tube temperature vector"
+    annotation (Dialog(tab="Initialization"));
 
 /*********************** VARIABLES ***********************/
 
 /*********************** Area of Collector and Reflector ***********************/
-Modelica.SIunits.Area A_ext_g "Lateral external area of the glass";
-Modelica.SIunits.Area A_ext_t "Lateral external area of the tube";
-Modelica.SIunits.Area A_ref "Area of the reflector";
-Modelica.SIunits.Area Am_t "Area of the metal cross section";
-Modelica.SIunits.Area Am_g "Area of the glass cross section";
+  Modelica.Units.SI.Area A_ext_g "Lateral external area of the glass";
+  Modelica.Units.SI.Area A_ext_t "Lateral external area of the tube";
+  Modelica.Units.SI.Area A_ref "Area of the reflector";
+  Modelica.Units.SI.Area Am_t "Area of the metal cross section";
+  Modelica.Units.SI.Area Am_g "Area of the glass cross section";
 
 /*********************** HEAT TRANSFER COEFFICIENTS ***********************/
 //Modelica.SIunits.CoefficientOfHeatTransfer Gamma_fluid[N]
 //    "Coefficient of heat transfer fluid";
-Modelica.SIunits.CoefficientOfHeatTransfer Gamma_vacuum[N]
+  Modelica.Units.SI.CoefficientOfHeatTransfer Gamma_vacuum[N]
     "Coefficient of heat transfer vacuum";
-Modelica.SIunits.CoefficientOfHeatTransfer Gamma_air
+  Modelica.Units.SI.CoefficientOfHeatTransfer Gamma_air
     "coefficient of heat transfer";
 Real LAMBDA[N] "mean free-path between collisions of a molecule [m]";
 /***********************TEMPERATURES***********************/
-Modelica.SIunits.Temperature Tsky "Sky temperature";
+  Modelica.Units.SI.Temperature Tsky "Sky temperature";
 //Modelica.SIunits.Temperature T_g_air[N]
 //    "Average temperature between air and external glass temperature";
 //Modelica.SIunits.Temperature T_fluid[N] "temperature of the fluid";
-Modelica.SIunits.Temperature T_int_t[N] "temperature of the internal tube";
-Modelica.SIunits.Temperature T_t[N](start = T_t_start)
+  Modelica.Units.SI.Temperature T_int_t[N] "temperature of the internal tube";
+  Modelica.Units.SI.Temperature T_t[N](start=T_t_start)
     "temperature at the center of the tube";
-Modelica.SIunits.Temperature T_ext_t[N] "temperature of the external tube";
-Modelica.SIunits.Temperature T_g_t[N]
+  Modelica.Units.SI.Temperature T_ext_t[N] "temperature of the external tube";
+  Modelica.Units.SI.Temperature T_g_t[N]
     "Average temperature of the inner glass and the external tube";
-Modelica.SIunits.Temperature T_int_g[N] "temperature of the internal glass";
-Modelica.SIunits.Temperature T_g[N](start = T_g_start)
+  Modelica.Units.SI.Temperature T_int_g[N] "temperature of the internal glass";
+  Modelica.Units.SI.Temperature T_g[N](start=T_g_start)
     "temperature at the center of the glass";
-Modelica.SIunits.Temperature T_ext_g[N] "temperature of the external glass";
+  Modelica.Units.SI.Temperature T_ext_g[N] "temperature of the external glass";
 
 /***********************THERMAL FLOW***********************/
-Modelica.SIunits.HeatFlowRate Q_glass_tot;
-Modelica.SIunits.HeatFlowRate Q_tube_tot;
-Modelica.SIunits.HeatFlowRate Q_abs[N];
+  Modelica.Units.SI.HeatFlowRate Q_glass_tot;
+  Modelica.Units.SI.HeatFlowRate Q_tube_tot;
+  Modelica.Units.SI.HeatFlowRate Q_abs[N];
 
 /***********************THERMAL FLUX***********************/
-Modelica.SIunits.HeatFlux Phi_glass_tot "heat flux absorbed by the glass";
-Modelica.SIunits.HeatFlux Phi_glass_tot_N[N]
+  Modelica.Units.SI.HeatFlux Phi_glass_tot "heat flux absorbed by the glass";
+  Modelica.Units.SI.HeatFlux Phi_glass_tot_N[N]
     "Heat flux from the sun to the glass at each node";
-Modelica.SIunits.HeatFlux Phi_tube_tot "Heat flux absorbed by the tube";
-Modelica.SIunits.HeatFlux Phi_tube_tot_N[N]
+  Modelica.Units.SI.HeatFlux Phi_tube_tot "Heat flux absorbed by the tube";
+  Modelica.Units.SI.HeatFlux Phi_tube_tot_N[N]
     "Heat flux from the sun to the tube at each node";
 //Modelica.SIunits.HeatFlux Phi_conv_f[N] "Heat flux convection of the fluid";
-Modelica.SIunits.HeatFlux Phi_tube_int[N] "Heat flux of tube internal";
-Modelica.SIunits.HeatFlux Phi_tube_ext[N] "Heat flux of the tube external";
-Modelica.SIunits.HeatFlux Phi_conv_gas[N] "heat flux convection in the vacuum";
-Modelica.SIunits.HeatFlux Phi_rad_gas[N] "heat flux radiation in the vacuum";
-Modelica.SIunits.HeatFlux Phi_glass_int[N] "heat flux of the glass internal";
-Modelica.SIunits.HeatFlux Phi_glass_ext[N] "heat flux of the glass external";
-Modelica.SIunits.HeatFlux Phi_conv_air[N] "Heat flux convection in the air";
-Modelica.SIunits.HeatFlux Phi_rad_air[N] "heat flux radiation in the air";
-Modelica.SIunits.HeatFlux Phi_loss
+  Modelica.Units.SI.HeatFlux Phi_tube_int[N] "Heat flux of tube internal";
+  Modelica.Units.SI.HeatFlux Phi_tube_ext[N] "Heat flux of the tube external";
+  Modelica.Units.SI.HeatFlux Phi_conv_gas[N]
+    "heat flux convection in the vacuum";
+  Modelica.Units.SI.HeatFlux Phi_rad_gas[N] "heat flux radiation in the vacuum";
+  Modelica.Units.SI.HeatFlux Phi_glass_int[N] "heat flux of the glass internal";
+  Modelica.Units.SI.HeatFlux Phi_glass_ext[N] "heat flux of the glass external";
+  Modelica.Units.SI.HeatFlux Phi_conv_air[N] "Heat flux convection in the air";
+  Modelica.Units.SI.HeatFlux Phi_rad_air[N] "heat flux radiation in the air";
+  Modelica.Units.SI.HeatFlux Phi_loss
     "Heat losses with respect to the reflector surface";
 
 /***********************EFFICIENCIES***********************/

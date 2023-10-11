@@ -1,4 +1,4 @@
-within ThermoCycle.Components.Units.ExpansionAndCompressionMachines;
+﻿within ThermoCycle.Components.Units.ExpansionAndCompressionMachines;
 model ExpanderOpendriveDetailed
   "Detailed expander model (oil free, open-drive)"
 //2. PORTS AND FLUIDS
@@ -21,195 +21,246 @@ replaceable package Medium = ThermoCycle.Media.R245fa_CP  constrainedby
  //===========================
  //1.1. Model parameters
  //---------------------------
-  parameter Modelica.SIunits.Volume V_s=110e-6 "Displacement";
+  parameter Modelica.Units.SI.Volume V_s=110e-6 "Displacement";
   parameter Real r_v_in=2.85 "Internal built-in volume ratio";
-  parameter Modelica.SIunits.Length d_su=6.18e-3
+  parameter Modelica.Units.SI.Length d_su=6.18e-3
     "inlet pressure drop equivalent diameter";
-  parameter Modelica.SIunits.MassFlowRate M_dot_n=0.1 "Nominal mass flow rate";
-  parameter Modelica.SIunits.ThermalConductance AU_su_n=30
+  parameter Modelica.Units.SI.MassFlowRate M_dot_n=0.1 "Nominal mass flow rate";
+  parameter Modelica.Units.SI.ThermalConductance AU_su_n=30
     "Supply heat transfer coefficient";
-  parameter Modelica.SIunits.ThermalConductance AU_ex_n=30
+  parameter Modelica.Units.SI.ThermalConductance AU_ex_n=30
     "Exhaust heat transfer coefficient";
-  parameter Modelica.SIunits.ThermalConductance AU_amb=3.4
+  parameter Modelica.Units.SI.ThermalConductance AU_amb=3.4
     "Ambient heat transfer coefficient";
-  parameter Modelica.SIunits.Area A_leak=2.6e-6 "Leakage area";
-  parameter Modelica.SIunits.Power W_dot_loss0=0 "Constant mechanical losses";
+  parameter Modelica.Units.SI.Area A_leak=2.6e-6 "Leakage area";
+  parameter Modelica.Units.SI.Power W_dot_loss0=0 "Constant mechanical losses";
   parameter Real alpha=0.1 "Proportionality factor of the mechanical losses";
-  parameter Modelica.SIunits.Temperature T_amb=25+273.15 "Ambient temperature";
-  parameter Modelica.SIunits.SpecificHeatCapacity c_w=500 annotation(Dialog(enable = HeatCapacity));
-  parameter Modelica.SIunits.Mass M_w=20 annotation(Dialog(enable = HeatCapacity));
+  parameter Modelica.Units.SI.Temperature T_amb=25 + 273.15
+    "Ambient temperature";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_w=500
+    annotation (Dialog(enable=HeatCapacity));
+  parameter Modelica.Units.SI.Mass M_w=20
+    annotation (Dialog(enable=HeatCapacity));
  //1.2. Start values
  //---------------------------
   parameter Boolean HeatCapacity=false
     "Set to true to consider the thermal mass of the expander walls"  annotation(Dialog(tab = "Initialization"));
   parameter Boolean SteadyState=false
     "Set to true to initialize in steady-state"  annotation(Dialog(tab = "Initialization"));
-  parameter Modelica.SIunits.MassFlowRate M_dot_start=0.08
-    "Inlet pressure start value"  annotation(Dialog(tab = "Initialization"));
- parameter Modelica.SIunits.Pressure p_su_start=10e5
-    "Inlet pressure start value"  annotation(Dialog(tab = "Initialization"));
- parameter Modelica.SIunits.Temperature T_su_start=423.15
-    "Inlet temperature start value"  annotation(Dialog(tab = "Initialization"));
- parameter Modelica.SIunits.SpecificEnthalpy h_su_start=Medium.specificEnthalpy_pT(p=p_su_start,T=T_su_start)
-    "Inlet specific enthalpy start value"    annotation(Dialog(tab = "Initialization"));
- parameter Modelica.SIunits.Pressure p_su1_start=9e5
-    "Inlet pressure after pressure loss start value"  annotation(Dialog(tab = "Initialization"));
-  parameter Modelica.SIunits.Temperature T_su1_start=423.15
-    "Inlet temperature start value"  annotation(Dialog(tab = "Initialization"));
- parameter Modelica.SIunits.SpecificEnthalpy h_su1_start=h_su_start
-    "Inlet specific enthalpy after pressure loss start value"    annotation(Dialog(tab = "Initialization"));
- parameter Modelica.SIunits.SpecificEntropy s_su_start=2000
-    "Inlet specific entropy "    annotation(Dialog(tab = "Initialization"));
-parameter Modelica.SIunits.SpecificEnthalpy h_ex_start=500000
-    "Outlet specific enthalpy "    annotation(Dialog(tab = "Initialization"));
-  parameter Modelica.SIunits.SpecificHeatCapacity c_p_su1_start=1170
-    "Start value for the supply specific heat capacity after pressure loss"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.ThermalConductance C_dot_su1_start=77
-    "Start value for the supply heat capacity flow rate after pressure loss"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.ThermalConductance AU_su_start=21.49
-    "Start value for the supply heat transfer coefficient"    annotation(dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.MassFlowRate M_dot_start=0.08
+    "Inlet pressure start value" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure p_su_start=10e5
+    "Inlet pressure start value" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_su_start=423.15
+    "Inlet temperature start value" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.SpecificEnthalpy h_su_start=
+      Medium.specificEnthalpy_pT(p=p_su_start, T=T_su_start)
+    "Inlet specific enthalpy start value"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure p_su1_start=9e5
+    "Inlet pressure after pressure loss start value"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_su1_start=423.15
+    "Inlet temperature start value" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.SpecificEnthalpy h_su1_start=h_su_start
+    "Inlet specific enthalpy after pressure loss start value"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.SpecificEntropy s_su_start=2000
+    "Inlet specific entropy " annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.SpecificEnthalpy h_ex_start=500000
+    "Outlet specific enthalpy " annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_p_su1_start=1170
+    "Start value for the supply specific heat capacity after pressure loss"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.ThermalConductance C_dot_su1_start=77
+    "Start value for the supply heat capacity flow rate after pressure loss"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.ThermalConductance AU_su_start=21.49
+    "Start value for the supply heat transfer coefficient"
+    annotation (dialog(tab="Start Values"));
   parameter Real epsilon_su_start=0.243174
     "Start value for the supply efficiency"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.HeatFlowRate Q_dot_su_start=-369.857
-    "Start value for the supply heat transfer rate"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.Temperature T_w_start=373.6
-    "Start value for the wall temperature"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.SpecificEnthalpy h_su2_start=498749
-    "Start value for the supply specific enthalpy after heat transfer"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.Temperature T_su2_start=388.5
-    "Start value for the supply temperature after heat transfer"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.SpecificVolume v_su2_start=0.02
-    "Start value for the supply specific volume after heat transfer"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.SpecificEntropy s_su2_start=1866
-    "Start value for the supply specific entropy after heat transfer"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.Pressure p_su2_start=1.01791e6
-    "Start value for the pressure after heat transfer"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.MassFlowRate M_dot_in_start=0.054812
-    "Start value for the internal mass flow rate"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.Pressure p_crit_start=634079
-    "Start value for the critical pressure"    annotation(dialog(tab="Start Values"));
- parameter Modelica.SIunits.Pressure p_thr_start=634079
-    "Start value for the throat pressure"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.Pressure p_ex3_start=100000
-    "Start value for the pressure after expansion"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.SpecificEnthalpy h_thr_start=488984
-    "Start value for the specific enthalpy at the throat"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.Velocity C_thr_start=139.75
-    "Start value for the fluid velocity the throat"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.MassFlowRate M_dot_leak_start=0.0110975
-    "Start value for the leakage mass flow rate"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.SpecificVolume v_in_start=0.0617109
-    "Start value for the supply specific volume after heat transfer"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.Pressure p_in_start=335196
-    "Start value for the internal pressure"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.SpecificEnthalpy h_in_start=475750
-    "Start value for the internal specific enthalpy after heat transfer"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.SpecificEnthalpy w_1_start=22999
-    "Start value for the internal isentropic work"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.SpecificEnthalpy w_2_start=14514
-    "Start value for the internal constant volume work"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.SpecificEnthalpy h_ex3_start=461236
-    "Start value for the internal specific enthalpy after expansion"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.Power W_dot_in_start=2056
-    "Start value for the internal power"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.Power W_dot_loss1_start=183
-    "Start value for the mechanical losses"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.Power W_dot_sh_start=1873
-    "Start value for the shaft power"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.Power W_dot_loss2_start=215
-    "Start value for the electro-mechanical losses"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.Power W_dot_el_start = 1658
+  parameter Modelica.Units.SI.HeatFlowRate Q_dot_su_start=-369.857
+    "Start value for the supply heat transfer rate"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Temperature T_w_start=373.6
+    "Start value for the wall temperature"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.SpecificEnthalpy h_su2_start=498749
+    "Start value for the supply specific enthalpy after heat transfer"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Temperature T_su2_start=388.5
+    "Start value for the supply temperature after heat transfer"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.SpecificVolume v_su2_start=0.02
+    "Start value for the supply specific volume after heat transfer"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.SpecificEntropy s_su2_start=1866
+    "Start value for the supply specific entropy after heat transfer"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Pressure p_su2_start=1.01791e6
+    "Start value for the pressure after heat transfer"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.MassFlowRate M_dot_in_start=0.054812
+    "Start value for the internal mass flow rate"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Pressure p_crit_start=634079
+    "Start value for the critical pressure"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Pressure p_thr_start=634079
+    "Start value for the throat pressure"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Pressure p_ex3_start=100000
+    "Start value for the pressure after expansion"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.SpecificEnthalpy h_thr_start=488984
+    "Start value for the specific enthalpy at the throat"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Velocity C_thr_start=139.75
+    "Start value for the fluid velocity the throat"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.MassFlowRate M_dot_leak_start=0.0110975
+    "Start value for the leakage mass flow rate"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.SpecificVolume v_in_start=0.0617109
+    "Start value for the supply specific volume after heat transfer"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Pressure p_in_start=335196
+    "Start value for the internal pressure"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.SpecificEnthalpy h_in_start=475750
+    "Start value for the internal specific enthalpy after heat transfer"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.SpecificEnthalpy w_1_start=22999
+    "Start value for the internal isentropic work"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.SpecificEnthalpy w_2_start=14514
+    "Start value for the internal constant volume work"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.SpecificEnthalpy h_ex3_start=461236
+    "Start value for the internal specific enthalpy after expansion"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Power W_dot_in_start=2056
+    "Start value for the internal power" annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Power W_dot_loss1_start=183
+    "Start value for the mechanical losses"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Power W_dot_sh_start=1873
+    "Start value for the shaft power" annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Power W_dot_loss2_start=215
+    "Start value for the electro-mechanical losses"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Power W_dot_el_start=1658
     "Start value for the electrical power";
-  parameter Modelica.SIunits.SpecificEnthalpy h_ex2_start=467552
-    "Start value for the specific enthalpy after mixing with leakages"             annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.Pressure p_ex2_start=100000
-    "Start value for the pressure after mixing with leakage"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.Temperature T_ex2_start=344
-    "Start value for the temperature after mixing with lekage"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.SpecificHeatCapacity c_p_ex2_start=964
-    "Start value for the exhaust specific heat capacity"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.ThermalConductance C_dot_ex2_start=64
-    "Start value for the exhaust heat capacity flow rate"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.ThermalConductance AU_ex_start=21.49
-    "Start value for the exhaust heat transfer coefficient"    annotation(dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.SpecificEnthalpy h_ex2_start=467552
+    "Start value for the specific enthalpy after mixing with leakages"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Pressure p_ex2_start=100000
+    "Start value for the pressure after mixing with leakage"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Temperature T_ex2_start=344
+    "Start value for the temperature after mixing with lekage"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_p_ex2_start=964
+    "Start value for the exhaust specific heat capacity"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.ThermalConductance C_dot_ex2_start=64
+    "Start value for the exhaust heat capacity flow rate"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.ThermalConductance AU_ex_start=21.49
+    "Start value for the exhaust heat transfer coefficient"
+    annotation (dialog(tab="Start Values"));
   parameter Real epsilon_ex_start=0.29 "Start value for the exhaust efficiency"
                                                 annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.HeatFlowRate Q_dot_ex_start=542
-    "Start value for the exhaust heat transfer rate"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.SpecificEnthalpy h_ex1_start=475776
-    "Start value for the specific enthalpy after heat transfer" annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.Pressure p_ex1_start=100000
-    "Start value for the pressure after heat transfer"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.HeatFlowRate Q_dot_amb_start=226
-    "Start value for the ambient heat transfer rate"    annotation(dialog(tab="Start Values"));
-  parameter Modelica.SIunits.Pressure p_ex_start=3e5
-    "Inlet pressure start value"
-                             annotation(Dialog(tab = "Initialization"));
+  parameter Modelica.Units.SI.HeatFlowRate Q_dot_ex_start=542
+    "Start value for the exhaust heat transfer rate"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.SpecificEnthalpy h_ex1_start=475776
+    "Start value for the specific enthalpy after heat transfer"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Pressure p_ex1_start=100000
+    "Start value for the pressure after heat transfer"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.HeatFlowRate Q_dot_amb_start=226
+    "Start value for the ambient heat transfer rate"
+    annotation (dialog(tab="Start Values"));
+  parameter Modelica.Units.SI.Pressure p_ex_start=3e5
+    "Inlet pressure start value" annotation (Dialog(tab="Initialization"));
  //2. DECLARATIONS OF VARIABLES
  //=============================
  // Important data to show in results
- Modelica.SIunits.Power W_dot;
- Modelica.SIunits.Frequency N_rot(start=50) "Rotating speed in Hz";
- Modelica.SIunits.SpecificEnthalpy h_ex(start=h_ex_start);
- Modelica.SIunits.Pressure p_ex(min=1E5,max=10E5,start=p_ex_start);
-  Modelica.SIunits.MassFlowRate M_dot(start=M_dot_start);
-  Modelica.SIunits.Density rho_su(start=Medium.density_pT(p=p_su_start,T=T_su_start));
-  Modelica.SIunits.SpecificEnthalpy h_su(start=h_su_start);
-  Modelica.SIunits.Pressure p_su(min=1E5,max=28E5,start=p_su_start);
-  Modelica.SIunits.Temperature T_su;
-  Modelica.SIunits.SpecificEntropy s_su;
-  Modelica.SIunits.SpecificVolume v_su;
-  Modelica.SIunits.Area A_su;
-  Modelica.SIunits.Pressure p_su1(min=1E5,max=28E5,start=p_su1_start);
-  Modelica.SIunits.SpecificEnthalpy h_su1(start=h_su1_start);
-  Modelica.SIunits.Temperature T_su1;
-  Modelica.SIunits.SpecificHeatCapacity c_p_su1(start=c_p_su1_start);
-   Modelica.SIunits.ThermalConductance C_dot_su1(start=C_dot_su1_start);
-   Modelica.SIunits.ThermalConductance AU_su(start=AU_su_start);
+  Modelica.Units.SI.Power W_dot;
+  Modelica.Units.SI.Frequency N_rot(start=50) "Rotating speed in Hz";
+  Modelica.Units.SI.SpecificEnthalpy h_ex(start=h_ex_start);
+  Modelica.Units.SI.Pressure p_ex(
+    min=1E5,
+    max=10E5,
+    start=p_ex_start);
+  Modelica.Units.SI.MassFlowRate M_dot(start=M_dot_start);
+  Modelica.Units.SI.Density rho_su(start=Medium.density_pT(p=p_su_start, T=
+        T_su_start));
+  Modelica.Units.SI.SpecificEnthalpy h_su(start=h_su_start);
+  Modelica.Units.SI.Pressure p_su(
+    min=1E5,
+    max=28E5,
+    start=p_su_start);
+  Modelica.Units.SI.Temperature T_su;
+  Modelica.Units.SI.SpecificEntropy s_su;
+  Modelica.Units.SI.SpecificVolume v_su;
+  Modelica.Units.SI.Area A_su;
+  Modelica.Units.SI.Pressure p_su1(
+    min=1E5,
+    max=28E5,
+    start=p_su1_start);
+  Modelica.Units.SI.SpecificEnthalpy h_su1(start=h_su1_start);
+  Modelica.Units.SI.Temperature T_su1;
+  Modelica.Units.SI.SpecificHeatCapacity c_p_su1(start=c_p_su1_start);
+  Modelica.Units.SI.ThermalConductance C_dot_su1(start=C_dot_su1_start);
+  Modelica.Units.SI.ThermalConductance AU_su(start=AU_su_start);
    Real epsilon_su(start=epsilon_su_start);
-   Modelica.SIunits.HeatFlowRate Q_dot_su(start=Q_dot_su_start);
-   Modelica.SIunits.Temperature T_w(start=T_w_start);
-   Modelica.SIunits.SpecificEnthalpy h_su2(start=h_su2_start);
-   Modelica.SIunits.Temperature T_su2(start=T_su2_start);
-   Modelica.SIunits.SpecificVolume v_su2(start=v_su2_start);
-   Modelica.SIunits.SpecificEntropy s_su2(start=s_su2_start);
-   Modelica.SIunits.Pressure p_su2(start=p_su2_start);
+  Modelica.Units.SI.HeatFlowRate Q_dot_su(start=Q_dot_su_start);
+  Modelica.Units.SI.Temperature T_w(start=T_w_start);
+  Modelica.Units.SI.SpecificEnthalpy h_su2(start=h_su2_start);
+  Modelica.Units.SI.Temperature T_su2(start=T_su2_start);
+  Modelica.Units.SI.SpecificVolume v_su2(start=v_su2_start);
+  Modelica.Units.SI.SpecificEntropy s_su2(start=s_su2_start);
+  Modelica.Units.SI.Pressure p_su2(start=p_su2_start);
    Real rpm;
-   Modelica.SIunits.VolumeFlowRate V_dot_s;
-   Modelica.SIunits.MassFlowRate M_dot_in(start=M_dot_in_start);
+  Modelica.Units.SI.VolumeFlowRate V_dot_s;
+  Modelica.Units.SI.MassFlowRate M_dot_in(start=M_dot_in_start);
     Real gamma;
-    Modelica.SIunits.Pressure p_crit(start=p_crit_start);
-     Modelica.SIunits.Pressure p_thr(start=p_crit_start);
-     Modelica.SIunits.Pressure p_ex3(start=p_ex3_start);
-     Modelica.SIunits.SpecificEnthalpy h_thr(start=h_thr_start);
-     Modelica.SIunits.Velocity C_thr(start=C_thr_start);
-     Modelica.SIunits.MassFlowRate M_dot_leak(start=M_dot_leak_start);
-     Modelica.SIunits.SpecificVolume v_in(start=v_in_start);
-     Modelica.SIunits.Pressure p_in(start=p_in_start);
-     Modelica.SIunits.SpecificEnthalpy h_in(start=h_in_start);
-     Modelica.SIunits.SpecificEnthalpy w_1(start=w_1_start);
-     Modelica.SIunits.SpecificEnthalpy w_2(start=w_1_start);
-     Modelica.SIunits.SpecificEnthalpy h_ex3(start=h_ex3_start);
-     Modelica.SIunits.Power W_dot_in(start=W_dot_in_start);
-     Modelica.SIunits.Power W_dot_loss1(start=W_dot_loss1_start);
-     Modelica.SIunits.Power W_dot_sh(start=W_dot_sh_start);
+  Modelica.Units.SI.Pressure p_crit(start=p_crit_start);
+  Modelica.Units.SI.Pressure p_thr(start=p_crit_start);
+  Modelica.Units.SI.Pressure p_ex3(start=p_ex3_start);
+  Modelica.Units.SI.SpecificEnthalpy h_thr(start=h_thr_start);
+  Modelica.Units.SI.Velocity C_thr(start=C_thr_start);
+  Modelica.Units.SI.MassFlowRate M_dot_leak(start=M_dot_leak_start);
+  Modelica.Units.SI.SpecificVolume v_in(start=v_in_start);
+  Modelica.Units.SI.Pressure p_in(start=p_in_start);
+  Modelica.Units.SI.SpecificEnthalpy h_in(start=h_in_start);
+  Modelica.Units.SI.SpecificEnthalpy w_1(start=w_1_start);
+  Modelica.Units.SI.SpecificEnthalpy w_2(start=w_1_start);
+  Modelica.Units.SI.SpecificEnthalpy h_ex3(start=h_ex3_start);
+  Modelica.Units.SI.Power W_dot_in(start=W_dot_in_start);
+  Modelica.Units.SI.Power W_dot_loss1(start=W_dot_loss1_start);
+  Modelica.Units.SI.Power W_dot_sh(start=W_dot_sh_start);
      Real rpm_rel;
-     Modelica.SIunits.Power W_dot_loss2(start=W_dot_loss2_start);
-     Modelica.SIunits.Power W_dot_el(start=W_dot_el_start);
-    Modelica.SIunits.SpecificEnthalpy h_ex2(start=h_ex2_start);
-    Modelica.SIunits.Pressure p_ex2(start=p_ex2_start);
-    Modelica.SIunits.Temperature T_ex2(start=T_ex2_start);
-    Modelica.SIunits.ThermalConductance AU_ex(start=AU_ex_start);
-    Modelica.SIunits.SpecificHeatCapacity c_p_ex2(start=c_p_ex2_start);
-    Modelica.SIunits.ThermalConductance C_dot_ex2(start=C_dot_ex2_start);
+  Modelica.Units.SI.Power W_dot_loss2(start=W_dot_loss2_start);
+  Modelica.Units.SI.Power W_dot_el(start=W_dot_el_start);
+  Modelica.Units.SI.SpecificEnthalpy h_ex2(start=h_ex2_start);
+  Modelica.Units.SI.Pressure p_ex2(start=p_ex2_start);
+  Modelica.Units.SI.Temperature T_ex2(start=T_ex2_start);
+  Modelica.Units.SI.ThermalConductance AU_ex(start=AU_ex_start);
+  Modelica.Units.SI.SpecificHeatCapacity c_p_ex2(start=c_p_ex2_start);
+  Modelica.Units.SI.ThermalConductance C_dot_ex2(start=C_dot_ex2_start);
     Real epsilon_ex(start=epsilon_ex_start);
-    Modelica.SIunits.HeatFlowRate Q_dot_ex(start=Q_dot_ex_start);
-    Modelica.SIunits.Pressure p_ex1(start=p_ex1_start);
-    Modelica.SIunits.SpecificEnthalpy h_ex1(start=h_ex1_start);
-    Modelica.SIunits.HeatFlowRate Q_dot_amb(start=Q_dot_amb_start);
-    Modelica.SIunits.Power U_dot_w(start=100);
-     Modelica.SIunits.HeatFlowRate residual(start=0);
-     Modelica.SIunits.Efficiency epsilon_s "Isentropic efficiency";
+  Modelica.Units.SI.HeatFlowRate Q_dot_ex(start=Q_dot_ex_start);
+  Modelica.Units.SI.Pressure p_ex1(start=p_ex1_start);
+  Modelica.Units.SI.SpecificEnthalpy h_ex1(start=h_ex1_start);
+  Modelica.Units.SI.HeatFlowRate Q_dot_amb(start=Q_dot_amb_start);
+  Modelica.Units.SI.Power U_dot_w(start=100);
+  Modelica.Units.SI.HeatFlowRate residual(start=0);
+  Modelica.Units.SI.Efficiency epsilon_s "Isentropic efficiency";
      Real FF;
   Interfaces.Fluid.FlangeA flangeA(redeclare package Medium =
                Medium)

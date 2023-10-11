@@ -21,10 +21,10 @@ replaceable package Medium = ThermoCycle.Media.R245fa_CP  constrainedby
     annotation (Placement(transformation(extent={{-10,80},{10,100}})));
 
   /******************************* PARAMETERS *****************************/
-  parameter Modelica.SIunits.Volume Vtot=0.002 "Volume of the tank";
-  parameter Modelica.SIunits.Pressure p_ng = 0
+  parameter Modelica.Units.SI.Volume Vtot=0.002 "Volume of the tank";
+  parameter Modelica.Units.SI.Pressure p_ng=0
     "Partial pressure of non-condensable gases";
-  parameter Modelica.SIunits.Pressure pstart=5e5 "Initial pressure"
+  parameter Modelica.Units.SI.Pressure pstart=5e5 "Initial pressure"
     annotation (Dialog(tab="Initialization"));
   parameter Real L_start=0.6 "Initial level"
     annotation (Dialog(tab="Initialization"));
@@ -41,19 +41,19 @@ replaceable package Medium = ThermoCycle.Media.R245fa_CP  constrainedby
     annotation (Dialog(tab="Initialization"));
   /******************************* VARIABLES *****************************/
   Medium.SaturationProperties sat;
-  Modelica.SIunits.Pressure p_tot(start=pstart) "Total pressure of the system";
+  Modelica.Units.SI.Pressure p_tot(start=pstart) "Total pressure of the system";
   Medium.Density rho "Inlet density";
-  Modelica.SIunits.Volume Vl(start=Vtot*L_start)
+  Modelica.Units.SI.Volume Vl(start=Vtot*L_start)
     "Volume of the fluid in liquid phase [m3]";
-  Modelica.SIunits.Volume Vv(start=Vtot*(1 - L_start))
+  Modelica.Units.SI.Volume Vv(start=Vtot*(1 - L_start))
     "Volume of the fluid in vapor phase [m3]";
-  Modelica.SIunits.MassFlowRate M_dot_ex_l "Outlet mass flow [kg/s]";
-  Modelica.SIunits.MassFlowRate M_dot_ex_v "Outlet mass flow [kg/s]";
-  Modelica.SIunits.MassFlowRate M_dot_su "Inlet mass flow [kg/s]";
-  Modelica.SIunits.SpecificEnthalpy h_su "Inlet enthalpy [kJ/kg] ";
-  Modelica.SIunits.Pressure p(start=pstart);
-  Modelica.SIunits.Mass M "Total mass of the fluid stored [kg]";
-  Modelica.SIunits.Enthalpy H;
+  Modelica.Units.SI.MassFlowRate M_dot_ex_l "Outlet mass flow [kg/s]";
+  Modelica.Units.SI.MassFlowRate M_dot_ex_v "Outlet mass flow [kg/s]";
+  Modelica.Units.SI.MassFlowRate M_dot_su "Inlet mass flow [kg/s]";
+  Modelica.Units.SI.SpecificEnthalpy h_su "Inlet enthalpy [kJ/kg] ";
+  Modelica.Units.SI.Pressure p(start=pstart);
+  Modelica.Units.SI.Mass M "Total mass of the fluid stored [kg]";
+  Modelica.Units.SI.Enthalpy H;
   Real L(start=L_start) "Level of saturated liquid in the tank";
   Real H_der "derivative of the total enthalpy";
 

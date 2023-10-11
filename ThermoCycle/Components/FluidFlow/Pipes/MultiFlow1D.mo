@@ -1,4 +1,4 @@
-within ThermoCycle.Components.FluidFlow.Pipes;
+﻿within ThermoCycle.Components.FluidFlow.Pipes;
 model MultiFlow1D
   "1-D fluid flow model. The Cells are in parallel and a pressure drop is considered"
 
@@ -22,42 +22,42 @@ ThermoCycle.Interfaces.HeatTransfer.ThermalPortL[N] thermalPortCell
 
   /************ Geometric characteristics **************/
   parameter Integer N(min=1) = 10 "number of Cells";
-  parameter Modelica.SIunits.Volume V_f= 0.0397 "Total volume of fluid";
-  parameter Modelica.SIunits.Area A_f= 2.7 "Total Lateral surface";
-  parameter Modelica.SIunits.MassFlowRate Mdotnom= 2 "Nominal fluid flow rate"
-                                                                              annotation (Dialog(tab="Nominal Conditions"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom= 100
-    "Constant heat transfer coefficient" annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Volume V_f=0.0397 "Total volume of fluid";
+  parameter Modelica.Units.SI.Area A_f=2.7 "Total Lateral surface";
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom=2 "Nominal fluid flow rate"
+    annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom=100
+    "Constant heat transfer coefficient"
+    annotation (Dialog(tab="Nominal Conditions"));
    parameter Boolean UseNom=false
     "Use Nominal conditions to compute pressure drop characteristics";
 
     /************************** PRESSURE DROP COEFFICIENTS *********************/
 
- parameter Modelica.SIunits.Length h=0 "Static fluid head (dp = h * rho * g)"  annotation (Dialog(enable=(not UseNom)));
+  parameter Modelica.Units.SI.Length h=0 "Static fluid head (dp = h * rho * g)"
+    annotation (Dialog(enable=(not UseNom)));
   parameter Real k= 38.4E3*9.5
     "Coefficient for linear pressure drop (dp = k * V_dot)"                            annotation (Dialog(enable=(not UseNom)));
-  parameter Modelica.SIunits.Area A=(2*9.5*23282.7)^(-0.5)
+  parameter Modelica.Units.SI.Area A=(2*9.5*23282.7)^(-0.5)
     "Valve throat area for quadratic pressure drop (dp = 1/A²*M_dot²/(2*rho))"
-                                                                                 annotation (Dialog(enable=(not UseNom)));
- parameter Modelica.SIunits.Pressure DELTAp_0=500
+    annotation (Dialog(enable=(not UseNom)));
+  parameter Modelica.Units.SI.Pressure DELTAp_0=500
     "Pressure drop below which a 3rd order interpolation is used for the computation of the flow rate in order to avoid infinite derivative at 0";
 
 /************************** NOMINAL VALUES *********************/
-parameter Modelica.SIunits.Pressure p_nom=1e5 "Nominal pressure"
-                       annotation (Dialog(tab="Nominal Conditions"));
-parameter Modelica.SIunits.Temperature T_nom=423.15 "Nominal temperature"
-                          annotation (Dialog(tab="Nominal Conditions"));
- parameter Modelica.SIunits.Density rho_nom=Medium.density_pT(
-          p_nom,
-          T_nom) "Nominal density"    annotation (Dialog(tab="Nominal Conditions"));
-  parameter Modelica.SIunits.Pressure   DELTAp_stat_nom=0
-    "Nominal static pressure drop"
-                           annotation (Dialog(tab="Nominal Conditions"));
-  parameter Modelica.SIunits.Pressure   DELTAp_lin_nom=0
-    "Nominal linear pressure drop"
-                           annotation (Dialog(tab="Nominal Conditions"));
-  parameter Modelica.SIunits.Pressure   DELTAp_quad_nom=0
-    "Nominal quadratic pressure drop"                                                      annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Pressure p_nom=1e5 "Nominal pressure"
+    annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Temperature T_nom=423.15 "Nominal temperature"
+    annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Density rho_nom=Medium.density_pT(p_nom, T_nom)
+    "Nominal density" annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Pressure DELTAp_stat_nom=0
+    "Nominal static pressure drop" annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Pressure DELTAp_lin_nom=0
+    "Nominal linear pressure drop" annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Pressure DELTAp_quad_nom=0
+    "Nominal quadratic pressure drop"
+    annotation (Dialog(tab="Nominal Conditions"));
 
     parameter Boolean   use_rho_nom=false
     "Use the nominal density for the computation of the pressure drop (i.e it depends only the flow rate)"
@@ -70,9 +70,10 @@ parameter Modelica.SIunits.Temperature T_nom=423.15 "Nominal temperature"
   parameter Boolean UseHomotopy=false
     "if true, uses homotopy to set the pressure drop to zero in the first initialization"
   annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Pressure   DELTAp_start=DELTAp_stat_nom + DELTAp_lin_nom + DELTAp_quad_nom
-    "Start Value for the pressure drop"                                                         annotation (Dialog(tab="Initialization"));
-    parameter Modelica.SIunits.Time t_init=10
+  parameter Modelica.Units.SI.Pressure DELTAp_start=DELTAp_stat_nom +
+      DELTAp_lin_nom + DELTAp_quad_nom "Start Value for the pressure drop"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Time t_init=10
     "if constinit is true, time during which the pressure drop is set to the constant value DELTAp_start"
     annotation (Dialog(tab="Initialization", enable=constinit));
 
@@ -93,8 +94,7 @@ constrainedby
     each Vi=V_f/N,
     each Ai=A_f/N)
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
-ThermoCycle.Components.Units.PdropAndValves.DP[N] dP(redeclare package Medium
-      =                                                                               Medium,
+ThermoCycle.Components.Units.PdropAndValves.DP[N] dP(redeclare package Medium =       Medium,
     each UseNom=UseNom,
     each h=h,
     each k=k,

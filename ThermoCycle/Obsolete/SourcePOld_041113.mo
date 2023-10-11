@@ -4,9 +4,10 @@ model SourcePOld_041113 "Pressure source for water/steam flows"
   replaceable package Medium = ThermoCycle.Media.R245fa_CP
                                                 constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model" annotation (choicesAllMatching = true);
-  parameter Modelica.SIunits.Pressure p0=1.01325e5 "Nominal pressure";
-  parameter Modelica.SIunits.SpecificEnthalpy h=1e5 "Nominal specific enthalpy";
-  Modelica.SIunits.Pressure p "Actual pressure";
+  parameter Modelica.Units.SI.Pressure p0=1.01325e5 "Nominal pressure";
+  parameter Modelica.Units.SI.SpecificEnthalpy h=1e5
+    "Nominal specific enthalpy";
+  Modelica.Units.SI.Pressure p "Actual pressure";
   Modelica.Blocks.Interfaces.RealInput in_p0
     annotation (Placement(transformation(
         origin={-40,92},

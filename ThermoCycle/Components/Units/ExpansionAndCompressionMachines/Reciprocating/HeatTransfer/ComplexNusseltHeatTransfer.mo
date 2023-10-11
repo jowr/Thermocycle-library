@@ -3,11 +3,11 @@ model ComplexNusseltHeatTransfer
   "Recip heat transfer with constant complex Nusselt number"
   extends
     ThermoCycle.Components.Units.ExpansionAndCompressionMachines.Reciprocating.BaseClasses.PartialCylinderHeatTransfer;
-  input Modelica.SIunits.NusseltNumber Nu_r "Nusselt number, real part";
-  input Modelica.SIunits.NusseltNumber Nu_i "Nusselt number, imaginary part";
-  input Modelica.SIunits.Length Gamma0(min=0) "Characteristic length";
-  Modelica.SIunits.NusseltNumber[n] Nu0 "Nusselt number, combined";
-  Modelica.SIunits.ThermalConductivity[n] lambda;
+  input Modelica.Units.SI.NusseltNumber Nu_r "Nusselt number, real part";
+  input Modelica.Units.SI.NusseltNumber Nu_i "Nusselt number, imaginary part";
+  input Modelica.Units.SI.Length Gamma0(min=0) "Characteristic length";
+  Modelica.Units.SI.NusseltNumber[n] Nu0 "Nusselt number, combined";
+  Modelica.Units.SI.ThermalConductivity[n] lambda;
 equation
   for i in 1:n loop
     lambda[i]  = Medium.thermalConductivity(states[i]);

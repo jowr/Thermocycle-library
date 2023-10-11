@@ -3,9 +3,10 @@ model SinkP "Pressure sink"
   extends ThermoCycle.Icons.Water.SourceP;
   replaceable package Medium = Media.DummyFluid constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model" annotation (choicesAllMatching = true);
-  parameter Modelica.SIunits.Pressure p0=1.01325e5 "Nominal pressure";
-  parameter Modelica.SIunits.SpecificEnthalpy h=1e5 "Nominal specific enthalpy";
-  Modelica.SIunits.Pressure p;
+  parameter Modelica.Units.SI.Pressure p0=1.01325e5 "Nominal pressure";
+  parameter Modelica.Units.SI.SpecificEnthalpy h=1e5
+    "Nominal specific enthalpy";
+  Modelica.Units.SI.Pressure p;
   Modelica.Blocks.Interfaces.RealInput in_p0 annotation (Placement(
         transformation(
         origin={-40,88},

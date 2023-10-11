@@ -11,36 +11,38 @@ replaceable package Medium = ThermoCycle.Media.R245fa_CP  constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model" annotation (choicesAllMatching = true);
   parameter Boolean UseNom=false
     "Use Nominal conditions to compute pressure drop characteristics";
-  parameter Modelica.SIunits.Area Afull=10e-5
-    "Cross-sectional area of the fully open valve"                                           annotation (Dialog(enable=(not UseNom)));
+  parameter Modelica.Units.SI.Area Afull=10e-5
+    "Cross-sectional area of the fully open valve"
+    annotation (Dialog(enable=(not UseNom)));
   parameter Real Xopen(
     min=0,
     max=1) = 1
     "Valve opening if no external command is connected (0=fully closed; 1=fully open)";
-  parameter Modelica.SIunits.Pressure DELTAp_0=500
+  parameter Modelica.Units.SI.Pressure DELTAp_0=500
     "Pressure drop below which a 3rd order interpolation is used for the computation of the flow rate in order to avoid infinite derivative at 0";
-  Modelica.SIunits.Area A(start=Afull) "Valve throat area";
-  parameter Modelica.SIunits.MassFlowRate Mdot_nom=0.1 "Nominal mass flow rate"
-                             annotation (Dialog(tab="Nominal Conditions"));
-  parameter Modelica.SIunits.Pressure p_nom=1e5 "Nominal inlet pressure"
-                       annotation (Dialog(tab="Nominal Conditions"));
-  parameter Modelica.SIunits.Temperature T_nom=423.15
-    "Nominal inlet temperature"
-                          annotation (Dialog(tab="Nominal Conditions"));
-  parameter Modelica.SIunits.Density rho_nom=Medium.density_pTX(
-          p_nom,
-          T_nom,fill(0,0)) "Nominal density"    annotation (Dialog(tab="Nominal Conditions"));
+  Modelica.Units.SI.Area A(start=Afull) "Valve throat area";
+  parameter Modelica.Units.SI.MassFlowRate Mdot_nom=0.1
+    "Nominal mass flow rate" annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Pressure p_nom=1e5 "Nominal inlet pressure"
+    annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Temperature T_nom=423.15
+    "Nominal inlet temperature" annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Density rho_nom=Medium.density_pTX(
+      p_nom,
+      T_nom,
+      fill(0, 0)) "Nominal density"
+    annotation (Dialog(tab="Nominal Conditions"));
 
-  parameter Modelica.SIunits.Pressure   DELTAp_nom=0 "Nominal pressure drop"
-                           annotation (Dialog(tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Pressure DELTAp_nom=0 "Nominal pressure drop"
+    annotation (Dialog(tab="Nominal Conditions"));
   parameter Boolean   use_rho_nom=false
     "Use the nominal density for the computation of the pressure drop (i.e it depends only on the flow rate)"
                            annotation (Dialog(tab="Nominal Conditions"));
 
-  Modelica.SIunits.Pressure DELTAp(start=DELTAp_nom);
-  Modelica.SIunits.Pressure DELTAp_bis(start=DELTAp_nom);
-  Modelica.SIunits.MassFlowRate Mdot(start=Mdot_nom);
-  parameter Modelica.SIunits.Time t_init=10
+  Modelica.Units.SI.Pressure DELTAp(start=DELTAp_nom);
+  Modelica.Units.SI.Pressure DELTAp_bis(start=DELTAp_nom);
+  Modelica.Units.SI.MassFlowRate Mdot(start=Mdot_nom);
+  parameter Modelica.Units.SI.Time t_init=10
     "if constinit is true, time during which the pressure drop is set to the constant value DELTAp_nom"
     annotation (Dialog(tab="Initialization", enable=constinit));
   parameter Boolean constinit=false
@@ -50,7 +52,7 @@ replaceable package Medium = ThermoCycle.Media.R245fa_CP  constrainedby
   Medium.ThermodynamicState  fluidState(p(start=p_nom),T(start=T_nom));
   Medium.Density  rho "Inlet density";
   /*time */
-  Modelica.SIunits.Time t_change=5;
+  Modelica.Units.SI.Time t_change=5;
   ThermoCycle.Interfaces.Fluid.FlangeA InFlow(redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   ThermoCycle.Interfaces.Fluid.FlangeB OutFlow(redeclare package Medium =

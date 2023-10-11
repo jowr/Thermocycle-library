@@ -15,7 +15,7 @@ partial model PartialTwoPhaseCorrelation
   Medium.ThermodynamicState dewState;
   Medium.ThermodynamicState dewState_TP "Thermodynamic state";
   Medium.ThermodynamicState filteredState "Thermodynamic state";
-  Modelica.SIunits.QualityFactor x "Vapour quality";
+  Modelica.Units.SI.QualityFactor x "Vapour quality";
   Real deltaX = 1e-5;
 
   Medium.SpecificEnthalpy h_bub_TP;

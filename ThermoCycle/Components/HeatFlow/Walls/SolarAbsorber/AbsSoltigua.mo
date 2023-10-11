@@ -1,4 +1,4 @@
-within ThermoCycle.Components.HeatFlow.Walls.SolarAbsorber;
+﻿within ThermoCycle.Components.HeatFlow.Walls.SolarAbsorber;
 model AbsSoltigua
 // It solves the 1D radial energy balance around the Heat Transfer Element based on the SOLTIGUA PTMx Datasheet (see PTMx REV03-04/2013 and REV09-08/2013)
 // min oil flow rate: 50 l/min @ 100-150 °C , 25 l/min @ 151-200 °C , 20 l/min @ 201 - 250 °C
@@ -36,36 +36,34 @@ constant Real gg = Modelica.Constants.g_n
  //constrainedby  ThermoCycle.Components.HeatFlow.Walls.SolarAbsorber.Geometry.Soltigua.BaseGeometry
  //                                                                                      annotation (choicesAllMatching=true);
 inner replaceable parameter
-    ThermoCycle.Components.HeatFlow.Walls.SolarAbsorber.Geometry.Soltigua.BaseGeometry
-                                                                                        geometry
+    ThermoCycle.Components.HeatFlow.Walls.SolarAbsorber.Geometry.Soltigua.BaseGeometry  geometry
 constrainedby
-    ThermoCycle.Components.HeatFlow.Walls.SolarAbsorber.Geometry.Soltigua.BaseGeometry
-                                                                                       annotation (choicesAllMatching=true);
+    ThermoCycle.Components.HeatFlow.Walls.SolarAbsorber.Geometry.Soltigua.BaseGeometry annotation (choicesAllMatching=true);
 
 /************** PARAMETER ***********************/
 /*****************General Geometries**************************/
 parameter Integer N = 2 "number of cells";
-final parameter Modelica.SIunits.Length ll= geometry.L/(N-1)
+  final parameter Modelica.Units.SI.Length ll=geometry.L/(N - 1)
     "Length of each cell";
     parameter Real Defocusing = 25
     "Percentage value of the SF surface that goes to defocusing (25-50-75)";
 /*************************** VARIABLES ****************************************/
 
 /******************* Area of Collector and Reflector *****************************/
- Modelica.SIunits.Area S_eff "effective collecting area - Depend on focusing";
+  Modelica.Units.SI.Area S_eff "effective collecting area - Depend on focusing";
 Real K_l( min=0,max=1) "Longitudinal Incident Angle Modifier (IAM)";
 Real Theta_deg;
 
 /********************* TEMPERATURES **********************************/
-Modelica.SIunits.Temperature T_fluid[N] "Temperature of the fluid";
+  Modelica.Units.SI.Temperature T_fluid[N] "Temperature of the fluid";
 
 /************* THERMAL FLOW ****************************************/
-Modelica.SIunits.HeatFlowRate Q_tube_tot
+  Modelica.Units.SI.HeatFlowRate Q_tube_tot
     "Total thermal energy on one solar collector";
 
 /****************************************THERMAL FLUX ****************************************/
-Modelica.SIunits.HeatFlux Phi_conv_f[N] "Heat flux to the fluid";
-Modelica.SIunits.HeatFlux Phi_amb[N] "Heat flux to the ambient";
+  Modelica.Units.SI.HeatFlux Phi_conv_f[N] "Heat flux to the fluid";
+  Modelica.Units.SI.HeatFlux Phi_amb[N] "Heat flux to the ambient";
 /**************************************** EFFICIENCIES ****************************************/
 Real Eta_tot_N[N] "Efficiency based on Soltigua data sheet";
 Real Eta_tot "Averaged overall Efficiency";

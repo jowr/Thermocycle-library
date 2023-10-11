@@ -32,31 +32,39 @@ constrainedby ThermoCycle.Components.Units.Tanks.FillerMaterial.MaterialBase
 /********************** PARAMETERS **********************/
   constant Real pi= Modelica.Constants.pi;
   parameter Integer N(min=4) "Number of nodes";
-  parameter Modelica.SIunits.Volume V_tank "Tank volume";
+  parameter Modelica.Units.SI.Volume V_tank "Tank volume";
   parameter Real H_D "Height to diameter ratio of the tank";
-  parameter Modelica.SIunits.Position d_met "Tank thickness";
+  parameter Modelica.Units.SI.Position d_met "Tank thickness";
   parameter Real epsilon_p "Filler porosity" annotation(Dialog(group="Filler Characteristics", tab="General"));
-  parameter Modelica.SIunits.Volume Vlstart "Liquid volume start value";
-  parameter Modelica.SIunits.Pressure p "Pressure of the fluid in the tank";
+  parameter Modelica.Units.SI.Volume Vlstart "Liquid volume start value";
+  parameter Modelica.Units.SI.Pressure p "Pressure of the fluid in the tank";
 
     /* Heat transfer parameters */
 
-  parameter Modelica.SIunits.ThermalConductivity k_liq
-    "Fluid thermal conductivity" annotation (Dialog(group="Heat transfer", tab="General"));
-  parameter Modelica.SIunits.ThermalConductivity k_wall
-    "Wall thermal conductivity" annotation (Dialog(group="Heat transfer", tab="General"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer U_env_bottom
-    "Overall heat transfer coefficient referred to the bottom of the tank" annotation (Dialog(group="Heat transfer", tab="General"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer U_env_wall
-    "Overall heat transfer coefficient referred to tank wall" annotation (Dialog(group="Heat transfer", tab="General"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer U_env_top
-    "Overall heat transfer coefficient referred to the top of the tank" annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.ThermalConductivity k_liq
+    "Fluid thermal conductivity"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.ThermalConductivity k_wall
+    "Wall thermal conductivity"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_env_bottom
+    "Overall heat transfer coefficient referred to the bottom of the tank"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_env_wall
+    "Overall heat transfer coefficient referred to tank wall"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_env_top
+    "Overall heat transfer coefficient referred to the top of the tank"
+    annotation (Dialog(group="Heat transfer", tab="General"));
 
   /* Fluid Variables initial condition */
-  parameter Modelica.SIunits.Pressure pstart
-    "Start value of pressure of the fluid in the tank" annotation(Dialog(tab = "Initialisation"));
-  parameter Modelica.SIunits.MassFlowRate m_dot_su "Nominal supply mass flow" annotation(Dialog(tab = "Initialisation"));
-  parameter Modelica.SIunits.MassFlowRate m_dot_ex "Nominal exhaust mass flow" annotation(Dialog(tab = "Initialisation"));
+  parameter Modelica.Units.SI.Pressure pstart
+    "Start value of pressure of the fluid in the tank"
+    annotation (Dialog(tab="Initialisation"));
+  parameter Modelica.Units.SI.MassFlowRate m_dot_su "Nominal supply mass flow"
+    annotation (Dialog(tab="Initialisation"));
+  parameter Modelica.Units.SI.MassFlowRate m_dot_ex "Nominal exhaust mass flow"
+    annotation (Dialog(tab="Initialisation"));
   parameter Medium.Temperature Tstart_su = 288
     "Temperature of volume 1 - bottom volume"
                                              annotation(Dialog(tab = "Initialisation"));
@@ -65,11 +73,16 @@ constrainedby ThermoCycle.Components.Units.Tanks.FillerMaterial.MaterialBase
                                           annotation(Dialog(tab = "Initialisation"));
   final parameter Medium.Temperature Tstart[N-1]=linspace(Tstart_su,Tstart_ex,N-1)
     "Initial temperature profile"  annotation(Dialog(tab = "Initialisation"));
-  final parameter Modelica.SIunits.SpecificEnthalpy hstart[N - 1]=Medium.specificEnthalpy_pTX(pstart*ones(N-1),Tstart,fill(0,0))
-    "Start value of enthalpy vector (initialized by default)";
+  final parameter Modelica.Units.SI.SpecificEnthalpy hstart[N - 1]=
+      Medium.specificEnthalpy_pTX(
+      pstart*ones(N - 1),
+      Tstart,
+      fill(0, 0)) "Start value of enthalpy vector (initialized by default)";
 
-  final parameter Modelica.SIunits.MassFlowRate m_dot_nom[N]=linspace(m_dot_su,m_dot_ex,N)
-    "Mass flow rate start value";
+  final parameter Modelica.Units.SI.MassFlowRate m_dot_nom[N]=linspace(
+      m_dot_su,
+      m_dot_ex,
+      N) "Mass flow rate start value";
 
   /********************** VARIABLES **********************/
 
@@ -84,68 +97,68 @@ constrainedby ThermoCycle.Components.Units.Tanks.FillerMaterial.MaterialBase
   Medium.Density rho_liq[N - 1] "Fluid nodal density";
   Medium.SpecificHeatCapacity cp_liq[N-1];
   Medium.Temperature T[N - 1] "Volume temperature";
-  Modelica.SIunits.DerDensityByEnthalpy drdh[N - 1]
+  Modelica.Units.SI.DerDensityByEnthalpy drdh[N - 1]
     "Derivative of density by enthalpy";
-  Modelica.SIunits.Volume V_liq[N - 1] "Volume of the liquid in a single cell";
-  Modelica.SIunits.Mass M_liq[N - 1] "Mass of the liquid in a single cell";
-  Modelica.SIunits.MassFlowRate m_dot[N](start=m_dot_nom)
+  Modelica.Units.SI.Volume V_liq[N - 1] "Volume of the liquid in a single cell";
+  Modelica.Units.SI.Mass M_liq[N - 1] "Mass of the liquid in a single cell";
+  Modelica.Units.SI.MassFlowRate m_dot[N](start=m_dot_nom)
     "Mass flow at the nodes";
   Real dM_dt[N - 1] "Mass deriverative";
   Real dE_dt[N - 1] "Energy deriverative";
 
     /* ENTHALPIES */
-  Modelica.SIunits.SpecificEnthalpy h_low[N - 3]
+  Modelica.Units.SI.SpecificEnthalpy h_low[N - 3]
     "enthalpy at the node below the volume";
-  Modelica.SIunits.SpecificEnthalpy h_high[N - 3]
+  Modelica.Units.SI.SpecificEnthalpy h_high[N - 3]
     "enthalpy at the node above the volume";
- Modelica.SIunits.SpecificEnthalpy h_top
+  Modelica.Units.SI.SpecificEnthalpy h_top
     "incoming/outgoing enthalpy at the top volume";
- Modelica.SIunits.SpecificEnthalpy h_down
+  Modelica.Units.SI.SpecificEnthalpy h_down
     "incoming/outgoing enthalpy at the bottom voluem";
 
   /*Thermocline storage variables */
-  Modelica.SIunits.Volume V[N - 1] "Volume of a single cell";
-  Modelica.SIunits.Mass Mtot "Total tank mass";
-  Modelica.SIunits.Length H_vol[N-1]
+  Modelica.Units.SI.Volume V[N - 1] "Volume of a single cell";
+  Modelica.Units.SI.Mass Mtot "Total tank mass";
+  Modelica.Units.SI.Length H_vol[N - 1]
     "Height of the middle part of the cell from the bottom";
-  Modelica.SIunits.Length r_int "Internal radius";
-  Modelica.SIunits.Length H[N-2]
+  Modelica.Units.SI.Length r_int "Internal radius";
+  Modelica.Units.SI.Length H[N - 2]
     "Distance between the center cell of the fluid volume i and i+1";
-  Modelica.SIunits.Area A_tank "Area of the tank base";
-  Modelica.SIunits.Volume Vl(start=Vlstart, stateSelect=StateSelect.prefer);
+  Modelica.Units.SI.Area A_tank "Area of the tank base";
+  Modelica.Units.SI.Volume Vl(start=Vlstart, stateSelect=StateSelect.prefer);
  /* Solid filler variables */
-  Modelica.SIunits.Volume V_sol[N - 1] "Volume of the solid in a single cell";
-  Modelica.SIunits.Mass M[N - 1] "Mass of a single cell";
-  Modelica.SIunits.Mass M_sol[N - 1] "Mass of the solid in a single cell";
+  Modelica.Units.SI.Volume V_sol[N - 1] "Volume of the solid in a single cell";
+  Modelica.Units.SI.Mass M[N - 1] "Mass of a single cell";
+  Modelica.Units.SI.Mass M_sol[N - 1] "Mass of the solid in a single cell";
 
   /* VALUES OF ENTHALPIES AND MASS FLOW AT THE 4 PORTS*/
-  Modelica.SIunits.SpecificEnthalpy h_cold_PW
+  Modelica.Units.SI.SpecificEnthalpy h_cold_PW
     "enthalpy of the cold stream from Power plant";
-  Modelica.SIunits.SpecificEnthalpy h_cold_SF
+  Modelica.Units.SI.SpecificEnthalpy h_cold_SF
     "enthalpy of the cold stream to Solar Field";
-  Modelica.SIunits.SpecificEnthalpy h_hot_PW
+  Modelica.Units.SI.SpecificEnthalpy h_hot_PW
     "enthalpy of the hot stream to the Power Plant";
-  Modelica.SIunits.SpecificEnthalpy h_hot_SF
+  Modelica.Units.SI.SpecificEnthalpy h_hot_SF
     "enthalpy of the hot stream from the Solar Field";
-  Modelica.SIunits.MassFlowRate m_dot_cold_PW
+  Modelica.Units.SI.MassFlowRate m_dot_cold_PW
     "Mass flow rate of the cold stream from the power plant";
-  Modelica.SIunits.MassFlowRate m_dot_cold_SF
+  Modelica.Units.SI.MassFlowRate m_dot_cold_SF
     "Mass flow rate of the cold stream to the solar field";
-  Modelica.SIunits.MassFlowRate m_dot_hot_PW
+  Modelica.Units.SI.MassFlowRate m_dot_hot_PW
     "Mass flow rate of the hot stream to the power plant";
-  Modelica.SIunits.MassFlowRate m_dot_hot_SF
+  Modelica.Units.SI.MassFlowRate m_dot_hot_SF
     "Mass flow rate of the hot stream from the solar field";
 
   /* HEAT TRANSFER COEFFICIENT VARIABLES*/
-  Modelica.SIunits.ThermalConductance G_eff[N-2]
+  Modelica.Units.SI.ThermalConductance G_eff[N - 2]
     "Effective thermal conductance and heat conduction through the tank wall";
-  Modelica.SIunits.ThermalConductance G_env_wall[N-1]
+  Modelica.Units.SI.ThermalConductance G_env_wall[N - 1]
     "Thermal conductance for the heat losses to the environment through the tank wall";
-  Modelica.SIunits.ThermalConductance G_env_top
+  Modelica.Units.SI.ThermalConductance G_env_top
     "Thermal conductance for the heat losses to the environment through the tank roof";
-  Modelica.SIunits.ThermalConductance G_env_bottom
+  Modelica.Units.SI.ThermalConductance G_env_bottom
     "Thermal conductance for the heat losses to the environment through the tank base";
-  Modelica.SIunits.ThermalConductivity K_wall
+  Modelica.Units.SI.ThermalConductivity K_wall
     "Modified thermal conductivity for the conduction through the tank wall";
 
 equation

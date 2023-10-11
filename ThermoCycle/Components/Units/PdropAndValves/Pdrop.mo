@@ -7,20 +7,20 @@ model Pdrop "Linear pressure drop"
    /* Define the type of pressure drop */
   import ThermoCycle.Functions.Enumerations.PressureDrops;
   parameter PressureDrops DPtype=PressureDrops.UD;
-  parameter Modelica.SIunits.Pressure p_su_start=1e5
+  parameter Modelica.Units.SI.Pressure p_su_start=1e5
     "Inlet pressure start value" annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Pressure DELTAp_start=10000
+  parameter Modelica.Units.SI.Pressure DELTAp_start=10000
     "Start value for the pressure drop"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.MassFlowRate Mdot_start=0.1
+  parameter Modelica.Units.SI.MassFlowRate Mdot_start=0.1
     "Mass flow rate initial value" annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.MassFlowRate Mdot_max=0.1
+  parameter Modelica.Units.SI.MassFlowRate Mdot_max=0.1
     "flow rate at DELTAp_max";
-  parameter Modelica.SIunits.Pressure DELTAp_max=20E5
+  parameter Modelica.Units.SI.Pressure DELTAp_max=20E5
     "Pressure drop at Mdot_max";
   /* Variables */
-  Modelica.SIunits.MassFlowRate Mdot(start=Mdot_start);
-  Modelica.SIunits.Pressure DELTAp(start=DELTAp_start);
+  Modelica.Units.SI.MassFlowRate Mdot(start=Mdot_start);
+  Modelica.Units.SI.Pressure DELTAp(start=DELTAp_start);
   Interfaces.Fluid.FlangeA InFlow( redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   Interfaces.Fluid.FlangeB OutFlow( redeclare package Medium = Medium)

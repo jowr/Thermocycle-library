@@ -8,15 +8,15 @@ partial model RePrHeatTransfer
   parameter Real b = 0.800 "Reynolds exponent";
   parameter Real c = 0.600 "Prandl exponent";
 
-  Modelica.SIunits.Length[n] Gamma(min=0) "Characteristic length";
-  Modelica.SIunits.Velocity[n] Lambda(min=0) "Characteristic velocity";
+  Modelica.Units.SI.Length[n] Gamma(min=0) "Characteristic length";
+  Modelica.Units.SI.Velocity[n] Lambda(min=0) "Characteristic velocity";
 
-  Modelica.SIunits.ReynoldsNumber[n] Re(min=0);
-  Modelica.SIunits.PrandtlNumber[n] Pr(min=0);
-  Modelica.SIunits.NusseltNumber[n] Nu(min=0);
+  Modelica.Units.SI.ReynoldsNumber[n] Re(min=0);
+  Modelica.Units.SI.PrandtlNumber[n] Pr(min=0);
+  Modelica.Units.SI.NusseltNumber[n] Nu(min=0);
 
-  Modelica.SIunits.ThermalConductivity[n] lambda;
-  Modelica.SIunits.DynamicViscosity[n] eta;
+  Modelica.Units.SI.ThermalConductivity[n] lambda;
+  Modelica.Units.SI.DynamicViscosity[n] eta;
 
 equation
   for i in 1:n loop

@@ -1,13 +1,13 @@
-within ThermoCycle.Components.Units.ExpansionAndCompressionMachines;
+﻿within ThermoCycle.Components.Units.ExpansionAndCompressionMachines;
 package ScrollCompressor
   "Detailed, semi-empirical model of a scroll compressor"
 
   package R22
     extends ExternalMedia.Media.BaseClasses.ExternalTwoPhaseMedium(
-    mediumName="R22",
-    libraryName="CoolProp",
-    substanceNames={"R22"},
-    ThermoStates=Modelica.Media.Interfaces.PartialMedium.Choices.IndependentVariables.ph);
+      mediumName="R22",
+      libraryName="CoolProp",
+      substanceNames={"R22"},
+      ThermoStates=Modelica.Media.Interfaces.Choices.IndependentVariables.ph);
   end R22;
 
   model Test_nozzle
@@ -68,7 +68,7 @@ package ScrollCompressor
   Medium.ThermodynamicState inlet;
   Medium.ThermodynamicState throat;
   Medium.ThermodynamicState throat_choked;
-  parameter Modelica.SIunits.Area A_leak = 5e-7 "Throat area";
+    parameter Modelica.Units.SI.Area A_leak=5e-7 "Throat area";
   parameter Boolean Use_gamma=false
       "Use a fictitious gamma (perfect gas model) to compute the critical pressure";
 
@@ -83,17 +83,18 @@ package ScrollCompressor
                                                                                                           annotation(Dialog(tab="Initialization"));
   parameter Medium.AbsolutePressure P_thr_crit_start = P_su_start*(2/(gamma_start+1))^(gamma_start/(gamma_start-1))
       "Critical throat pressure start value"                                                           annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Velocity C_thr_start = Medium.velocityOfSound(Medium.setState_pT(P_thr_crit_start,T_su_start))
-      "Throat velocity start value"   annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.Velocity C_thr_start=Medium.velocityOfSound(
+        Medium.setState_pT(P_thr_crit_start, T_su_start))
+      "Throat velocity start value" annotation (Dialog(tab="Initialization"));
   //Medium.AbsolutePressure P_thr_crit(start = P_thr_crit_start);
   Medium.AbsolutePressure p_thr(start=max(P_ex_start,P_thr_crit_start),stateSelect = StateSelect.prefer);
   Medium.AbsolutePressure p_su(start=P_su_start);
   Medium.AbsolutePressure p_ex(start=P_ex_start);
   Medium.AbsolutePressure p_choked(start = P_thr_crit_start);
   Medium.Density rho_choked;
-  Modelica.SIunits.VolumeFlowRate V_dot_leak;
-  Modelica.SIunits.Velocity C_choked(start = C_thr_start);
-  Modelica.SIunits.Velocity C_thr(start = C_thr_start);
+    Modelica.Units.SI.VolumeFlowRate V_dot_leak;
+    Modelica.Units.SI.Velocity C_choked(start=C_thr_start);
+    Modelica.Units.SI.Velocity C_thr(start=C_thr_start);
   Real gamma;
 
     ThermoCycle.Interfaces.Fluid.FlangeA su(redeclare package Medium = Medium)
@@ -180,11 +181,11 @@ package ScrollCompressor
   end Nozzle;
 
   model Isothermal_wall
-  Modelica.SIunits.TemperatureSlope der_T(start=0);
-  parameter Modelica.SIunits.HeatCapacity C = 400;
-  parameter Modelica.SIunits.ThermalConductance AU_amb = 10;
-  Modelica.SIunits.Power Q_dot_amb;
-  Modelica.SIunits.Temperature T_wall(start = 290);
+    Modelica.Units.SI.TemperatureSlope der_T(start=0);
+    parameter Modelica.Units.SI.HeatCapacity C=400;
+    parameter Modelica.Units.SI.ThermalConductance AU_amb=10;
+    Modelica.Units.SI.Power Q_dot_amb;
+    Modelica.Units.SI.Temperature T_wall(start=290);
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Compresseur
       annotation (Placement(transformation(extent={{-16,58},{16,90}}),
           iconTransformation(extent={{-8,16},{6,30}})));
@@ -237,13 +238,14 @@ package ScrollCompressor
       "Fluid pressure start value, outlet"     annotation (Dialog(tab="Initialization"));
   Medium.AbsolutePressure P_ad(start = P_su_start*r_v_in,stateSelect = StateSelect.prefer);
   parameter Real r_v_in = 2.55;
-  parameter Modelica.SIunits.Volume V_s=100e-6 "Compressor swept Volume";
+    parameter Modelica.Units.SI.Volume V_s=100e-6 "Compressor swept Volume";
 
-  Modelica.SIunits.AngularFrequency N_rot "Compressor rotational speed in Hz";
-  Modelica.SIunits.SpecificEnergy w_1;
-  Modelica.SIunits.SpecificEnergy w_2;
-  Modelica.SIunits.Power W_dot_in;
-  Modelica.SIunits.AngularVelocity omega_m
+    Modelica.Units.SI.AngularFrequency N_rot
+      "Compressor rotational speed in Hz";
+    Modelica.Units.SI.SpecificEnergy w_1;
+    Modelica.Units.SI.SpecificEnergy w_2;
+    Modelica.Units.SI.Power W_dot_in;
+    Modelica.Units.SI.AngularVelocity omega_m
       "Angular velocity of the shaft [rad/s] ";
 
     ThermoCycle.Interfaces.Fluid.FlangeA su(
@@ -327,17 +329,17 @@ package ScrollCompressor
 
   model Mechanical_losses
     "Computes the Mechanical losses as a sum of different contributions (constant losses, proportional losses, friction torque)"
-  parameter Modelica.SIunits.Power W_dot_loss_0 = 0 "Constant losses";
+    parameter Modelica.Units.SI.Power W_dot_loss_0=0 "Constant losses";
   parameter Real alpha = 0
       "Proportionality factor (Wdot_loss = alpha*Wdot_tot)";
-  parameter Modelica.SIunits.Torque T_friction= 0
+    parameter Modelica.Units.SI.Torque T_friction=0
       "Friction torque (Wdot_loss = 2*pi*N_rot*T_friction)";
-  Modelica.SIunits.Power W_dot_loss;
-  Modelica.SIunits.Power W_dot_propor;
-  Modelica.SIunits.Power W_dot_friction;
-  Modelica.SIunits.Power W_dot_A;
-  Modelica.SIunits.Power W_dot_B;
-  Modelica.SIunits.AngularVelocity omega
+    Modelica.Units.SI.Power W_dot_loss;
+    Modelica.Units.SI.Power W_dot_propor;
+    Modelica.Units.SI.Power W_dot_friction;
+    Modelica.Units.SI.Power W_dot_A;
+    Modelica.Units.SI.Power W_dot_B;
+    Modelica.Units.SI.AngularVelocity omega
       "Angular velocity of the shaft [rad/s] ";
 
     Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_A      annotation (
@@ -436,37 +438,41 @@ package ScrollCompressor
     import ThermoCycle;
 
   parameter Real r_v_in=2.55 "Built-in volume ratio";
-  parameter Modelica.SIunits.Volume Vs=97.7e-6 "Swept volume";
-  parameter Modelica.SIunits.ThermalConductance AU_amb=5.382
+    parameter Modelica.Units.SI.Volume Vs=97.7e-6 "Swept volume";
+    parameter Modelica.Units.SI.ThermalConductance AU_amb=5.382
       "Heat transfer conductance for the ambient heat losses";
-  parameter Modelica.SIunits.ThermalConductance AU_su=18
+    parameter Modelica.Units.SI.ThermalConductance AU_su=18
       "Heat transfer conductance for the inlet heat exchange";
-  parameter Modelica.SIunits.ThermalConductance AU_ex=35
+    parameter Modelica.Units.SI.ThermalConductance AU_ex=35
       "Heat transfer conductance for the outlet heat exchange";
-  parameter Modelica.SIunits.Area A_leak=4.5e-7
+    parameter Modelica.Units.SI.Area A_leak=4.5e-7
       "Leakage equivalent orifice area";
-  parameter Modelica.SIunits.Power Wdot_loss_0=242
+    parameter Modelica.Units.SI.Power Wdot_loss_0=242
       "Constant (electro)mechanical losses";
   parameter Real alpha=0.2 "Proportionality factor for the proportional losses";
-  parameter Modelica.SIunits.Length d_ex=0.0075
+    parameter Modelica.Units.SI.Length d_ex=0.0075
       "Exhaust pressure drop equivalent orifice diameter";
-  parameter Modelica.SIunits.Length d_su=0.1
+    parameter Modelica.Units.SI.Length d_su=0.1
       "Supply pressure drop equivalent orifice diameter";
-  parameter Modelica.SIunits.Mass m=20 "Total mass of the compressor";
-  parameter Modelica.SIunits.SpecificHeatCapacity c=466
+    parameter Modelica.Units.SI.Mass m=20 "Total mass of the compressor";
+    parameter Modelica.Units.SI.SpecificHeatCapacity c=466
       "Specific heat capacity of the metal";
-  parameter Modelica.SIunits.Inertia J=0.02 "Moment of inertia of the rotor";
+    parameter Modelica.Units.SI.Inertia J=0.02 "Moment of inertia of the rotor";
 
-  parameter Modelica.SIunits.Temperature T_su_start = 273.15 + 20
-      "Fluid temperature start value, inlet"     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature T_ex_start = 273.15 + 100
-      "Fluid temperature start value, inlet"     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.AbsolutePressure p_su_start = 6e5
-      "Fluid pressure start value, inlet"     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.AbsolutePressure p_ex_start = 20e5
-      "Fluid pressure start value, outlet"     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.MassFlowRate Mdot_nom=0.13
-      "Nominal Mass Flow rate"                                                    annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.Temperature T_su_start=273.15 + 20
+      "Fluid temperature start value, inlet"
+      annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.Temperature T_ex_start=273.15 + 100
+      "Fluid temperature start value, inlet"
+      annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.AbsolutePressure p_su_start=6e5
+      "Fluid pressure start value, inlet"
+      annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.AbsolutePressure p_ex_start=20e5
+      "Fluid pressure start value, outlet"
+      annotation (Dialog(tab="Initialization"));
+    parameter Modelica.Units.SI.MassFlowRate Mdot_nom=0.13
+      "Nominal Mass Flow rate" annotation (Dialog(tab="Initialization"));
 
     ThermoCycle.Components.Units.PdropAndValves.DP dp_su(
       redeclare package Medium =
@@ -766,26 +772,26 @@ package ScrollCompressor
     import ThermoCycle;
 
   parameter Real r_v_in=2.55 "Built-in volume ratio";
-  parameter Modelica.SIunits.Volume Vs=97.7e-6 "Swept volume";
-  parameter Modelica.SIunits.ThermalConductance AU_amb=5.382
+    parameter Modelica.Units.SI.Volume Vs=97.7e-6 "Swept volume";
+    parameter Modelica.Units.SI.ThermalConductance AU_amb=5.382
       "Heat transfer conductance for the ambient heat losses";
-  parameter Modelica.SIunits.ThermalConductance AU_su=18
+    parameter Modelica.Units.SI.ThermalConductance AU_su=18
       "Heat transfer conductance for the inlet heat exchange";
-  parameter Modelica.SIunits.ThermalConductance AU_ex=35
+    parameter Modelica.Units.SI.ThermalConductance AU_ex=35
       "Heat transfer conductance for the outlet heat exchange";
-  parameter Modelica.SIunits.Area A_leak=4.5e-7
+    parameter Modelica.Units.SI.Area A_leak=4.5e-7
       "Leakage equivalent orifice area";
-  parameter Modelica.SIunits.Power Wdot_loss_0=242
+    parameter Modelica.Units.SI.Power Wdot_loss_0=242
       "Constant (electro)mechanical losses";
   parameter Real alpha=0.2 "Proportionality factor for the proportional losses";
-  parameter Modelica.SIunits.Length d_ex=0.0075
+    parameter Modelica.Units.SI.Length d_ex=0.0075
       "Exhaust pressure drop equivalent orifice diameter";
-  parameter Modelica.SIunits.Length d_su=0.1
+    parameter Modelica.Units.SI.Length d_su=0.1
       "Supply pressure drop equivalent orifice diameter";
-  parameter Modelica.SIunits.Mass m=20 "Total mass of the compressor";
-  parameter Modelica.SIunits.SpecificHeatCapacity c=466
+    parameter Modelica.Units.SI.Mass m=20 "Total mass of the compressor";
+    parameter Modelica.Units.SI.SpecificHeatCapacity c=466
       "Specific heat capacity of the metal";
-  parameter Modelica.SIunits.Inertia J=0.02 "Moment of inertia of the rotor";
+    parameter Modelica.Units.SI.Inertia J=0.02 "Moment of inertia of the rotor";
 
     ThermoCycle.Components.FluidFlow.Reservoirs.SinkP Sink(
       redeclare package Medium =
@@ -801,12 +807,12 @@ package ScrollCompressor
       p0=600000)
       annotation (Placement(transformation(extent={{-108,-30},{-128,-10}})));
     Modelica.Blocks.Sources.Sine sine(
-      freqHz=0.02,
+      f=0.02,
       offset=293,
       amplitude=0)
       annotation (Placement(transformation(extent={{-122,-76},{-102,-56}})));
     Modelica.Blocks.Sources.Sine sine1(
-      freqHz=0.1,
+      f=0.1,
       offset=50,
       amplitude=0)
       annotation (Placement(transformation(extent={{116,-22},{96,-2}})));

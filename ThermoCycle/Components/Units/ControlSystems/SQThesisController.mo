@@ -33,8 +33,8 @@ model SQThesisController
   // Frequency controlling PID parameters
   parameter Real Kp_freq=2
     "Elec. freq.PID Proportional gain (normalised units)";
-  parameter Modelica.SIunits.Time Ti_freq "Elec. freq.PID Integral time";
-  parameter Modelica.SIunits.Time Td_freq=0 "Elec. freq.PID Derivative time";
+  parameter Modelica.Units.SI.Time Ti_freq "Elec. freq.PID Integral time";
+  parameter Modelica.Units.SI.Time Td_freq=0 "Elec. freq.PID Derivative time";
   parameter Real Nd_freq = 1
     "Elec. freq.PID Derivative action up to Nd / Td rad/s";
   parameter Real Ni_freq = 1
@@ -79,8 +79,8 @@ model SQThesisController
             {104,-10}})));
   // Pump capacity ratio contrlling PID parameters
   parameter Real Kp_Xpp "Xpp PID Proportional gain (normalised units)";
-  parameter Modelica.SIunits.Time Ti_Xpp "Xpp PID Integral time";
-  parameter Modelica.SIunits.Time Td_Xpp=0 "Xpp PID Derivative time";
+  parameter Modelica.Units.SI.Time Ti_Xpp "Xpp PID Integral time";
+  parameter Modelica.Units.SI.Time Td_Xpp=0 "Xpp PID Derivative time";
   parameter Real Nd_Xpp = 1 "Xpp PID Derivative action up to Nd / Td rad/s";
   parameter Real Ni_Xpp = 1
     "Xpp PID Ni*Ti is the time constant of anti-windup compensation";

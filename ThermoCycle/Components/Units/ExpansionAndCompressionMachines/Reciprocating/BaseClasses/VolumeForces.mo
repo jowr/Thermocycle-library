@@ -1,6 +1,6 @@
 within ThermoCycle.Components.Units.ExpansionAndCompressionMachines.Reciprocating.BaseClasses;
 model VolumeForces "Converts pressure into forces on both ends of a cylinder"
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
   extends Modelica.Mechanics.Translational.Interfaces.PartialCompliant;
   parameter SI.Length bore;
   SI.AbsolutePressure p(min=10);

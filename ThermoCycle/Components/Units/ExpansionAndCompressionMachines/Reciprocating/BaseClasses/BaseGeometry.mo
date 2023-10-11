@@ -3,16 +3,16 @@ record BaseGeometry
   "Base class to define the geometry of a reciprocating machine"
   extends Modelica.Icons.Record;
 
-  parameter Modelica.SIunits.Length d_ppin(displayUnit="mm")
+  parameter Modelica.Units.SI.Length d_ppin(displayUnit="mm")
     "piston pin offset";
-  parameter Modelica.SIunits.Volume V_tdc(displayUnit="ml")
+  parameter Modelica.Units.SI.Volume V_tdc(displayUnit="ml")
     "ml=cm^3 - clearance volume";
-  parameter Modelica.SIunits.Length d_inlet(displayUnit="mm")
+  parameter Modelica.Units.SI.Length d_inlet(displayUnit="mm")
     "Hydraulic diameter of inlet port";
-  parameter Modelica.SIunits.Length d_outlet(displayUnit="mm")
+  parameter Modelica.Units.SI.Length d_outlet(displayUnit="mm")
     "Hydraulic diameter of outlet port";
   parameter Real zeta_inout "friction coefficient valve ports";
-  parameter Modelica.SIunits.Length d_leak(displayUnit="mm")
+  parameter Modelica.Units.SI.Length d_leak(displayUnit="mm")
     "Hydraulic diameter of leakage gap";
   parameter Real zeta_leak "friction coefficient leakage";
 

@@ -8,7 +8,7 @@ replaceable package Medium = ThermoCycle.Media.DummyFluid
         transformation(extent={{60,40},{100,80}}, rotation=0)));
   Modelica.Blocks.Interfaces.RealOutput p annotation (Placement(
         transformation(extent={{-60,40},{-100,80}}, rotation=0)));
-Modelica.SIunits.SpecificEnthalpy h "Specific Enthalpy of the fluid";
+  Modelica.Units.SI.SpecificEnthalpy h "Specific Enthalpy of the fluid";
 Medium.ThermodynamicState fluidState "Thermodynamic state of the fluid";
   Interfaces.Fluid.FlangeA InFlow( redeclare package Medium = Medium, m_flow(min= 0))
     annotation (Placement(transformation(extent={{-10,-106},{10,-86}}),

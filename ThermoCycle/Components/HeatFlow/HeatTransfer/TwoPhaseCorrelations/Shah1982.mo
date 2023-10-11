@@ -21,9 +21,9 @@ model Shah1982 "Shah correlation for evaporation"
      q_dot = q_dot);
 
   Real G(unit="kg/(s.m.m)") "Mass flux";
-  Modelica.SIunits.FroudeNumber Fr_l;
-  Modelica.SIunits.CoefficientOfHeatTransfer htc_l;
-  Modelica.SIunits.CoefficientOfHeatTransfer htc_TP;
+  Modelica.Units.SI.FroudeNumber Fr_l;
+  Modelica.Units.SI.CoefficientOfHeatTransfer htc_l;
+  Modelica.Units.SI.CoefficientOfHeatTransfer htc_TP;
   Real Bo(unit="1") "Boiling number";
 
   // Constants and factors

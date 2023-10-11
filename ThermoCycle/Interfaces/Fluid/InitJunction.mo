@@ -16,26 +16,31 @@ annotation (choicesAllMatching = true);
                                                                                                         annotation (Dialog(tab="Downstream"));
   parameter Boolean Use_pT=true
     "Use p and T to defined the initial inlet enthalpy"  annotation (Dialog(enable=const_downstream,tab="Downstream"));
-  parameter Modelica.SIunits.MassFlowRate Mdot_ex_init = 0.2
-    "Initial inlet mass flow"  annotation (Dialog(enable=const_downstream,tab="Downstream"));
-  parameter Modelica.SIunits.SpecificEnthalpy h_ex_init=2E5
-    "Initial inlet enthalpy"                                                         annotation (Dialog(enable=const_downstream and not Use_pT,tab="Downstream"));
-  parameter Modelica.SIunits.Temperature T_ex_init=273.15+25
-    "Initial inlet temperature"                                                        annotation (Dialog(enable= const_downstream and Use_pT,tab="Downstream"));
-  parameter Modelica.SIunits.Pressure p_ex_init = 1E5
-    "Initial inlet pressure (used to calculate the downstream enthalpy"                                                    annotation (Dialog(enable=const_downstream and Use_pT,tab="Downstream"));
+  parameter Modelica.Units.SI.MassFlowRate Mdot_ex_init=0.2
+    "Initial inlet mass flow"
+    annotation (Dialog(enable=const_downstream, tab="Downstream"));
+  parameter Modelica.Units.SI.SpecificEnthalpy h_ex_init=2E5
+    "Initial inlet enthalpy" annotation (Dialog(enable=const_downstream and
+          not Use_pT, tab="Downstream"));
+  parameter Modelica.Units.SI.Temperature T_ex_init=273.15 + 25
+    "Initial inlet temperature"
+    annotation (Dialog(enable=const_downstream and Use_pT, tab="Downstream"));
+  parameter Modelica.Units.SI.Pressure p_ex_init=1E5
+    "Initial inlet pressure (used to calculate the downstream enthalpy"
+    annotation (Dialog(enable=const_downstream and Use_pT, tab="Downstream"));
 
   parameter Boolean const_upstream=false
     "Set to true to impose the boundary conditions during initialization (thus discarding the real ones)"
                                                                                                         annotation (Dialog(tab="Upstream"));
-  parameter Modelica.SIunits.Pressure p_su_init = 1E5 "Initial inlet pressure"  annotation (Dialog(enable=const_upstream,tab="Upstream"));
+  parameter Modelica.Units.SI.Pressure p_su_init=1E5 "Initial inlet pressure"
+    annotation (Dialog(enable=const_upstream, tab="Upstream"));
 
   parameter Boolean noevent=false
     "Avoids generating events during the transition";
 
-  parameter Modelica.SIunits.Time tinit=10
+  parameter Modelica.Units.SI.Time tinit=10
     "Start time of the transition to the real boundary";
-  parameter Modelica.SIunits.Time duration=5 "Duration of the transition";
+  parameter Modelica.Units.SI.Time duration=5 "Duration of the transition";
 
   ThermoCycle.Functions.Init                              init_h(t_init=tinit,
       length=duration,noevent=noevent);

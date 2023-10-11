@@ -1,4 +1,4 @@
-within ThermoCycle.Components.Units.HeatExchangers;
+﻿within ThermoCycle.Components.Units.HeatExchangers;
 model CrossHX
 parameter Integer N(min=1) = 5 "Number of cells";
  replaceable package Medium1 =ThermoCycle.Media.R245fa_CP  constrainedby
@@ -8,19 +8,18 @@ parameter Integer N(min=1) = 5 "Number of cells";
 
   /*******************************************  PARAMETER *****************************************************************/
   /*Geometry*/
-  parameter Modelica.SIunits.Volume V_wf =  0.0397
-    "Volume of working fluid side";
-  parameter Modelica.SIunits.Area A_wf = 16.18
+  parameter Modelica.Units.SI.Volume V_wf=0.0397 "Volume of working fluid side";
+  parameter Modelica.Units.SI.Area A_wf=16.18
     "Lateral surface of working fluid side";
-  parameter Modelica.SIunits.Volume V_sf= 0.0397 "Total volume of fluid";
-  parameter Modelica.SIunits.Area A_sf= 16.18 "Total Lateral surface";
-  parameter Modelica.SIunits.MassFlowRate Mdotnom_wf = 0.2588
+  parameter Modelica.Units.SI.Volume V_sf=0.0397 "Total volume of fluid";
+  parameter Modelica.Units.SI.Area A_sf=16.18 "Total Lateral surface";
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom_wf=0.2588
     "Nominal fluid flow rate";
-  parameter Modelica.SIunits.MassFlowRate Mdotnom_sf= 3
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom_sf=3
     "Nominal fluid flow rate";
 /* MetalWall parameter */
-  parameter Modelica.SIunits.Mass M_wall_tot= 69 "Mass of the Wall ";
-  parameter Modelica.SIunits.SpecificHeatCapacity c_wall= 500
+  parameter Modelica.Units.SI.Mass M_wall_tot=69 "Mass of the Wall ";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_wall=500
     "Specific heat capacity of the metal ";
 
 /******************************** HEAT TRANSFER **************************************************/
@@ -28,53 +27,62 @@ parameter Integer N(min=1) = 5 "Number of cells";
 replaceable model Medium2HeatTransferModel =
     ThermoCycle.Components.HeatFlow.HeatTransfer.MassFlowDependence
    constrainedby
-    ThermoCycle.Components.HeatFlow.HeatTransfer.BaseClasses.PartialHeatTransferZones
-                                                                                                      annotation (Dialog(group="Heat transfer", tab="General"),choicesAllMatching=true);
+    ThermoCycle.Components.HeatFlow.HeatTransfer.BaseClasses.PartialHeatTransferZones                 annotation (Dialog(group="Heat transfer", tab="General"),choicesAllMatching=true);
 /*Working fluid*/
 replaceable model Medium1HeatTransferModel =
     ThermoCycle.Components.HeatFlow.HeatTransfer.MassFlowDependence
    constrainedby
-    ThermoCycle.Components.HeatFlow.HeatTransfer.BaseClasses.PartialHeatTransferZones
-                                                                                                      annotation (Dialog(group="Heat transfer", tab="General"),choicesAllMatching=true);
+    ThermoCycle.Components.HeatFlow.HeatTransfer.BaseClasses.PartialHeatTransferZones                 annotation (Dialog(group="Heat transfer", tab="General"),choicesAllMatching=true);
 
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_l= 300
-    "if HTtype = LiqVap : Heat transfer coefficient, liquid zone " annotation (Dialog(group="Heat transfer", tab="General"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_tp= 700
-    "if HTtype = LiqVap : heat transfer coefficient, two-phase zone" annotation (Dialog(group="Heat transfer", tab="General"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_v= 400
-    "if HTtype = LiqVap : heat transfer coefficient, vapor zone" annotation (Dialog(group="Heat transfer", tab="General"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_sf= 100
-    "Constant heat transfer coefficient" annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_l=300
+    "if HTtype = LiqVap : Heat transfer coefficient, liquid zone "
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_tp=700
+    "if HTtype = LiqVap : heat transfer coefficient, two-phase zone"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_v=400
+    "if HTtype = LiqVap : heat transfer coefficient, vapor zone"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_sf=100
+    "Constant heat transfer coefficient"
+    annotation (Dialog(group="Heat transfer", tab="General"));
 
 /*PRESSURE DROP SECONDARY FLUID */
 
    parameter Boolean UseNom_sf=false
     "Use Nominal conditions to compute pressure drop characteristics" annotation (Dialog(group="Pdrop_sf", tab="General"));
- parameter Modelica.SIunits.Length h_sf=0
-    "Static fluid head (dp = h * rho * g)"                                        annotation (Dialog(enable=(not UseNom),group="Pdrop_sf", tab="General"));
+  parameter Modelica.Units.SI.Length h_sf=0
+    "Static fluid head (dp = h * rho * g)" annotation (Dialog(
+      enable=(not UseNom),
+      group="Pdrop_sf",
+      tab="General"));
   parameter Real k_sf= 38.4E3*9.5
     "Coefficient for linear pressure drop (dp = k * V_dot)"                            annotation (Dialog(enable=(not UseNom_sf),group="Pdrop_sf", tab="General"));
-  parameter Modelica.SIunits.Area Athroat_sf=(2*9.5*23282.7)^(-0.5)
+  parameter Modelica.Units.SI.Area Athroat_sf=(2*9.5*23282.7)^(-0.5)
     "Valve throat area for quadratic pressure drop (dp = 1/A²*M_dot²/(2*rho))"
-                                                                                 annotation (Dialog(enable=(not UseNom_sf),group="Pdrop_sf", tab="General"));
- parameter Modelica.SIunits.Pressure DELTAp_0_sf=500
+    annotation (Dialog(
+      enable=(not UseNom_sf),
+      group="Pdrop_sf",
+      tab="General"));
+  parameter Modelica.Units.SI.Pressure DELTAp_0_sf=500
     "Pressure drop below which a 3rd order interpolation is used for the computation of the flow rate in order to avoid infinite derivative at 0"
-                                                                                                        annotation (Dialog(group="Pdrop_sf", tab="General"));
-parameter Modelica.SIunits.Pressure p_nom_sf=1e5 "Nominal pressure"
-                       annotation (Dialog(group="Pdrop_sf",tab="Nominal Conditions"));
-parameter Modelica.SIunits.Temperature T_nom_sf=283.15 "Nominal temperature"
-                          annotation (Dialog(group="Pdrop_sf",tab="Nominal Conditions"));
- parameter Modelica.SIunits.Density rho_nom_sf=Medium1.density_pT(
-          p_nom_sf,
-          T_nom_sf) "Nominal density"    annotation (Dialog(group="Pdrop_sf",tab="Nominal Conditions"));
-  parameter Modelica.SIunits.Pressure   DELTAp_stat_nom_sf=0
+    annotation (Dialog(group="Pdrop_sf", tab="General"));
+  parameter Modelica.Units.SI.Pressure p_nom_sf=1e5 "Nominal pressure"
+    annotation (Dialog(group="Pdrop_sf", tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Temperature T_nom_sf=283.15 "Nominal temperature"
+    annotation (Dialog(group="Pdrop_sf", tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Density rho_nom_sf=Medium1.density_pT(p_nom_sf,
+      T_nom_sf) "Nominal density"
+    annotation (Dialog(group="Pdrop_sf", tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Pressure DELTAp_stat_nom_sf=0
     "Nominal static pressure drop"
-                           annotation (Dialog(group="Pdrop_sf",tab="Nominal Conditions"));
-  parameter Modelica.SIunits.Pressure   DELTAp_lin_nom_sf=0
+    annotation (Dialog(group="Pdrop_sf", tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Pressure DELTAp_lin_nom_sf=0
     "Nominal linear pressure drop"
-                           annotation (Dialog(group="Pdrop_sf",tab="Nominal Conditions"));
-  parameter Modelica.SIunits.Pressure   DELTAp_quad_nom_sf=0
-    "Nominal quadratic pressure drop"                                                      annotation (Dialog(group="Pdrop_sf",tab="Nominal Conditions"));
+    annotation (Dialog(group="Pdrop_sf", tab="Nominal Conditions"));
+  parameter Modelica.Units.SI.Pressure DELTAp_quad_nom_sf=0
+    "Nominal quadratic pressure drop"
+    annotation (Dialog(group="Pdrop_sf", tab="Nominal Conditions"));
    parameter Boolean   use_rho_nom_sf=false
     "Use the nominal density for the computation of the pressure drop (i.e it depends only the flow rate)"
                            annotation (Dialog(group="Pdrop_sf",tab="Nominal Conditions"));
@@ -82,8 +90,8 @@ parameter Modelica.SIunits.Temperature T_nom_sf=283.15 "Nominal temperature"
 /************************************************* INITIALIZATION ********************************/
 
  /* WorkingFluid Initial values */
-parameter Modelica.SIunits.Pressure pstart_wf = 23.57
-    "Fluid pressure start value"     annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure pstart_wf=23.57
+    "Fluid pressure start value" annotation (Dialog(tab="Initialization"));
   parameter Medium1.Temperature Tstart_wf_in "Inlet temperature start value"
      annotation (Dialog(tab="Initialization"));
   //parameter Medium1.Temperature Tstart_wf_out "outlet temperature start value"annotation (Dialog(tab="Initialization"));
@@ -92,8 +100,8 @@ parameter Modelica.SIunits.Pressure pstart_wf = 23.57
     annotation (Dialog(tab="Initialization"));
 
   /*Metal Wall*/
-  parameter Modelica.SIunits.Temperature T_start_wall = (Tstart_wf_in + T_nom_sf)/2
-    "Start value of temperature (initialized by default)"
+  parameter Modelica.Units.SI.Temperature T_start_wall=(Tstart_wf_in + T_nom_sf)
+      /2 "Start value of temperature (initialized by default)"
     annotation (Dialog(tab="Initialization"));
 parameter Boolean steadystate_wf=true
     "if true, sets the derivative of h (working fluids enthalpy in each cell) to zero during Initialization"
@@ -106,9 +114,11 @@ parameter Boolean steadystate_T_wall=true
   parameter Boolean UseHomotopy_sf=false
     "if true, uses homotopy to set the pressure drop to zero in the first initialization"
   annotation (Dialog(group="Initialization options",tab="Initialization"));
-  parameter Modelica.SIunits.Pressure   DELTAp_start_sf=DELTAp_stat_nom_sf + DELTAp_lin_nom_sf + DELTAp_quad_nom_sf
-    "Start Value for the pressure drop"                                                         annotation (Dialog(group="Initialization options",tab="Initialization"));
-    parameter Modelica.SIunits.Time t_init_sf=10
+  parameter Modelica.Units.SI.Pressure DELTAp_start_sf=DELTAp_stat_nom_sf +
+      DELTAp_lin_nom_sf + DELTAp_quad_nom_sf
+    "Start Value for the pressure drop"
+    annotation (Dialog(group="Initialization options", tab="Initialization"));
+  parameter Modelica.Units.SI.Time t_init_sf=10
     "if constinit is true, time during which the pressure drop is set to the constant value DELTAp_start"
     annotation (Dialog(tab="Initialization", enable=constinit));
 
@@ -129,7 +139,7 @@ parameter Boolean steadystate_T_wall=true
     annotation (Dialog(tab="Numerical options"));
   parameter Real max_drhodt_wf=100 "Maximum value for the density derivative"
     annotation (Dialog(enable=filter_dMdt, tab="Numerical options"));
-  parameter Modelica.SIunits.Time TT_wf=1
+  parameter Modelica.Units.SI.Time TT_wf=1
     "Integration time of the first-order filter"
     annotation (Dialog(enable=max_der_wf, tab="Numerical options"));
 

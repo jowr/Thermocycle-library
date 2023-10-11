@@ -44,8 +44,7 @@ model CondGeneral
   ThermoCycle.Interfaces.Fluid.FlangeA InFlow(redeclare final package Medium =
                Medium)
     annotation (Placement(transformation(extent={{-112,-8},{-92,12}})));
-  ThermoCycle.Interfaces.Fluid.FlangeB OutFlow(  redeclare final package Medium
-      =                                                                           Medium)
+  ThermoCycle.Interfaces.Fluid.FlangeB OutFlow(  redeclare final package Medium = Medium)
     annotation (Placement(transformation(extent={{70,-4},{90,16}}),
         iconTransformation(extent={{70,-4},{90,16}})));
 
@@ -69,9 +68,9 @@ import ThermoCycle.Components.Units.HeatExchangers.MB_HX.Records;
 
 /* Parameters */
 final parameter Integer  nCV= 3;
-parameter Modelica.SIunits.Area AA = 0.0019 "Channel cross section";
-parameter Modelica.SIunits.Length YY = 1.57 "Channel perimeter";
-parameter Modelica.SIunits.Length Ltotal=500
+  parameter Modelica.Units.SI.Area AA=0.0019 "Channel cross section";
+  parameter Modelica.Units.SI.Length YY=1.57 "Channel perimeter";
+  parameter Modelica.Units.SI.Length Ltotal=500
     "Total length of the heat exchanger";
 parameter Boolean VoidFraction = true
     "Set to true to calculate the void fraction to false to keep it constant";
@@ -79,21 +78,25 @@ parameter Boolean VoidFraction = true
 
 /* Heat transfer */
 parameter Boolean eps_NTU = false "Set to true for eps-NTU heat transfer" annotation (Dialog(group = "Heat transfer"));
-parameter Modelica.SIunits.MassFlowRate Mdotnom=0 "Nominal fluid flow rate" annotation (Dialog(group = "Heat transfer"));
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom=0 "Nominal fluid flow rate"
+    annotation (Dialog(group="Heat transfer"));
 
-parameter Modelica.SIunits.CoefficientOfHeatTransfer   UnomSH=3000 annotation (Dialog(group = "Heat transfer"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer   UnomTP=9000 annotation (Dialog(group = "Heat transfer"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer   UnomSC=2500 annotation (Dialog(group = "Heat transfer"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UnomSH=3000
+    annotation (Dialog(group="Heat transfer"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UnomTP=9000
+    annotation (Dialog(group="Heat transfer"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UnomSC=2500
+    annotation (Dialog(group="Heat transfer"));
 
   /* Initial values */
-  parameter Modelica.SIunits.Pressure pstart=6e6 "Fluid pressure start value"
+  parameter Modelica.Units.SI.Pressure pstart=6e6 "Fluid pressure start value"
     annotation (Dialog(tab="Initialization"));
 
-parameter Modelica.SIunits.Length lstartSH=1 "SH:Start value of length"
+  parameter Modelica.Units.SI.Length lstartSH=1 "SH:Start value of length"
     annotation (Dialog(tab="Initialization"));
-parameter Modelica.SIunits.Length lstartTP=1 "TP:Start value of length"
+  parameter Modelica.Units.SI.Length lstartTP=1 "TP:Start value of length"
     annotation (Dialog(tab="Initialization"));
-parameter Modelica.SIunits.Length lstartSC=1 "SC:Start value of length"
+  parameter Modelica.Units.SI.Length lstartSC=1 "SC:Start value of length"
     annotation (Dialog(tab="Initialization"));
 
 parameter Medium.SpecificEnthalpy hstartSH=1E5 "TP: Start value of enthalpy"
@@ -105,10 +108,10 @@ parameter Medium.SpecificEnthalpy hstartSC=1E5 "SC: Start value of enthalpy"
 
   Records.Mode mode[nCV];
 /* Summary Class variables */
-  Modelica.SIunits.Temperature[9] Temp;
-  Modelica.SIunits.Length[9] length;
-  Modelica.SIunits.Power[nCV] q_dot;
-  Modelica.SIunits.Power qtot;
+  Modelica.Units.SI.Temperature[9] Temp;
+  Modelica.Units.SI.Length[9] length;
+  Modelica.Units.SI.Power[nCV] q_dot;
+  Modelica.Units.SI.Power qtot;
 equation
   volumeSC.mode = mode[nCV-2];
   volumeTP.mode = mode[nCV-1];
@@ -146,11 +149,11 @@ public
   record SummaryClass
     replaceable Arrays T_profile;
      record Arrays
-     Modelica.SIunits.Temperature[9] T_cell;
+      Modelica.Units.SI.Temperature[9] T_cell;
      end Arrays;
-     Modelica.SIunits.Length[9] l_cell;
-     Modelica.SIunits.Power[3] Qflow;
-     Modelica.SIunits.Power Qtot;
+    Modelica.Units.SI.Length[9] l_cell;
+    Modelica.Units.SI.Power[3] Qflow;
+    Modelica.Units.SI.Power Qtot;
   end SummaryClass;
   SummaryClass Summary(T_profile(T_cell = Temp[:]),l_cell = length[:],Qflow=q_dot[:],Qtot=qtot);
 

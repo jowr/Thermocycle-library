@@ -2,7 +2,7 @@ within ThermoCycle.Interfaces.Fluid;
 connector FlangeA_limit
   "A-type flange connector real fluid flows with enthalpy limiter"
   extends Fluid.Flange;
-  stream Modelica.SIunits.SpecificEnthalpy h_limit;
+  stream Modelica.Units.SI.SpecificEnthalpy h_limit;
   annotation (Icon(graphics={Ellipse(
           extent={{-100,100},{100,-100}},
           lineColor={0,0,255},

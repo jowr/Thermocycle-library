@@ -56,18 +56,18 @@ ThermoCycle.Interfaces.Fluid.FlangeB OutFlow_fl2(redeclare package Medium=Medium
 parameter Integer N(min=1) = 5 "Number of cells";
 
 /*Geometry*/
-parameter Modelica.SIunits.Area A_wf = 16.18
+  parameter Modelica.Units.SI.Area A_wf=16.18
     "Heat exchange area of working fluid side";
 
-parameter Modelica.SIunits.Area A_sf= 16.18
+  parameter Modelica.Units.SI.Area A_sf=16.18
     "Heat exchange area of secondary fluid side";
-parameter Modelica.SIunits.Volume V_sf= 0.0397 "Volume of secondary fluid";
-parameter Modelica.SIunits.MassFlowRate Mdotnom_sf= 3
+  parameter Modelica.Units.SI.Volume V_sf=0.0397 "Volume of secondary fluid";
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom_sf=3
     "Nominal secondary fluid mass flow rate";
 
 /*MetalWall parameter*/
-parameter Modelica.SIunits.Mass M_wall_tot= 69 "Mass of the wall";
-parameter Modelica.SIunits.SpecificHeatCapacity c_wall= 500
+  parameter Modelica.Units.SI.Mass M_wall_tot=69 "Mass of the wall";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_wall=500
     "Specific heat capacity of the metal wall";
 
 /******************************** HEAT TRANSFER **************************************************/
@@ -77,12 +77,14 @@ replaceable model Medium2HeatTransferModel =
    constrainedby
     ThermoCycle.Components.HeatFlow.HeatTransfer.BaseClasses.PartialHeatTransferZones
     "Heat transfer model of secondary fluid"                                                                                                   annotation (Dialog(group="Heat transfer", tab="General"),choicesAllMatching=true);
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_sf
-    "Heat transfer coefficient of secondary fluid"                                                         annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_sf
+    "Heat transfer coefficient of secondary fluid"
+    annotation (Dialog(group="Heat transfer", tab="General"));
 
 /*Working fluid*/
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer U_wf
-    "Heat transfer coefficient of working fluid" annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_wf
+    "Heat transfer coefficient of working fluid"
+    annotation (Dialog(group="Heat transfer", tab="General"));
 /************************************************* INITIALIZATION ********************************/
 
 /* SecondaryFluid Initial values */
@@ -91,10 +93,12 @@ replaceable model Medium2HeatTransferModel =
   parameter Medium2.Temperature Tstart_sf_out "Outlet temperature start value" annotation (Dialog(group="Secondary Fluid",tab="Initialization"));
 
 /* WorkingFluid Initial values */
-  parameter Modelica.SIunits.Temperature T_sat_start
-    "Saturation temperature start value"                                                  annotation(Dialog(group="Working Fluid",tab = "Initialization"));
-  parameter Modelica.SIunits.Pressure p_sat_start = Medium1.saturationPressure(T_sat_start)
-    "Saturation pressure start value"                                                                                                     annotation(Dialog(group="Working Fluid",tab = "Initialization"));
+  parameter Modelica.Units.SI.Temperature T_sat_start
+    "Saturation temperature start value"
+    annotation (Dialog(group="Working Fluid", tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure p_sat_start=Medium1.saturationPressure(
+      T_sat_start) "Saturation pressure start value"
+    annotation (Dialog(group="Working Fluid", tab="Initialization"));
   parameter Medium1.SpecificEnthalpy h_su_wf_start = Medium1.dewEnthalpy(Medium1.setSat_T(T_sat_start))
     "Inlet enthalpy start value"
     annotation(Dialog(group="Working Fluid",tab = "Initialization"));
@@ -105,9 +109,9 @@ replaceable model Medium2HeatTransferModel =
   Medium1.SpecificEnthalpy h_ex_wf(start=h_ex_wf_start) "Outlet enthalpy";
 
 /*Metal Wall*/
-  parameter Modelica.SIunits.Temperature T_start_wall = (Tstart_sf_in + T_sat_start)/2
-    "Wall's temperature start value"
-    annotation (Dialog(group="Metal Wall",tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_start_wall=(Tstart_sf_in +
+      T_sat_start)/2 "Wall's temperature start value"
+    annotation (Dialog(group="Metal Wall", tab="Initialization"));
 
 /* Initialization Options */
 parameter Boolean steadystate_sf=true
@@ -117,9 +121,9 @@ parameter Boolean steadystate_T_wall=true
     "if true, sets the derivative of T_wall to zero during Initialization"    annotation (Dialog(group="Initialization options", tab="Initialization"));
 
 /************************************************* VARIABLES ********************************/
-  Modelica.SIunits.Power Qdot
+  Modelica.Units.SI.Power Qdot
     "Heat flux exchanged between the wall and the secondary fluid";
-  Modelica.SIunits.Power Qdot_tot "Total Heat flux exchanged";
+  Modelica.Units.SI.Power Qdot_tot "Total Heat flux exchanged";
   Medium1.SaturationProperties satState
     "Saturation state for the working fluid";
   Medium1.BaseProperties stateIn(p(start=p_sat_start),h(start=h_su_wf_start));

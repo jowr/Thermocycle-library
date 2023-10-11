@@ -4,10 +4,10 @@ replaceable package Medium = ThermoCycle.Media.R245fa_CP  constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model" annotation (choicesAllMatching = true);
 
  /******************************* PARAMETERS *****************************/
-  parameter Modelica.SIunits.Volume Vtot=0.002 "Volume of the tank";
-  parameter Modelica.SIunits.Pressure p_ng = 0
+  parameter Modelica.Units.SI.Volume Vtot=0.002 "Volume of the tank";
+  parameter Modelica.Units.SI.Pressure p_ng=0
     "Partial pressure of non-condensable gases";
-  parameter Modelica.SIunits.Pressure pstart=5e5 "Initial pressure"
+  parameter Modelica.Units.SI.Pressure pstart=5e5 "Initial pressure"
     annotation (Dialog(tab="Initialisation"));
   parameter Real L_start=0.6 "Initial level"
     annotation (Dialog(tab="Initialisation"));

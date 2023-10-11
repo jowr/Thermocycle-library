@@ -40,13 +40,12 @@ model Test_Flow1D
     offset=0.3335,
     amplitude=0.5,
     phase=0,
-    freqHz=0.1)
-    annotation (Placement(transformation(extent={{-116,50},{-102,64}})));
-  Components.FluidFlow.Sensors.SensTpSat T_su_Sensor(redeclare package Medium
-      = ThermoCycle.Media.SES36_CP)
+    f=0.1) annotation (Placement(transformation(extent={{-116,50},{-102,64}})));
+  Components.FluidFlow.Sensors.SensTpSat T_su_Sensor(redeclare package Medium =
+        ThermoCycle.Media.SES36_CP)
     annotation (Placement(transformation(extent={{-64,10},{-44,30}})));
-  Components.FluidFlow.Sensors.SensTpSat T_ex_Sensor(redeclare package Medium
-      = ThermoCycle.Media.SES36_CP)
+  Components.FluidFlow.Sensors.SensTpSat T_ex_Sensor(redeclare package Medium =
+        ThermoCycle.Media.SES36_CP)
     annotation (Placement(transformation(extent={{14,14},{34,34}})));
 equation
   connect(source_T.thermalPort, flow1Dim.Wall_int) annotation (Line(

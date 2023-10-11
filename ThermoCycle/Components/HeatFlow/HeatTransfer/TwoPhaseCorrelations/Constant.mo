@@ -9,7 +9,7 @@ model Constant "Constant: Constant heat transfer coefficient"
     ThermoCycle.Components.HeatFlow.HeatTransfer.BaseClasses.PartialPlateHeatExchangerCorrelation(
       final d_h=0, final A_cro=0);
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer U_c = 3000
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_c=3000
     "Heat transfer coefficient";
 equation
   U = U_c;

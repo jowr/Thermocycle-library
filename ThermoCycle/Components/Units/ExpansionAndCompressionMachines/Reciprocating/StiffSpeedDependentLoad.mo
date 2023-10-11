@@ -1,19 +1,20 @@
 within ThermoCycle.Components.Units.ExpansionAndCompressionMachines.Reciprocating;
 model StiffSpeedDependentLoad "High order dependency of load on speed"
   extends Modelica.Mechanics.Rotational.Interfaces.PartialTorque;
-  parameter Modelica.SIunits.Power P_nominal(displayUnit="kW") = 1000
+  parameter Modelica.Units.SI.Power P_nominal(displayUnit="kW") = 1000
     "Nominal load (if positive, load is acting as drive)";
   parameter Boolean LoadDirection=true
     "Same direction of load in both directions of rotation";
-  parameter Modelica.SIunits.AngularVelocity w_nominal(displayUnit="rpm",min=Modelica.Constants.eps) = 20
-    "Nominal speed";
+  parameter Modelica.Units.SI.AngularVelocity w_nominal(
+    displayUnit="rpm",
+    min=Modelica.Constants.eps) = 20 "Nominal speed";
   parameter Integer order(min=2) = 10 "Order of dependency";
-  Modelica.SIunits.AngularVelocity w
+  Modelica.Units.SI.AngularVelocity w
     "Angular velocity of flange with respect to support (= der(phi))";
-  Modelica.SIunits.Torque tau
+  Modelica.Units.SI.Torque tau
     "Accelerating torque acting at flange (= -flange.tau)";
 protected
-  Modelica.SIunits.Torque tau_nominal
+  Modelica.Units.SI.Torque tau_nominal
     "Accelerating torque acting at flange (= -flange.tau)";
 equation
   w = der(phi);

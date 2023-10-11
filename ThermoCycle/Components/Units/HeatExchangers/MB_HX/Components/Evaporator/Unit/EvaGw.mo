@@ -56,9 +56,9 @@ annotation (choicesAllMatching = true);
 
            /* GEOMETRIES */
  final parameter Integer  nCV= 3;
-parameter Modelica.SIunits.Area AA = 0.0019 "Channel cross section";
-parameter Modelica.SIunits.Length YY "Channel perimeter";
-parameter Modelica.SIunits.Length Ltotal=500
+  parameter Modelica.Units.SI.Area AA=0.0019 "Channel cross section";
+  parameter Modelica.Units.SI.Length YY "Channel perimeter";
+  parameter Modelica.Units.SI.Length Ltotal=500
     "Total length of the heat exchanger";
 
 parameter Boolean VoidFraction = true
@@ -66,9 +66,11 @@ parameter Boolean VoidFraction = true
 parameter Real VoidF = 0.8 "Constantat void fraction" annotation (Dialog(enable= not VoidFraction));
 
     /* WALL */
-parameter Modelica.SIunits.SpecificHeatCapacity cpw
-    "Specific heat capacity (constant)"                                                       annotation(Dialog(group="Metal Wall",__Dymola_label="Cp wall:"));
-    parameter Modelica.SIunits.Mass Mw "Total mass of the wall" annotation(Dialog(group="Metal Wall",__Dymola_label="Mass wall:"));
+  parameter Modelica.Units.SI.SpecificHeatCapacity cpw
+    "Specific heat capacity (constant)"
+    annotation (Dialog(group="Metal Wall", __Dymola_label="Cp wall:"));
+  parameter Modelica.Units.SI.Mass Mw "Total mass of the wall"
+    annotation (Dialog(group="Metal Wall", __Dymola_label="Mass wall:"));
 
   /* BOOLEAN */
 parameter Boolean epsNTU_sf = false "SF-wall :If True use eps-NTU " annotation (Dialog(group = "Heat transfer"));
@@ -77,18 +79,23 @@ parameter Boolean counterCurrent = true
     "If true countercurrent - PARALLEL FLOW NOT STABLE";
 
 /* HEAT TRANSFER */
-parameter Modelica.SIunits.MassFlowRate Mdotnom=0 "Nominal fluid flow rate" annotation (Dialog(group = "Heat transfer"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer UnomSC=2500
-    "SC - Nominal heat transfer coefficient"                                                annotation (Dialog(group = "Heat transfer"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer UnomTP=9000
-    "TP - Nominal heat transfer coefficient"                                                annotation (Dialog(group = "Heat transfer"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer UnomSH=9000
-    "TP - Nominal heat transfer coefficient"                                                annotation (Dialog(group = "Heat transfer"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unomsf=1000
-    "TP - Nominal heat transfer coefficient"                                                annotation (Dialog(group = "Heat transfer"));
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom=0 "Nominal fluid flow rate"
+    annotation (Dialog(group="Heat transfer"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UnomSC=2500
+    "SC - Nominal heat transfer coefficient"
+    annotation (Dialog(group="Heat transfer"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UnomTP=9000
+    "TP - Nominal heat transfer coefficient"
+    annotation (Dialog(group="Heat transfer"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UnomSH=9000
+    "TP - Nominal heat transfer coefficient"
+    annotation (Dialog(group="Heat transfer"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unomsf=1000
+    "TP - Nominal heat transfer coefficient"
+    annotation (Dialog(group="Heat transfer"));
 
     /* INITIAL VALUES */
-parameter Modelica.SIunits.Pressure pstart=6e6 "Fluid pressure start value"
+  parameter Modelica.Units.SI.Pressure pstart=6e6 "Fluid pressure start value"
     annotation (Dialog(tab="Initialization"));
 parameter Medium.SpecificEnthalpy hstartSC=1E5 "SC: Start value of enthalpy"
     annotation (Dialog(tab="Initialization"));
@@ -96,16 +103,17 @@ parameter Medium.SpecificEnthalpy hstartTP=1E5 "TP: Start value of enthalpy"
     annotation (Dialog(tab="Initialization"));
 parameter Medium.SpecificEnthalpy hstartSH=1E5 "SH: Start value of enthalpy"
     annotation (Dialog(tab="Initialization"));
-parameter Modelica.SIunits.Length lstartSC=1 "SC:Start value of length"
+  parameter Modelica.Units.SI.Length lstartSC=1 "SC:Start value of length"
     annotation (Dialog(tab="Initialization"));
-parameter Modelica.SIunits.Length lstartTP=1 "TP:Start value of length"
+  parameter Modelica.Units.SI.Length lstartTP=1 "TP:Start value of length"
     annotation (Dialog(tab="Initialization"));
-parameter Modelica.SIunits.Length lstartSH=1 "SH:Start value of length"
+  parameter Modelica.Units.SI.Length lstartSH=1 "SH:Start value of length"
     annotation (Dialog(tab="Initialization"));
 
     /* initialization wall */
-parameter Modelica.SIunits.Temperature TstartWall[nCV]
-    "Start temperature of the wall"                                                        annotation (Dialog(tab="Initialization",group= "Wall"));
+  parameter Modelica.Units.SI.Temperature TstartWall[nCV]
+    "Start temperature of the wall"
+    annotation (Dialog(tab="Initialization", group="Wall"));
 parameter Boolean SteadyStateWall = false
     "If true set Twall to zero during initialization"                                      annotation (Dialog(tab="Initialization",group= "Wall"));
 
@@ -118,10 +126,12 @@ parameter Boolean Set_h_pf_out = false
     "If true set PF outlet enthalpy during initialization equal to h_pf_out"                annotation(Dialog(tab="Initialization",group= "Primary fluid"));
 
  /* initialization secondary fluid */
-parameter Modelica.SIunits.Temperature Tstartsf
-    "Start value for average temperature of inlet cell" annotation (Dialog(tab="Initialization",group= "Secondary fluid"));
-parameter Modelica.SIunits.Temperature DTstartsf
-    "Delta T to initialize second and third volume average temperature" annotation (Dialog(tab="Initialization",group= "Secondary fluid"));
+  parameter Modelica.Units.SI.Temperature Tstartsf
+    "Start value for average temperature of inlet cell"
+    annotation (Dialog(tab="Initialization", group="Secondary fluid"));
+  parameter Modelica.Units.SI.Temperature DTstartsf
+    "Delta T to initialize second and third volume average temperature"
+    annotation (Dialog(tab="Initialization", group="Secondary fluid"));
 
   ThermoCycle.Interfaces.Fluid.Flange_ex_Cdot OutFlowSF
     annotation (Placement(transformation(extent={{-110,64},{-90,84}}),
@@ -162,13 +172,13 @@ public
   record SummaryClass
     replaceable Arrays T_profile;
      record Arrays
-     Modelica.SIunits.Temperature[9] Twf;
-     Modelica.SIunits.Temperature[9] Twall;
-     Modelica.SIunits.Temperature[9] Tsf;
+      Modelica.Units.SI.Temperature[9] Twf;
+      Modelica.Units.SI.Temperature[9] Twall;
+      Modelica.Units.SI.Temperature[9] Tsf;
      end Arrays;
-     Modelica.SIunits.Length[9] l_cell;
-     Modelica.SIunits.Power Qwf;
-     Modelica.SIunits.Power Qsf;
+    Modelica.Units.SI.Length[9] l_cell;
+    Modelica.Units.SI.Power Qwf;
+    Modelica.Units.SI.Power Qsf;
   end SummaryClass;
   SummaryClass Summary(T_profile(Twf = evaGeneral.Summary.T_profile.T_cell[:],Twall= Wall.Summary.T_profile.T_cell[:], Tsf = secondaryFluid.Summary.T_profile.T_cell[end:-1:1]),l_cell = evaGeneral.Summary.l_cell[:],Qwf = evaGeneral.Summary.Qtot,Qsf = secondaryFluid.Summary.Qtot);
   // Eva_G.PNG

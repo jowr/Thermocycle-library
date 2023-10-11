@@ -24,16 +24,16 @@ parameter Real epsilon_s=0.7 "Isentropic Efficiency"
   /****************************************** PARAMETERES ******************************************/
   parameter Real epsilon_v=1 "Volumetric efficiency"
     annotation (Dialog(enable=(ExpType == ExpTypes.UD)));
-  parameter Modelica.SIunits.Volume V_s=1e-4 "Swept volume";
+  parameter Modelica.Units.SI.Volume V_s=1e-4 "Swept volume";
   parameter Real epsilon_start=0.5782 "Isentropic Efficiency"
     annotation (Dialog(tab="Initialization"));
   parameter Real epsilon_v_start=1 "Volumetric Efficiency"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Pressure p_su_start=2.339e5
+  parameter Modelica.Units.SI.Pressure p_su_start=2.339e5
     "Inlet pressure start value" annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Pressure p_ex_start=1.77175e6
+  parameter Modelica.Units.SI.Pressure p_ex_start=1.77175e6
     "Outlet pressure start value" annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature T_su_start=293.15
+  parameter Modelica.Units.SI.Temperature T_su_start=293.15
     "Inlet temperature start value" annotation (Dialog(tab="Initialization"));
   parameter Medium.SpecificEnthalpy h_su_start = Medium.specificEnthalpy_pT(p_su_start, T_su_start)
     "Inlet enthalpy start value"                                                                                                annotation (Dialog(tab="Initialization"));
@@ -52,10 +52,10 @@ parameter Real epsilon_s=0.7 "Isentropic Efficiency"
   Medium.ThermodynamicState vaporOut
     "Thermodynamic state of the fluid at the outlet - isentropic";
   Real rpm;
-  Modelica.SIunits.Frequency N_rot;
-  Modelica.SIunits.Power W_dot;
-  Modelica.SIunits.VolumeFlowRate V_dot_su;
-  Modelica.SIunits.MassFlowRate M_dot;
+  Modelica.Units.SI.Frequency N_rot;
+  Modelica.Units.SI.Power W_dot;
+  Modelica.Units.SI.VolumeFlowRate V_dot_su;
+  Modelica.Units.SI.MassFlowRate M_dot;
   Medium.Density rho_su(start=Medium.density_pT(p_su_start,T_su_start));
   Medium.SpecificEntropy s_su;
   Medium.SpecificEnthalpy h_su(start=h_su_start);

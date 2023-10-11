@@ -3,10 +3,9 @@ block ValveTimer "Open and close valves according to degree or time input."
   extends Modelica.Blocks.Interfaces.SO;
 
   parameter Boolean use_angle_in=true "Enable input connector";
-  parameter Modelica.SIunits.AngularVelocity rpm=
-      Modelica.SIunits.Conversions.from_rpm(60)
-    annotation (Evaluate = true,
-                Dialog(enable = not use_angle_in));
+  parameter Modelica.Units.SI.AngularVelocity rpm=
+      Modelica.Units.Conversions.from_rpm(60)
+    annotation (Evaluate=true, Dialog(enable=not use_angle_in));
   parameter Boolean input_in_rad=false "Input in radians, else degrees"
     annotation (Evaluate = true,
                 Dialog(enable = use_angle_in));
@@ -15,23 +14,23 @@ block ValveTimer "Open and close valves according to degree or time input."
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
           rotation=0), iconTransformation(extent={{-140,-20},{-100,20}})));
 
-                parameter Modelica.SIunits.Angle open = Modelica.SIunits.Conversions.from_deg(170)
-    "Half opened";
+  parameter Modelica.Units.SI.Angle open=Modelica.Units.Conversions.from_deg(
+      170) "Half opened";
 
-    parameter Modelica.SIunits.Angle close = Modelica.SIunits.Conversions.from_deg(190)
-    "Half closed";
+  parameter Modelica.Units.SI.Angle close=Modelica.Units.Conversions.from_deg(
+      190) "Half closed";
 
-    parameter Modelica.SIunits.Angle switch = Modelica.SIunits.Conversions.from_deg(5)
-    "Length for valve operation.";
+  parameter Modelica.Units.SI.Angle switch=Modelica.Units.Conversions.from_deg(
+      5) "Length for valve operation.";
 
 protected
   Real value1;
   Real value2;
-  Modelica.SIunits.Angle closeTmp;
-  Modelica.SIunits.Angle openTmp;
-  Modelica.SIunits.Angle angleTmp;
-  Modelica.SIunits.Angle deltaOpen;
-  Modelica.SIunits.Angle deltaClose;
+  Modelica.Units.SI.Angle closeTmp;
+  Modelica.Units.SI.Angle openTmp;
+  Modelica.Units.SI.Angle angleTmp;
+  Modelica.Units.SI.Angle deltaOpen;
+  Modelica.Units.SI.Angle deltaClose;
   Modelica.Blocks.Interfaces.RealInput angle_in_internal;
 algorithm
 
@@ -41,7 +40,8 @@ algorithm
   if noEvent(input_in_rad) then
     angleTmp := noEvent(mod(angle_in_internal,2*Modelica.Constants.pi));
   else
-    angleTmp := noEvent(mod(Modelica.SIunits.Conversions.from_deg(angle_in_internal),2*Modelica.Constants.pi));
+    angleTmp :=noEvent(mod(Modelica.Units.Conversions.from_deg(
+      angle_in_internal), 2*Modelica.Constants.pi));
   end if;
 
   deltaOpen := angleTmp-openTmp;
@@ -72,7 +72,7 @@ algorithm
 equation
   connect(angle_in, angle_in_internal);
   if noEvent(not use_angle_in) then
-    angle_in_internal = Modelica.SIunits.Conversions.to_deg(time*rpm);
+    angle_in_internal =Modelica.Units.Conversions.to_deg(time*rpm);
   end if;
 
   annotation (Icon(graphics={

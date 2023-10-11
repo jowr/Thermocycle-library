@@ -8,27 +8,27 @@ model SmoothedInit
         Modelica.Media.Interfaces.PartialTwoPhaseMedium
   constrainedby Modelica.Media.Interfaces.PartialTwoPhaseMedium);
 
-  parameter Modelica.SIunits.Time t_start=5 "Start of initialization"
-    annotation(Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Time t_init=5 "Duration of initialization"
-    annotation(Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Time t_start=5 "Start of initialization"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Time t_init=5 "Duration of initialization"
+    annotation (Dialog(tab="Initialization"));
 
-  parameter Modelica.SIunits.Time filterConstant(min=1e-8) = 1e-8
+  parameter Modelica.Units.SI.Time filterConstant(min=1e-8) = 1e-8
     "Integration time of filter, 1e-8=disabled"
-                               annotation(Dialog(group="Correlations"));
+    annotation (Dialog(group="Correlations"));
 
   parameter Real max_dUdt(unit="W/(m2.K.s)") = 0
     "maximum change in HTC, 0=disabled, experimental!"
                              annotation(Dialog(group="Correlations"),enabled=(filterConstant>0));
 
-  Modelica.SIunits.CoefficientOfHeatTransfer U_limited;
-  Modelica.SIunits.CoefficientOfHeatTransfer U_filtered;
-  Modelica.SIunits.CoefficientOfHeatTransfer U_initialized;
+  Modelica.Units.SI.CoefficientOfHeatTransfer U_limited;
+  Modelica.Units.SI.CoefficientOfHeatTransfer U_filtered;
+  Modelica.Units.SI.CoefficientOfHeatTransfer U_initialized;
   Real initialized(min=0,max=1);
 
-  Modelica.SIunits.CoefficientOfHeatTransfer U_cor_l;
-  Modelica.SIunits.CoefficientOfHeatTransfer U_cor_tp;
-  Modelica.SIunits.CoefficientOfHeatTransfer U_cor_v;
+  Modelica.Units.SI.CoefficientOfHeatTransfer U_cor_l;
+  Modelica.Units.SI.CoefficientOfHeatTransfer U_cor_tp;
+  Modelica.Units.SI.CoefficientOfHeatTransfer U_cor_v;
 
   replaceable model LiquidCorrelation =
     ThermoCycle.Components.HeatFlow.HeatTransfer.BaseClasses.PartialSinglePhaseCorrelation
@@ -55,9 +55,9 @@ model SmoothedInit
   TwoPhaseCorrelation twoPhaseCorrelation(redeclare final package Medium = Medium, state = state_TP, m_dot = M_dot, q_dot = q_dot[1]);
   VapourCorrelation   vapourCorrelation(  redeclare final package Medium = Medium, state = state_V,  m_dot = M_dot, q_dot = q_dot[1]);
 
-  Modelica.SIunits.CoefficientOfHeatTransfer    U_cor_LTP;
-  Modelica.SIunits.CoefficientOfHeatTransfer    U_cor_TPV;
-  Modelica.SIunits.CoefficientOfHeatTransfer    U_cor;
+  Modelica.Units.SI.CoefficientOfHeatTransfer U_cor_LTP;
+  Modelica.Units.SI.CoefficientOfHeatTransfer U_cor_TPV;
+  Modelica.Units.SI.CoefficientOfHeatTransfer U_cor;
 
   //Define filtered states to avoid spikes at phase boundary
   Medium.ThermodynamicState state;

@@ -67,10 +67,10 @@ replaceable package Medium1 = ThermoCycle.Media.DummyFluid
 /***************************** GEOMETRIES ***************************************************/
 parameter Integer N(min=1)=5 "Number of nodes for the heat exchanger";
 parameter Integer Nt(min=1)=1 "Number of tubes in parallel";
-parameter Modelica.SIunits.Volume V_sf= 0.03781 "Volume secondary fluid";
-parameter Modelica.SIunits.Volume V_wf= 0.03781 "Volume primary fluid";
-parameter Modelica.SIunits.Area A_sf = 16.18 "Area secondary fluid";
-parameter Modelica.SIunits.Area A_wf = 16.18 "Area primary fluid";
+  parameter Modelica.Units.SI.Volume V_sf=0.03781 "Volume secondary fluid";
+  parameter Modelica.Units.SI.Volume V_wf=0.03781 "Volume primary fluid";
+  parameter Modelica.Units.SI.Area A_sf=16.18 "Area secondary fluid";
+  parameter Modelica.Units.SI.Area A_wf=16.18 "Area primary fluid";
 
 /****************************** HEAT TRANSFER *************************************/
 parameter Boolean counterCurrent = true
@@ -79,45 +79,50 @@ parameter Boolean counterCurrent = true
 replaceable model Medium2HeatTransferModel =
   ThermoCycle.Components.HeatFlow.HeatTransfer.MassFlowDependence_IdealFluid
    constrainedby
-    ThermoCycle.Components.HeatFlow.HeatTransfer.BaseClasses.PartialHeatTransferZones_IdealFluid
-                                                                                                      annotation (Dialog(group="Heat transfer", tab="General"),choicesAllMatching=true);
+    ThermoCycle.Components.HeatFlow.HeatTransfer.BaseClasses.PartialHeatTransferZones_IdealFluid      annotation (Dialog(group="Heat transfer", tab="General"),choicesAllMatching=true);
 
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_sf = 369
-    "Coefficient of heat transfer, secondary fluid" annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_sf=369
+    "Coefficient of heat transfer, secondary fluid"
+    annotation (Dialog(group="Heat transfer", tab="General"));
 
 /*Working fluid*/
 
 replaceable model Medium1HeatTransferModel =
     ThermoCycle.Components.HeatFlow.HeatTransfer.MassFlowDependence
    constrainedby
-    ThermoCycle.Components.HeatFlow.HeatTransfer.BaseClasses.PartialHeatTransferZones
-                                                                                                      annotation (Dialog(group="Heat transfer", tab="General"),choicesAllMatching=true);
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_wf=300
-    "Coefficient of heat transfer, primary fluid" annotation (Dialog(group="Heat transfer", tab="General"));
+    ThermoCycle.Components.HeatFlow.HeatTransfer.BaseClasses.PartialHeatTransferZones                 annotation (Dialog(group="Heat transfer", tab="General"),choicesAllMatching=true);
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_wf=300
+    "Coefficient of heat transfer, primary fluid"
+    annotation (Dialog(group="Heat transfer", tab="General"));
 
 /*METAL WALL*/
-parameter Modelica.SIunits.Mass M_wall= 69
+  parameter Modelica.Units.SI.Mass M_wall=69
     "Mass of the metal wall between the two fluids";
-parameter Modelica.SIunits.SpecificHeatCapacity c_wall= 500
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_wall=500
     "Specific heat capacity of metal wall";
 /*MASS FLOW*/
-parameter Modelica.SIunits.MassFlowRate Mdotnom_sf= 3
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom_sf=3
     "Nominal flow rate of secondary fluid";
-parameter Modelica.SIunits.MassFlowRate Mdotnom_wf= 0.2588
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom_wf=0.2588
     "Nominal flow rate of working fluid";
 /*INITIAL VALUES*/
   /*pressure*/
-parameter Modelica.SIunits.Pressure pstart_wf= 23.57e5
-    "Nominal inlet pressure of working fluid"  annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure pstart_wf=23.57e5
+    "Nominal inlet pressure of working fluid"
+    annotation (Dialog(tab="Initialization"));
 /*Temperatures*/
-parameter Modelica.SIunits.Temperature Tstart_inlet_wf = 334.9
-    "Initial value of working fluid temperature at the inlet"  annotation (Dialog(tab="Initialization"));
-parameter Modelica.SIunits.Temperature Tstart_outlet_wf = 413.15
-    "Initial value of working fluid temperature at the outlet"  annotation (Dialog(tab="Initialization"));
-parameter Modelica.SIunits.Temperature Tstart_inlet_sf = 418.15
-    "Initial value of secondary fluid temperature at the inlet"  annotation (Dialog(tab="Initialization"));
-parameter Modelica.SIunits.Temperature Tstart_outlet_sf = 408.45
-    "Initial value of secondary fluid temperature at the outlet"  annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature Tstart_inlet_wf=334.9
+    "Initial value of working fluid temperature at the inlet"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature Tstart_outlet_wf=413.15
+    "Initial value of working fluid temperature at the outlet"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature Tstart_inlet_sf=418.15
+    "Initial value of secondary fluid temperature at the inlet"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature Tstart_outlet_sf=408.45
+    "Initial value of secondary fluid temperature at the outlet"
+    annotation (Dialog(tab="Initialization"));
 /*steady state */
  parameter Boolean steadystate_T_sf=false
     "if true, sets the derivative of T_sf (secondary fluids Temperature in each cell) to zero during Initialization"
@@ -144,26 +149,26 @@ parameter Boolean steadystate_T_wall=false
   parameter Real max_drhodt_wf=100
     "Maximum value for the density derivative of primary fluid"
     annotation (Dialog(enable=max_der_wf, tab="Numerical options"));
-  parameter Modelica.SIunits.Time TT_wf=1
+  parameter Modelica.Units.SI.Time TT_wf=1
     "Integration time of the first-order filter"
     annotation (Dialog(enable=filter_dMdt_wf, tab="Numerical options"));
  //Variables
 protected
- Modelica.SIunits.Power Q_sf_;
- Modelica.SIunits.Power Q_wf_;
+  Modelica.Units.SI.Power Q_sf_;
+  Modelica.Units.SI.Power Q_wf_;
 public
  record SummaryBase
    replaceable Arrays T_profile;
    record Arrays
     parameter Integer n;
-    Modelica.SIunits.Temperature[n] Tsf;
-    Modelica.SIunits.Temperature[n] Twall;
-    Modelica.SIunits.Temperature[n] Twf;
+      Modelica.Units.SI.Temperature[n] Tsf;
+      Modelica.Units.SI.Temperature[n] Twall;
+      Modelica.Units.SI.Temperature[n] Twf;
    Real PinchPoint;
    end Arrays;
-   Modelica.SIunits.Pressure p_wf;
-   Modelica.SIunits.Power Q_sf;
-   Modelica.SIunits.Power Q_wf;
+    Modelica.Units.SI.Pressure p_wf;
+    Modelica.Units.SI.Power Q_sf;
+    Modelica.Units.SI.Power Q_wf;
  end SummaryBase;
  replaceable record SummaryClass = SummaryBase;
  SummaryClass Summary( T_profile( n=N, Tsf = SecondaryFluid.Cells[end:-1:1].T, Twall = metalWall.T_wall, Twf = WorkingFluid.Summary.T_profile.T_cell,PinchPoint = min(SecondaryFluid.Cells[end:-1:1].T-WorkingFluid.Summary.T_profile.T_cell)),p_wf = WorkingFluid.Summary.p,Q_sf = Q_sf_,Q_wf = Q_wf_);

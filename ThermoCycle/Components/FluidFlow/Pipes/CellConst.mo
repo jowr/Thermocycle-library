@@ -15,15 +15,15 @@ model CellConst
 
   /************ Geometric characteristics **************/
   parameter Integer Nt(min=1)=1 "Number of cells in parallel";
-  parameter Modelica.SIunits.Volume Vi "Volume of a single cell";
-  parameter Modelica.SIunits.Area Ai "Lateral surface of a single cell";
-  parameter Modelica.SIunits.MassFlowRate Mdotnom= 3
+  parameter Modelica.Units.SI.Volume Vi "Volume of a single cell";
+  parameter Modelica.Units.SI.Area Ai "Lateral surface of a single cell";
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom=3
     "Norminal  fluid flow rate";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer  Unom=500
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom=500
     "Nominal heat transfer coefficient,secondary fluid";
 
 /************ FLUID INITIAL VALUES ***************/
-  parameter Modelica.SIunits.Temperature Tstart= 145 + 273.15
+  parameter Modelica.Units.SI.Temperature Tstart=145 + 273.15
     "Start value of temperature vector (initialized by default)"
     annotation (Dialog(tab="Initialization"));
 
@@ -36,16 +36,16 @@ parameter Boolean steadystate=true
     annotation (Dialog(group="Initialization options", tab="Initialization"));
 
 /********************************* VARIABLES **************************************************/
-  Modelica.SIunits.Temperature T_su;
-  Modelica.SIunits.MassFlowRate Mdot;
-  Modelica.SIunits.SpecificHeatCapacity cp;
-  Modelica.SIunits.Density rho_su;
-  Modelica.SIunits.Temperature T(start=Tstart) "Node temperatures";
-  Modelica.SIunits.Temperature Tnode_su;
-  Modelica.SIunits.Temperature Tnode_ex;
-  Modelica.SIunits.HeatFlux qdot "Average heat flux";
-  Modelica.SIunits.Power Q_tot "Total heat flux exchanged by the thermal port";
-  Modelica.SIunits.Mass M_tot "Total mass";
+  Modelica.Units.SI.Temperature T_su;
+  Modelica.Units.SI.MassFlowRate Mdot;
+  Modelica.Units.SI.SpecificHeatCapacity cp;
+  Modelica.Units.SI.Density rho_su;
+  Modelica.Units.SI.Temperature T(start=Tstart) "Node temperatures";
+  Modelica.Units.SI.Temperature Tnode_su;
+  Modelica.Units.SI.Temperature Tnode_ex;
+  Modelica.Units.SI.HeatFlux qdot "Average heat flux";
+  Modelica.Units.SI.Power Q_tot "Total heat flux exchanged by the thermal port";
+  Modelica.Units.SI.Mass M_tot "Total mass";
 
 /********************************* HEAT TRANSFER MODEL ********************************/
 /* Heat transfer Model */

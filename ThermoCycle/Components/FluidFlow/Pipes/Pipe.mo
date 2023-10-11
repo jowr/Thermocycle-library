@@ -11,9 +11,9 @@ replaceable package Medium = ThermoCycle.Media.DummyFluid constrainedby
 
 parameter Integer Nt=1 "Number of cells in parallel in the Flow1DimInc";
 parameter Integer N(min=1)=10 "Number of cells";
-parameter Modelica.SIunits.Area A_in = 1 "Inside surface area of the tube";
-parameter Modelica.SIunits.Area A_ex = 1 "Outisde surface area of the tube";
-parameter Modelica.SIunits.Volume V_in = 1 "Volume of fluid inside the tube";
+  parameter Modelica.Units.SI.Area A_in=1 "Inside surface area of the tube";
+  parameter Modelica.Units.SI.Area A_ex=1 "Outisde surface area of the tube";
+  parameter Modelica.Units.SI.Volume V_in=1 "Volume of fluid inside the tube";
 //parameter Modelica.SIunits.Length L_sl = 1 "Length of the split line";
 
 /************************************************ HEAT TRANSFER ***********************************************************/
@@ -25,32 +25,35 @@ replaceable model Flow1DimHeatTransferModel =
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics));
 
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_l=100
-    "if HTtype = LiqVap: heat transfer coefficient, liquid zone " annotation (Dialog(group="Heat transfer", tab="General"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_tp=100
-    "if HTtype = LiqVap: heat transfer coefficient, two-phase zone" annotation (Dialog(group="Heat transfer", tab="General"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_v=100
-    "if HTtype = LiqVap: heat transfer coefficient, vapor zone" annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_l=100
+    "if HTtype = LiqVap: heat transfer coefficient, liquid zone "
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_tp=100
+    "if HTtype = LiqVap: heat transfer coefficient, two-phase zone"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_v=100
+    "if HTtype = LiqVap: heat transfer coefficient, vapor zone"
+    annotation (Dialog(group="Heat transfer", tab="General"));
 
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_ex =  1
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_ex=1
     "Heat transfer coefficient to the ambiance";
 
 /*************************** METAL WALL & AMBIANCE *********************************************************/
-parameter Modelica.SIunits.Mass M_wall = 1 "Wall mass of the tube";
-parameter Modelica.SIunits.SpecificHeatCapacity c_wall = 500
+  parameter Modelica.Units.SI.Mass M_wall=1 "Wall mass of the tube";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_wall=500
     "Specific heat capacity of the wall";
 /*MASS FLOW*/
-parameter Modelica.SIunits.MassFlowRate Mdotnom = 1
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom=1
     "Nominal fluid flow rate inside the tube";
 
 /*INITIAL VALUES*/
   /*pressure*/
-parameter Modelica.SIunits.Pressure pstart = 2e5 "Fluid pressure start value"
-                                   annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure pstart=2e5 "Fluid pressure start value"
+    annotation (Dialog(tab="Initialization"));
   /*Temperatures*/
-parameter Modelica.SIunits.Temperature Tstart_inlet = 283
+  parameter Modelica.Units.SI.Temperature Tstart_inlet=283
     "Inlet temperature start value" annotation (Dialog(tab="Initialization"));
-parameter Modelica.SIunits.Temperature Tstart_outlet = 283
+  parameter Modelica.Units.SI.Temperature Tstart_outlet=283
     "Outlet temperature start value" annotation (Dialog(tab="Initialization"));
 parameter Real T_ext_param = -1;
 
@@ -76,7 +79,7 @@ parameter Discretizations Discretization=ThermoCycle.Functions.Enumerations.Disc
     annotation (Dialog(tab="Numerical options"));
   parameter Real max_drhodt=100 "Maximum value for the density derivative"
     annotation (Dialog(enable=max_der, tab="Numerical options"));
-  parameter Modelica.SIunits.Time TT=1
+  parameter Modelica.Units.SI.Time TT=1
     "Integration time of the first-order filter"
     annotation (Dialog(enable=filter_dMdt, tab="Numerical options"));
 

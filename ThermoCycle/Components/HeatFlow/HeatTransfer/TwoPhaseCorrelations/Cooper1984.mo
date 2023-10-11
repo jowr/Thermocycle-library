@@ -12,8 +12,9 @@ model Cooper1984 "Cooper correlation for nucleate boiling"
   Real p_r(min=0,nominal=0.75) "p/p_crit";
   Real M;
   Real log_p_r;
-  parameter Modelica.SIunits.Length R_p(min=Modelica.Constants.small,displayUnit="mm") = 1e-6
-    "Roughness, disable with 1um";
+  parameter Modelica.Units.SI.Length R_p(
+    min=Modelica.Constants.small,
+    displayUnit="mm") = 1e-6 "Roughness, disable with 1um";
   Real log_R_p;
   parameter Real C(min=0) = 1.0 "Enhancement term, 0.7-1.5 for plate HX";
 

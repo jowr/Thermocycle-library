@@ -15,7 +15,7 @@ replaceable package Medium = ThermoCycle.Media.DummyFluid
         rotation=90,
         origin={0,136})));
 
-  Modelica.SIunits.SpecificEnthalpy h "Specific Enthalpy of the fluid";
+  Modelica.Units.SI.SpecificEnthalpy h "Specific Enthalpy of the fluid";
   Medium.MassFraction[2] X
     "Mass fraction of the moist air, see moist air media information";
 Medium.ThermodynamicState fluidState "Thermodynamic state of the fluid";

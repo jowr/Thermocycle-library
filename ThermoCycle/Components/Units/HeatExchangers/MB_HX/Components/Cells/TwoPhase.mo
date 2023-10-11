@@ -29,25 +29,27 @@ import ThermoCycle.Components.Units.HeatExchangers.MB_HX.Constants;
 
 /************ Geometric characteristics **************/
   constant Real pi = Modelica.Constants.pi "pi-greco";
-  parameter Modelica.SIunits.Area AA "Channel cross section";
-  parameter Modelica.SIunits.Length YY "Channel perimeter";
+  parameter Modelica.Units.SI.Area AA "Channel cross section";
+  parameter Modelica.Units.SI.Length YY "Channel perimeter";
   parameter Real Ltotal = 40 "Hx total length";
 
   parameter Boolean VoidFraction = true
     "Set to true to calculate the void fraction to false to keep it constant";
   parameter Real VoidF = 0.8 "Constantat void fraction" annotation (Dialog(enable= not VoidFraction));
 
-  parameter Modelica.SIunits.MassFlowRate Mdotnom "Nominal fluid flow rate" annotation (Dialog(group = "Heat transfer"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom
-    "if HTtype = LiqVap : Heat transfer coefficient, liquid zone " annotation (Dialog(group = "Heat transfer"));
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom "Nominal fluid flow rate"
+    annotation (Dialog(group="Heat transfer"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom
+    "if HTtype = LiqVap : Heat transfer coefficient, liquid zone "
+    annotation (Dialog(group="Heat transfer"));
 
   final parameter Integer nXi = Medium.nXi "mass fraction";
  /************ FLUID INITIAL VALUES ***************/
-  parameter Modelica.SIunits.Pressure pstart "Fluid pressure start value"
-                                     annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure pstart "Fluid pressure start value"
+    annotation (Dialog(tab="Initialization"));
   parameter Medium.SpecificEnthalpy hstart=1E5 "Start value of enthalpy"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Length lstart=1 "Start value of length"
+  parameter Modelica.Units.SI.Length lstart=1 "Start value of length"
     annotation (Dialog(tab="Initialization"));
 
 parameter Boolean alone = true annotation (choices(checkBox=true),Dialog( group="CV",__Dymola_label="Only 1CV?:"));
@@ -58,25 +60,25 @@ parameter Boolean General = false "Set to true if complete evaporator"
 
 /***************  VARIABLES ******************/
  /* Summary Class variables */
- Modelica.SIunits.Temperature[3] Temp "Fluid temperature for SummaryClass";
- Modelica.SIunits.Length[3] length "Length vector for summaryClass";
+  Modelica.Units.SI.Temperature[3] Temp "Fluid temperature for SummaryClass";
+  Modelica.Units.SI.Length[3] length "Length vector for summaryClass";
 
-  Modelica.SIunits.Length ll(start=lstart,min= Modelica.Constants.small);
-  Modelica.SIunits.Length la;
-  Modelica.SIunits.Length lb;
-  Modelica.SIunits.Velocity dldt;
-  Modelica.SIunits.Area SS "Lateral area of the cylinder";
+  Modelica.Units.SI.Length ll(start=lstart, min=Modelica.Constants.small);
+  Modelica.Units.SI.Length la;
+  Modelica.Units.SI.Length lb;
+  Modelica.Units.SI.Velocity dldt;
+  Modelica.Units.SI.Area SS "Lateral area of the cylinder";
 
-  Modelica.SIunits.MassFlowRate M_dot_a(start=Mdotnom);
-  Modelica.SIunits.MassFlowRate M_dot_b(start=Mdotnom);
-  Modelica.SIunits.MassFlowRate dMdt(start=0)
+  Modelica.Units.SI.MassFlowRate M_dot_a(start=Mdotnom);
+  Modelica.Units.SI.MassFlowRate M_dot_b(start=Mdotnom);
+  Modelica.Units.SI.MassFlowRate dMdt(start=0)
     "Change in mass in control volume";
 
-  Modelica.SIunits.HeatFlowRate dUdt(start=0)
+  Modelica.Units.SI.HeatFlowRate dUdt(start=0)
     "Change in energy in control volume";
-   Modelica.SIunits.HeatFlowRate H_dot_a(start=Mdotnom*hstart)
+  Modelica.Units.SI.HeatFlowRate H_dot_a(start=Mdotnom*hstart)
     "Enthalpy flow at inlet";
-  Modelica.SIunits.HeatFlowRate H_dot_b(start=Mdotnom*hstart)
+  Modelica.Units.SI.HeatFlowRate H_dot_b(start=Mdotnom*hstart)
     "Enthalpy flow at outlet";
 
   Medium.SaturationProperties sat =  Medium.setSat_p(pp) "Saturation";
@@ -91,10 +93,10 @@ parameter Boolean General = false "Set to true if complete evaporator"
   Medium.SpecificEnthalpy h_l "Fluid enthalpy, saturated liquid";
   Medium.SpecificEnthalpy h_v "Fluid enthalpy, saturated vapour";
 
-  Modelica.SIunits.Temperature Text "Temperature from the connection element";
+  Modelica.Units.SI.Temperature Text "Temperature from the connection element";
   Medium.Temperature TT "Fluid temperature";
-  Modelica.SIunits.Temperature T_a "Fluid temperature at inlet";
-  Modelica.SIunits.Temperature T_b "Fluid temperature at outlet";
+  Modelica.Units.SI.Temperature T_a "Fluid temperature at inlet";
+  Modelica.Units.SI.Temperature T_b "Fluid temperature at outlet";
 
  // Medium.Density rho "Fluid density, mean";
   Medium.Density rho_a "Fluid density at inlet";
@@ -102,14 +104,14 @@ parameter Boolean General = false "Set to true if complete evaporator"
   Medium.Density rho_l "Fluid density, saturated liquid";
   Medium.Density rho_v "Fluid density, saturated vapour";
 
- Modelica.SIunits.MassFraction[nXi] Xia "Inlet mass fraction";
- Modelica.SIunits.MassFraction[nXi] Xib "Outlet mass fraction";
+  Modelica.Units.SI.MassFraction[nXi] Xia "Inlet mass fraction";
+  Modelica.Units.SI.MassFraction[nXi] Xib "Outlet mass fraction";
 
 /* Derivative of fluid properties */
-  Modelica.SIunits.DerEnthalpyByPressure dhdp_l "TP:SatLiq  - h deriv wrt p";
-  Modelica.SIunits.DerEnthalpyByPressure dhdp_v "TP:SatVap - h deriv wrt p";
-  Modelica.SIunits.DerDensityByPressure drdp_l "TP: SatLiq  - D deriv wrt p ";
-  Modelica.SIunits.DerDensityByPressure drdp_v "TP: SatVap  - D deriv wrt p";
+  Modelica.Units.SI.DerEnthalpyByPressure dhdp_l "TP:SatLiq  - h deriv wrt p";
+  Modelica.Units.SI.DerEnthalpyByPressure dhdp_v "TP:SatVap - h deriv wrt p";
+  Modelica.Units.SI.DerDensityByPressure drdp_l "TP: SatLiq  - D deriv wrt p ";
+  Modelica.Units.SI.DerDensityByPressure drdp_v "TP: SatVap  - D deriv wrt p";
   Real dhdt_a "Inlet state - h deriv wrt time";
   Real dhdt_b "outlet state - h deriv wrt time";
 
@@ -336,10 +338,10 @@ public
   record SummaryClass
     replaceable Arrays T_profile;
      record Arrays
-     Modelica.SIunits.Temperature[3] T_cell;
-     Modelica.SIunits.Length[3] l_cell;
+      Modelica.Units.SI.Temperature[3] T_cell;
+      Modelica.Units.SI.Length[3] l_cell;
      end Arrays;
-     Modelica.SIunits.Power Q_flow;
+    Modelica.Units.SI.Power Q_flow;
   end SummaryClass;
   SummaryClass Summary(T_profile(T_cell = Temp[:],l_cell = length[:]),Q_flow= q_dot);
 

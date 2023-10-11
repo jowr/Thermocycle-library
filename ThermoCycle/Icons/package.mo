@@ -1,6 +1,6 @@
 within ThermoCycle;
 package Icons "Icons for the ORC components, copied from the ThermoPower library"
-  extends Modelica.Icons.Library;
+  extends Modelica.Icons.Package;
 
 
 annotation (Documentation(info="<HTML>

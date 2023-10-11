@@ -1,4 +1,4 @@
-within ThermoCycle.Components.Units.HeatExchangers;
+﻿within ThermoCycle.Components.Units.HeatExchangers;
 model Semi_isothermal_HeatExchanger_pT
   "Steady-state model of a semi-isothermal heat exchanger using epsilon-NTU"
   import ThermoCycle;
@@ -10,8 +10,8 @@ parameter Medium.Temperature T_su_start=273.15+200
 parameter Medium.Temperature T_ex_start=273.15+100
     "Start value for the outlet temperature" annotation(Dialog(tab = "Initialization"));
 Medium.ThermodynamicState meanState;
-parameter Modelica.SIunits.ThermalConductance AU = 35 "Thermal conductance";
-Modelica.SIunits.Power Q_dot;
+  parameter Modelica.Units.SI.ThermalConductance AU=35 "Thermal conductance";
+  Modelica.Units.SI.Power Q_dot;
 Medium.Temperature T_iso; //Température de la plaque isotherme
 Real C_dot;
 Real NTU;

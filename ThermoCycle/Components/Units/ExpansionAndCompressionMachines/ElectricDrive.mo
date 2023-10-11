@@ -1,21 +1,21 @@
 within ThermoCycle.Components.Units.ExpansionAndCompressionMachines;
 model ElectricDrive
   "Motor/Generator model with prescribed rotational speed (Active power only)"
-  import Modelica.SIunits.Conversions.NonSIunits.*;
+  import Modelica.Units.NonSI.*;
   parameter Real eta=1 "Conversion efficiency";
-  parameter Modelica.SIunits.MomentOfInertia J=0 "Moment of inertia";
+  parameter Modelica.Units.SI.MomentOfInertia J=0 "Moment of inertia";
   parameter Integer Np=2 "Number of electrical poles";
-  parameter Modelica.SIunits.Frequency fstart=50
+  parameter Modelica.Units.SI.Frequency fstart=50
     "Start value of the electrical frequency"
     annotation (Dialog(tab="Initialization"));
-  Modelica.SIunits.Power Pe "Electrical Power";
+  Modelica.Units.SI.Power Pe "Electrical Power";
 protected
-  Modelica.SIunits.Power Pm "Mechanical power";
-  Modelica.SIunits.Power Ploss "Inertial power Loss";
-  Modelica.SIunits.Torque tau "Torque at shaft";
-  Modelica.SIunits.AngularVelocity omega_m(start=2*Modelica.Constants.pi*
+  Modelica.Units.SI.Power Pm "Mechanical power";
+  Modelica.Units.SI.Power Ploss "Inertial power Loss";
+  Modelica.Units.SI.Torque tau "Torque at shaft";
+  Modelica.Units.SI.AngularVelocity omega_m(start=2*Modelica.Constants.pi*
         fstart/Np) "Angular velocity of the shaft [rad/s] ";
-  Modelica.SIunits.AngularVelocity omega_e
+  Modelica.Units.SI.AngularVelocity omega_e
     "Angular velocity of the e.m.f. rotating frame [rad/s]";
   AngularVelocity_rpm n "Rotational speed [rpm]";
 public
@@ -30,7 +30,7 @@ equation
   omega_m = der(shaft.phi) "Mechanical boundary condition";
   omega_e = omega_m*Np;
   f = omega_e/(2*Modelica.Constants.pi) "Electrical frequency";
-  n = Modelica.SIunits.Conversions.to_rpm(omega_m) "Rotational speed in rpm";
+  n =Modelica.Units.Conversions.to_rpm(omega_m)    "Rotational speed in rpm";
   Pm = omega_m*tau;
   if J > 0 then
     Ploss = J*der(omega_m)*omega_m;

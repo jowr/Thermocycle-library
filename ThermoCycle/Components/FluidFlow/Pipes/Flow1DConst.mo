@@ -9,8 +9,8 @@ record SummaryClass
   replaceable Arrays T_profile;
     record Arrays
     parameter Integer n;
-    Modelica.SIunits.Temperature[n] T_cell;
-      Modelica.SIunits.Temperature[n+1]  Tnode;
+      Modelica.Units.SI.Temperature[n] T_cell;
+      Modelica.Units.SI.Temperature[n + 1] Tnode;
     end Arrays;
 
 end SummaryClass;
@@ -31,25 +31,23 @@ end SummaryClass;
   constant Real pi = Modelica.Constants.pi "pi-greco";
   parameter Integer N(min=1) = 10 "Number of cells";
   parameter Integer Nt(min=1)=1 "Number of cells in parallel";
-  parameter Modelica.SIunits.Area A= 16.18
+  parameter Modelica.Units.SI.Area A=16.18
     "Lateral surface of the tube: heat exchange area";
-  parameter Modelica.SIunits.Volume V = 0.03781 "Volume of the tube";
-  parameter Modelica.SIunits.MassFlowRate Mdotnom= 3
+  parameter Modelica.Units.SI.Volume V=0.03781 "Volume of the tube";
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom=3
     "Norminal  fluid flow rate";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer  Unom=500
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom=500
     "Nominal heat transfer coefficient,secondary fluid";
 
 /************ FLUID INITIAL VALUES ***************/
-  parameter Modelica.SIunits.Temperature Tstart_inlet = 145 + 273.15
-    "Inlet temperature start value"
-    annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature Tstart_outlet = 135 + 273.15
-    "Outlet temperature start value"
-    annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature Tstart[N]=linspace(
-        Tstart_inlet,
-        Tstart_outlet,
-        N) "Start value of temperature vector (initialized by default)"
+  parameter Modelica.Units.SI.Temperature Tstart_inlet=145 + 273.15
+    "Inlet temperature start value" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature Tstart_outlet=135 + 273.15
+    "Outlet temperature start value" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature Tstart[N]=linspace(
+      Tstart_inlet,
+      Tstart_outlet,
+      N) "Start value of temperature vector (initialized by default)"
     annotation (Dialog(tab="Initialization"));
 parameter Boolean steadystate=true
     "if true, sets the derivative of T to zero during Initialization"
@@ -69,9 +67,9 @@ constrainedby
     "Convective heat transfer"                                                         annotation (choicesAllMatching = true);
 
 /***************  VARIABLES ******************/
-Modelica.SIunits.Power Q_tot "Total heat flux exchanged by the thermal port";
-Modelica.SIunits.Mass M_tot "Total mass of the fluid in the component";
-Modelica.SIunits.Temperature Tnode_[N+1]
+  Modelica.Units.SI.Power Q_tot "Total heat flux exchanged by the thermal port";
+  Modelica.Units.SI.Mass M_tot "Total mass of the fluid in the component";
+  Modelica.Units.SI.Temperature Tnode_[N + 1]
     "Temperature at each node of the cells";
 
 /******************************** CELLS **************************/

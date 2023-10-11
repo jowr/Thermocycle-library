@@ -21,17 +21,18 @@ parameter HT_sf HTtype=HT_sf.Const "Select type of heat transfer coefficient";
 // Geometric characteristics
   constant Real pi = Modelica.Constants.pi "pi-greco";
   parameter Integer N(min=1)=2 "Number of cells";
-  parameter Modelica.SIunits.Area A = 16.18
+  parameter Modelica.Units.SI.Area A=16.18
     "Lateral surface of the tube: heat exchange area";
-  parameter Modelica.SIunits.Volume V = 0.03781 "Volume of the tube";
-  final parameter Modelica.SIunits.Volume Vi=V/N "Volume of a single cell";
-  final parameter Modelica.SIunits.Area Ai=A/N
+  parameter Modelica.Units.SI.Volume V=0.03781 "Volume of the tube";
+  final parameter Modelica.Units.SI.Volume Vi=V/N "Volume of a single cell";
+  final parameter Modelica.Units.SI.Area Ai=A/N
     "Lateral surface of a single cell";
-  parameter Modelica.SIunits.MassFlowRate Mdotnom = 0.02588
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom=0.02588
     "Nominal fluid flow rate";
-   parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom
     "if HTtype = Const: Heat transfer coefficient";
-    parameter Modelica.SIunits.Pressure pstart "Fluid pressure start value" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure pstart "Fluid pressure start value"
+    annotation (Dialog(tab="Initialization"));
  /* FLUID INITIAL VALUES */
   parameter Medium.Temperature Tstart_inlet "Inlet temperature start value"
      annotation (Dialog(tab="Initialization"));
@@ -56,21 +57,21 @@ parameter HT_sf HTtype=HT_sf.Const "Select type of heat transfer coefficient";
     annotation (Dialog(group="Initialization options", tab="Initialization"));
 /* FLUID VARIABLES */
   Medium.ThermodynamicState  fluidState[N];
-  Modelica.SIunits.MassFlowRate M_dot_su;
-  Modelica.SIunits.MassFlowRate Mdot(start=Mdotnom);
+  Modelica.Units.SI.MassFlowRate M_dot_su;
+  Modelica.Units.SI.MassFlowRate Mdot(start=Mdotnom);
   Medium.SpecificEnthalpy h[N](start=hstart)
     "Fluid specific enthalpy at the cells";
   Medium.Temperature T[N] "Fluid temperature";
-  Modelica.SIunits.Temperature T_wall[N] "Internal wall temperature";
+  Modelica.Units.SI.Temperature T_wall[N] "Internal wall temperature";
   Medium.Density rho[N] "Fluid cell density";
   Medium.SpecificHeatCapacity cp[N] "Fluid cell heat capacity";
-  Modelica.SIunits.SpecificEnthalpy hnode[N + 1]
+  Modelica.Units.SI.SpecificEnthalpy hnode[N + 1]
     "Enthalpy state variables at each node";
-  Modelica.SIunits.HeatFlux qdot[N] "heat flux at each cell";
-  Modelica.SIunits.CoefficientOfHeatTransfer U
+  Modelica.Units.SI.HeatFlux qdot[N] "heat flux at each cell";
+  Modelica.Units.SI.CoefficientOfHeatTransfer U
     "Heat transfer coefficient between wall and working fluid";
-  Modelica.SIunits.Power Q_tot "Total heat flux exchanged by the thermal port";
-  Modelica.SIunits.Mass M_tot "Total mass of the fluid in the component";
+  Modelica.Units.SI.Power Q_tot "Total heat flux exchanged by the thermal port";
+  Modelica.Units.SI.Mass M_tot "Total mass of the fluid in the component";
 equation
   Mdot = M_dot_su;
 for j in 1:N loop

@@ -10,72 +10,95 @@ protected
    record SummaryClass
    replaceable Arrays T_profile;
       record Arrays
-      Modelica.SIunits.Temperature[2] T_ps;
-      Modelica.SIunits.Temperature[2] T_ss;
+      Modelica.Units.SI.Temperature[2] T_ps;
+      Modelica.Units.SI.Temperature[2] T_ss;
       end Arrays;
     //Modelica.SIunits.SpecificEnthalpy[2] h_ps;
     //Modelica.SIunits.SpecificEnthalpy[2] h_ss;
-    Modelica.SIunits.Power Q_ps;
-    Modelica.SIunits.Power Q_ss;
-    Modelica.SIunits.Pressure p_ps;
-    Modelica.SIunits.Pressure p_ss;
+    Modelica.Units.SI.Power Q_ps;
+    Modelica.Units.SI.Power Q_ss;
+    Modelica.Units.SI.Pressure p_ps;
+    Modelica.Units.SI.Pressure p_ss;
    end SummaryClass;
 public
  SummaryClass Summary( T_profile(T_ps= {T_primary[1],T_primary[2]}, T_ss = {T_secondary[1],T_secondary[2]}),  p_ps = stateIn_ps.p, p_ss = stateIn_ss.p, Q_ps = Q_dot_ps, Q_ss = Q_dot_ss);
 
 protected
-  Modelica.SIunits.Temperature[2] T_primary;
-  Modelica.SIunits.Temperature[2] T_secondary;
+  Modelica.Units.SI.Temperature[2] T_primary;
+  Modelica.Units.SI.Temperature[2] T_secondary;
   //
   /******************************* PARAMETERS *****************************/
   /*Metal Wall*/
 public
-  parameter Modelica.SIunits.Mass M_wall= 69 "Mass of the Wall";
-  parameter Modelica.SIunits.SpecificHeatCapacity c_wall= 500
+  parameter Modelica.Units.SI.Mass M_wall=69 "Mass of the Wall";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_wall=500
     "Specific heat capacity of the metal wall";
 
-  parameter Modelica.SIunits.Mass M_ps = 300 "Mass of the fluid"
-                        annotation (Dialog(group="Primary side", tab="General"));
-  parameter Modelica.SIunits.MassFlowRate MdotNom_ps = 1
-    "Nominal mass flow rate" annotation (Dialog(group="Primary side", tab="General"));
+  parameter Modelica.Units.SI.Mass M_ps=300 "Mass of the fluid"
+    annotation (Dialog(group="Primary side", tab="General"));
+  parameter Modelica.Units.SI.MassFlowRate MdotNom_ps=1
+    "Nominal mass flow rate"
+    annotation (Dialog(group="Primary side", tab="General"));
 
-  parameter Modelica.SIunits.Mass M_ss = 300 "Mass of the fluid"
-                        annotation (Dialog(group="Secondary side", tab="General"));
-  parameter Modelica.SIunits.MassFlowRate MdotNom_ss = 1
-    "Nominal mass flow rate" annotation (Dialog(group="Secondary side", tab="General"));
+  parameter Modelica.Units.SI.Mass M_ss=300 "Mass of the fluid"
+    annotation (Dialog(group="Secondary side", tab="General"));
+  parameter Modelica.Units.SI.MassFlowRate MdotNom_ss=1
+    "Nominal mass flow rate"
+    annotation (Dialog(group="Secondary side", tab="General"));
 
   /****************** Heat Transfer parameter  ******************/
-  parameter Boolean Use_AU=false "if true, uses the global thermal conductance"
-                                                                                                        annotation (Dialog(group="Heat transfer", tab="General"));
-  parameter Modelica.SIunits.Area A_ps=0.03 "Heat transfer area primary side" annotation (Dialog(group="Heat transfer", tab="General", enable=(not Use_AU)));
-  parameter Modelica.SIunits.Area A_ss=0.03 "Heat transfer area secondary side"
-                                                                                                        annotation (Dialog(group="Heat transfer", tab="General", enable=(not Use_AU)));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer U_ps
-    "Constant heat transfer coefficient primary side" annotation (Dialog(group="Heat transfer", tab="General"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer U_ss
-    "Constant heat transfer coefficient secondary Side" annotation (Dialog(group="Heat transfer", tab="General"));
-  parameter Modelica.SIunits.ThermalConductance AU_global=27240
-    "Global Thermal conductance"                                                    annotation (Dialog(group="Heat transfer", tab="General", enable=(Use_AU)));
+  parameter Boolean Use_AU=false "if true, uses the global thermal conductance"                         annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.Area A_ps=0.03 "Heat transfer area primary side"
+    annotation (Dialog(
+      group="Heat transfer",
+      tab="General",
+      enable=(not Use_AU)));
+  parameter Modelica.Units.SI.Area A_ss=0.03
+    "Heat transfer area secondary side" annotation (Dialog(
+      group="Heat transfer",
+      tab="General",
+      enable=(not Use_AU)));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_ps
+    "Constant heat transfer coefficient primary side"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_ss
+    "Constant heat transfer coefficient secondary Side"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.ThermalConductance AU_global=27240
+    "Global Thermal conductance" annotation (Dialog(
+      group="Heat transfer",
+      tab="General",
+      enable=(Use_AU)));
 
     /****************** START VALUES ******************/
-  parameter Modelica.SIunits.AbsolutePressure p_ps_start=50E5
-    "Initial pressure" annotation (Dialog( group="Primary side",tab="Initialization"));
-  parameter Modelica.SIunits.Temperature T_ps_su_start=394.95
-    "Initial value of inlet temperature"                                                    annotation (Dialog(group="Primary side",tab="Initialization"));
-    parameter Modelica.SIunits.Temperature T_ps_ex_start=516.25
-    "Initial value of outlet temperature"                                                    annotation (Dialog(group="Primary side",tab="Initialization"));
+  parameter Modelica.Units.SI.AbsolutePressure p_ps_start=50E5
+    "Initial pressure"
+    annotation (Dialog(group="Primary side", tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_ps_su_start=394.95
+    "Initial value of inlet temperature"
+    annotation (Dialog(group="Primary side", tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_ps_ex_start=516.25
+    "Initial value of outlet temperature"
+    annotation (Dialog(group="Primary side", tab="Initialization"));
 
-  parameter Modelica.SIunits.AbsolutePressure p_ss_start=50E5
-    "Initial pressure" annotation (Dialog(group="Secondary side",tab="Initialization"));
-  parameter Modelica.SIunits.Temperature T_ss_su_start=599.15
-    "Initial value of inlet temperature"                                                    annotation (Dialog(group="Secondary side",tab="Initialization"));
-  parameter Modelica.SIunits.Temperature T_ss_ex_start=443.35
-    "Initial value of outlet temperature"                                                    annotation (Dialog(group="Secondary side",tab="Initialization"));
+  parameter Modelica.Units.SI.AbsolutePressure p_ss_start=50E5
+    "Initial pressure"
+    annotation (Dialog(group="Secondary side", tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_ss_su_start=599.15
+    "Initial value of inlet temperature"
+    annotation (Dialog(group="Secondary side", tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_ss_ex_start=443.35
+    "Initial value of outlet temperature"
+    annotation (Dialog(group="Secondary side", tab="Initialization"));
 
-  parameter Modelica.SIunits.Temperature T_w_1_start=(T_ps_su_start+T_ss_ex_start)/2
-    "Initial value of wall temperature at T_ps_su and T_ss_ex"                                                  annotation (Dialog(group="Metal wall",tab="Initialization"));
-  parameter Modelica.SIunits.Temperature T_w_2_start=(T_ps_ex_start+T_ss_su_start)/2
-    "Initial value of wall temperature at T_ps_ex and T_ss_su"                                                  annotation (Dialog(group="Metal wall",tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_w_1_start=(T_ps_su_start +
+      T_ss_ex_start)/2
+    "Initial value of wall temperature at T_ps_su and T_ss_ex"
+    annotation (Dialog(group="Metal wall", tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_w_2_start=(T_ps_ex_start +
+      T_ss_su_start)/2
+    "Initial value of wall temperature at T_ps_ex and T_ss_su"
+    annotation (Dialog(group="Metal wall", tab="Initialization"));
   parameter Boolean steadystate_T_wall=false
     "if true, sets the derivative of T_wall to zero during Initialization"    annotation (Dialog(group="Metal wall", tab="Initialization"));
   parameter Boolean T_wall_fixed=false
@@ -85,21 +108,29 @@ public
     "if true, sets the fluid specific heat capacity, Cp, on the two side of the HX to a constant value computed with inital conditions";
 
   /******************************* VARIABLES *****************************/
-  Modelica.SIunits.Area A(start=A_ps);
-  Modelica.SIunits.Power Q_dot_ps;
-  Modelica.SIunits.Power Q_dot_ss;
-  Modelica.SIunits.SpecificEnthalpy h_ps_ex(start= MediumPs.specificEnthalpy_pTX(p_ps_start,T_ps_ex_start,fill(0,0)));
-  Modelica.SIunits.SpecificEnthalpy h_ss_ex(start= MediumSs.specificEnthalpy_pTX(p_ss_start,T_ss_ex_start,fill(0,0)));
-  Modelica.SIunits.Temperature T_wall(start=(T_w_1_start+T_w_2_start)/2);
-  Modelica.SIunits.Temperature T_w_1(start=T_w_1_start);
-  Modelica.SIunits.Temperature T_w_2(start=T_w_2_start);
-  Modelica.SIunits.Temperature DELTAT_w(start=T_w_2_start - T_w_1_start);
-  Modelica.SIunits.ThermodynamicTemperature LMTD_ps(displayUnit="K");
-  Modelica.SIunits.ThermodynamicTemperature LMTD_ss(displayUnit="K");
-  Modelica.SIunits.ThermodynamicTemperature pinch_ps(displayUnit="K",min=1);
-  Modelica.SIunits.ThermodynamicTemperature pinch_ss(displayUnit="K",min=1);
-  Modelica.SIunits.ThermalConductance AU_ps;
-  Modelica.SIunits.ThermalConductance AU_ss;
+  Modelica.Units.SI.Area A(start=A_ps);
+  Modelica.Units.SI.Power Q_dot_ps;
+  Modelica.Units.SI.Power Q_dot_ss;
+  Modelica.Units.SI.SpecificEnthalpy h_ps_ex(start=
+        MediumPs.specificEnthalpy_pTX(
+        p_ps_start,
+        T_ps_ex_start,
+        fill(0, 0)));
+  Modelica.Units.SI.SpecificEnthalpy h_ss_ex(start=
+        MediumSs.specificEnthalpy_pTX(
+        p_ss_start,
+        T_ss_ex_start,
+        fill(0, 0)));
+  Modelica.Units.SI.Temperature T_wall(start=(T_w_1_start + T_w_2_start)/2);
+  Modelica.Units.SI.Temperature T_w_1(start=T_w_1_start);
+  Modelica.Units.SI.Temperature T_w_2(start=T_w_2_start);
+  Modelica.Units.SI.Temperature DELTAT_w(start=T_w_2_start - T_w_1_start);
+  Modelica.Units.SI.ThermodynamicTemperature LMTD_ps(displayUnit="K");
+  Modelica.Units.SI.ThermodynamicTemperature LMTD_ss(displayUnit="K");
+  Modelica.Units.SI.ThermodynamicTemperature pinch_ps(displayUnit="K", min=1);
+  Modelica.Units.SI.ThermodynamicTemperature pinch_ss(displayUnit="K", min=1);
+  Modelica.Units.SI.ThermalConductance AU_ps;
+  Modelica.Units.SI.ThermalConductance AU_ss;
 
   MediumPs.SpecificHeatCapacity Cp_ps;
   MediumSs.SpecificHeatCapacity Cp_ss;

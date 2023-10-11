@@ -4,7 +4,7 @@ model ValveTimerTester
   ThermoCycle.Components.Units.ExpansionAndCompressionMachines.Reciprocating.ValveTimer
     valveTimer annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
   Modelica.Blocks.Sources.Sine sine(
-    freqHz=2,
+    f=2,
     amplitude=250,
     offset=750)
     annotation (Placement(transformation(extent={{-80,40},{-60,60}})));

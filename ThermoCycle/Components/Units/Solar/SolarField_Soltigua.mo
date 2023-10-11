@@ -1,4 +1,4 @@
-within ThermoCycle.Components.Units.Solar;
+﻿within ThermoCycle.Components.Units.Solar;
 model SolarField_Soltigua "Solar field model with Soltigua collector"
 replaceable package Medium1 = ThermoCycle.Media.DummyFluid
                                            constrainedby
@@ -17,25 +17,39 @@ parameter Real Def = 25
     "Percentage value of the SF surface that goes to defocusing (25-50-75)"                     annotation(Dialog(group="DEFOCUSING", tab="General"));
 /*********************  Parameters for convective heat transfer in the fluid *********************/
 
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_l=300
-    "if HTtype = LiqVap: heat transfer coefficient, liquid zone" annotation (Dialog(group="Heat transfer", tab="General"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_tp=700
-    "if HTtype = LiqVap: heat transfer coefficient, two-phase zone" annotation (Dialog(group="Heat transfer", tab="General"));
-parameter Modelica.SIunits.CoefficientOfHeatTransfer Unom_v=400
-    "if HTtype = LiqVap: heat transfer coefficient, vapor zone" annotation (Dialog(group="Heat transfer", tab="General"));
-parameter Modelica.SIunits.MassFlowRate Mdotnom "Total nominal Mass flow";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_l=300
+    "if HTtype = LiqVap: heat transfer coefficient, liquid zone"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_tp=700
+    "if HTtype = LiqVap: heat transfer coefficient, two-phase zone"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Unom_v=400
+    "if HTtype = LiqVap: heat transfer coefficient, vapor zone"
+    annotation (Dialog(group="Heat transfer", tab="General"));
+  parameter Modelica.Units.SI.MassFlowRate Mdotnom "Total nominal Mass flow";
 // Fluid initial values
-parameter Modelica.SIunits.Temperature Tstart_inlet
-    "Temperature of the fluid at the inlet of the collector" annotation (Dialog(tab="Initialization"));
-parameter Modelica.SIunits.Temperature Tstart_outlet
-    "Temperature of the fluid at the outlet of the collector" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature Tstart_inlet
+    "Temperature of the fluid at the inlet of the collector"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature Tstart_outlet
+    "Temperature of the fluid at the outlet of the collector"
+    annotation (Dialog(tab="Initialization"));
 
-final parameter Modelica.SIunits.Temperature[Ns] Tstart_inlet_collector =  ThermoCycle.Functions.Solar.T_start_inlet(T_start_inlet=Tstart_inlet,T_start_outlet=Tstart_outlet,Ns=Ns);
+  final parameter Modelica.Units.SI.Temperature[Ns] Tstart_inlet_collector=
+      ThermoCycle.Functions.Solar.T_start_inlet(
+      T_start_inlet=Tstart_inlet,
+      T_start_outlet=Tstart_outlet,
+      Ns=Ns);
 
-final parameter Modelica.SIunits.Temperature[Ns] Tstart_outlet_collector = ThermoCycle.Functions.Solar.T_start_outlet(T_start_inlet=Tstart_inlet,T_start_outlet=Tstart_outlet,Ns=Ns);
+  final parameter Modelica.Units.SI.Temperature[Ns] Tstart_outlet_collector=
+      ThermoCycle.Functions.Solar.T_start_outlet(
+      T_start_inlet=Tstart_inlet,
+      T_start_outlet=Tstart_outlet,
+      Ns=Ns);
 
-parameter Modelica.SIunits.Pressure pstart
-    "Temperature of the fluid at the inlet of the collector" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Pressure pstart
+    "Temperature of the fluid at the inlet of the collector"
+    annotation (Dialog(tab="Initialization"));
 /*steady state */
 parameter Boolean steadystate_T_fl=false
     "if true, sets the derivative of the fluid Temperature in each cell to zero during Initialization"
@@ -57,25 +71,22 @@ parameter Boolean steadystate_T_fl=false
   parameter Real max_drhodt=100
     "Maximum value for the density derivative of primary fluid"
     annotation (Dialog(enable=max_der_wf, tab="Numerical options"));
-  parameter Modelica.SIunits.Time TT=1
+  parameter Modelica.Units.SI.Time TT=1
     "Integration time of the first-order filter"
     annotation (Dialog(enable=filter_dMdt, tab="Numerical options"));
 
 /****************** GEOMETRY  *********************/
 inner replaceable parameter
-    ThermoCycle.Components.HeatFlow.Walls.SolarAbsorber.Geometry.Soltigua.BaseGeometry
-                                                                                        CollectorGeometry
+    ThermoCycle.Components.HeatFlow.Walls.SolarAbsorber.Geometry.Soltigua.BaseGeometry  CollectorGeometry
 constrainedby
-    ThermoCycle.Components.HeatFlow.Walls.SolarAbsorber.Geometry.Soltigua.BaseGeometry
-                                                                                       annotation (choicesAllMatching=true);
+    ThermoCycle.Components.HeatFlow.Walls.SolarAbsorber.Geometry.Soltigua.BaseGeometry annotation (choicesAllMatching=true);
 
 /*************************** HEAT TRANSFER ************************************/
 /*Secondary fluid*/
 replaceable model FluidHeatTransferModel =
     ThermoCycle.Components.HeatFlow.HeatTransfer.MassFlowDependence
    constrainedby
-    ThermoCycle.Components.HeatFlow.HeatTransfer.BaseClasses.PartialHeatTransferZones
-                                                                                                      annotation (Dialog(group="Heat transfer", tab="General"),choicesAllMatching=true);
+    ThermoCycle.Components.HeatFlow.HeatTransfer.BaseClasses.PartialHeatTransferZones                 annotation (Dialog(group="Heat transfer", tab="General"),choicesAllMatching=true);
 
 /******************************************  COMPONENTS *********************************************************/
 
@@ -147,19 +158,19 @@ public
     record Arrays
      parameter Integer n;
      parameter Integer Ns;
-     Modelica.SIunits.Temperature[Ns,n] T_fluid;
+      Modelica.Units.SI.Temperature[Ns,n] T_fluid;
     end Arrays;
     Real Eta_solarCollector "Total efficiency of solar collector";
-    Modelica.SIunits.Power Q_htf
+    Modelica.Units.SI.Power Q_htf
       "Total heat through the termal heat transfer fluid flowing in the solar collector";
   end SummaryBase;
   replaceable record SummaryClass = SummaryBase;
   SummaryClass Summary( T_profile( n=N, Ns=Ns,T_fluid = T_fluid_),Eta_solarCollector=Eta_tot,Q_htf = Q_tot);
 protected
-   Modelica.SIunits.Temperature T_fluid_[Ns,N];
+  Modelica.Units.SI.Temperature T_fluid_[Ns,N];
   //,Eta_solarCollector= absorberSchott.Eta_TOT,Philoss = absorberSchott.Phi_loss_ref_m,Q_htf = flow1Dim.Q_tot);
  Real Eta_tot "Total efficiency";
- Modelica.SIunits.HeatFlowRate Q_tot
+  Modelica.Units.SI.HeatFlowRate Q_tot
     "Total thermal energy flow on the tube from the sun [W]";
 equation
    for i in 1:Ns loop
