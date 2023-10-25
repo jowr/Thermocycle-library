@@ -330,7 +330,8 @@ equation
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(extent={{-160,-140},{140,140}},
           preserveAspectRatio=false),
-                      graphics), Icon(coordinateSystem(extent={{-160,-140},
+                      graphics), Icon(graphics,
+                                      coordinateSystem(extent={{-160,-140},
             {140,140}})),
     experiment(StopTime=1000),
     __Dymola_experimentSetupOutput);

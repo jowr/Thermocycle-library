@@ -55,5 +55,6 @@ equation
                       graphics),
     experiment(StopTime=50),
     __Dymola_experimentSetupOutput,
-    Icon(coordinateSystem(extent={{-80,-100},{100,80}})));
+    Icon(graphics,
+         coordinateSystem(extent={{-80,-100},{100,80}})));
 end Test_Valve;

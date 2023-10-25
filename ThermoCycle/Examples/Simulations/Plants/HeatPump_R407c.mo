@@ -227,5 +227,6 @@ equation
             -100},{140,100}}),      graphics),
     experiment(StopTime=100),
     __Dymola_experimentSetupOutput,
-    Icon(coordinateSystem(extent={{-100,-100},{140,100}})));
+    Icon(graphics,
+         coordinateSystem(extent={{-100,-100},{140,100}})));
 end HeatPump_R407c;

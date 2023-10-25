@@ -40,6 +40,7 @@ equation
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(extent={{-80,-80},{80,80}},
           preserveAspectRatio=true),
-                      graphics), Icon(coordinateSystem(extent={{-80,-80},
+                      graphics), Icon(graphics,
+                                      coordinateSystem(extent={{-80,-80},
             {80,80}})));
 end Cylinder_tester;

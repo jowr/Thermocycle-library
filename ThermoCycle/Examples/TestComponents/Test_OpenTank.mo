@@ -46,5 +46,6 @@ equation
             100}}), graphics),
     experiment(StopTime=100),
     __Dymola_experimentSetupOutput,
-    Icon(coordinateSystem(extent={{-100,0},{100,100}})));
+    Icon(graphics,
+         coordinateSystem(extent={{-100,0},{100,100}})));
 end Test_OpenTank;

@@ -108,6 +108,7 @@ public
   end SummaryClass;
   SummaryClass Summary(T_profile(n=n,T_cell = Temp[:]),n=n, Qflow = Qsf[:], Qtot = qtot);
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -60},{100,60}}),   graphics), Icon(coordinateSystem(extent={{-100,
+            -60},{100,60}}),   graphics), Icon(graphics,
+                                               coordinateSystem(extent={{-100,
             -60},{100,60}})));
 end SecondaryFluid;

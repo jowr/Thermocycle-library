@@ -38,7 +38,8 @@ equation
       pattern=LinePattern.None,
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(extent={{-80,-80},{80,80}}),
-                      graphics), Icon(coordinateSystem(extent={{-80,-80},
+                      graphics), Icon(graphics,
+                                      coordinateSystem(extent={{-80,-80},
             {80,80}})),
     experiment(StopTime=15));
 end PV_tester;

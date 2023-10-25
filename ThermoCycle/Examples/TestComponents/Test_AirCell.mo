@@ -177,5 +177,6 @@ equation
                         graphics),
     experiment(StopTime=100),
     __Dymola_experimentSetupOutput,
-    Icon(coordinateSystem(extent={{-100,-20},{60,80}})));
+    Icon(graphics,
+         coordinateSystem(extent={{-100,-20},{60,80}})));
 end Test_AirCell;

@@ -182,6 +182,7 @@ equation
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false),
-                      graphics), Icon(coordinateSystem(extent={{-100,-100},{100,
+                      graphics), Icon(graphics,
+                                      coordinateSystem(extent={{-100,-100},{100,
             100}})));
 end Compressor;

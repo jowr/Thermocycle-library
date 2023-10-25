@@ -225,6 +225,7 @@ equation
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(extent={{-120,-80},{120,80}},
           preserveAspectRatio=false),
-                      graphics), Icon(coordinateSystem(extent={{-120,-80},{120,
+                      graphics), Icon(graphics,
+                                      coordinateSystem(extent={{-120,-80},{120,
             80}})));
 end HX_full;

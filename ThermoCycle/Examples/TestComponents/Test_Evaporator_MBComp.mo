@@ -69,5 +69,6 @@ equation
                       graphics),
     experiment(StopTime=1000),
     __Dymola_experimentSetupOutput,
-    Icon(coordinateSystem(extent={{-120,-40},{100,60}})));
+    Icon(graphics,
+         coordinateSystem(extent={{-120,-40},{100,60}})));
 end Test_Evaporator_MBComp;

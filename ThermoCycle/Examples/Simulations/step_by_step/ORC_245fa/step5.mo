@@ -119,7 +119,8 @@ equation
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=true),
-                      graphics), Icon(coordinateSystem(extent={{-100,-100},
+                      graphics), Icon(graphics,
+                                      coordinateSystem(extent={{-100,-100},
             {100,100}})),
     experiment(StopTime=1000, __Dymola_NumberOfIntervals=5000),
     __Dymola_experimentSetupOutput);

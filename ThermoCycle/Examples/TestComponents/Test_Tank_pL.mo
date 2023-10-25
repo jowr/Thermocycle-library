@@ -31,6 +31,7 @@ equation
       smooth=Smooth.None));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{20,
-            100}}), graphics), Icon(coordinateSystem(extent={{-100,-100},{20,
+            100}}), graphics), Icon(graphics,
+                                    coordinateSystem(extent={{-100,-100},{20,
             100}})));
 end Test_Tank_pL;

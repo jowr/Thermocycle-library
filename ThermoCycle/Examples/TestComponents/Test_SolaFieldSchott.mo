@@ -65,5 +65,6 @@ equation
                       graphics),
     experiment(StopTime=1000),
     __Dymola_experimentSetupOutput,
-    Icon(coordinateSystem(extent={{-100,-80},{60,100}})));
+    Icon(graphics,
+         coordinateSystem(extent={{-100,-80},{60,100}})));
 end Test_SolaFieldSchott;
